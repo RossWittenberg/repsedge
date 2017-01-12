@@ -1,0 +1,38 @@
+<% if @high_schools %> 
+    <% @high_schools.each do |high_school| %>
+        <tr id="high_school_row" class="high-school">
+            <td id="name">
+                                   
+            <%= link_to high_school.name, controller: "high_schools", action: "show", id: high_school.id%>
+            </td>
+
+            <td id="city" >
+                <%= high_school.city %>
+            </td>
+
+            <td id="state" >
+            	<%= high_school.state.abbreviation %>
+            </td>
+
+            <td id="total_students" >
+            	<%= high_school.students_count %>
+            </td>
+
+            <td id="diversity">
+                <%= convertDiversity(high_school.percent_white) %>
+            </td>
+
+            <td id="graduation_rate" >
+            	<%= high_school.gradRateConverter %>
+            </td>
+
+            <td id="income" class="far-right" >
+                <% if high_school.median_income.blank? || high_school.median_income == "0" %>
+                    not available
+                <% else %>  
+                    <%= number_to_currency(high_school.median_income, precision: 0) %>
+                <% end %>    
+            </td>
+        </tr>
+    <% end %>    
+<% end %>

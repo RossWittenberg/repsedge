@@ -1,0 +1,173 @@
+<div class="filters-container">	
+
+	<div class="filter-select select" id="hs_type-filter">
+		<%= label_tag "public/private" %> <br>
+		<%= select_tag "high_school[hs_type]", 
+			options_for_select( [ 'ALL', 'Public', 'Private'],
+				( params[:high_school] && params[:high_school]["hs_type"] || "ALL" ) ),
+				{ class: 'filter_drop_down all' } %>
+	</div>		
+
+	<div class="filter-select select" id="classification-filter">
+		<%= label_tag "classification" %> <br>
+		<% classification_array = [ [ "ALL", "ALL"],
+																[ "Traditional","Traditional"],
+																[ "Other/Alternative","Other/Alternative school"],
+																[ "Sp. Programs...","Special program emphasis"],
+																[ "Vocational","Vocational school"],
+																[ "Special Education","Special Education"],
+																[ "Montessori","Montessori"] ] %>
+		<%= select_tag "high_school[classification]", 
+			options_for_select( classification_array, 
+				( params[:high_school] && params[:high_school]["classification"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="checkbox-container">
+		<div class="filter-select checkbox" id="boarding-filter">
+			<%=hidden_field_tag "high_school[boarding]", false %>
+			<%=check_box_tag "high_school[boarding]", true, ( params[:high_school] && params[:high_school]["boarding"] == true ), { class: 'checkbox' } %>
+			<%= label_tag "boarding" %> 
+		</div>
+
+		<div class="filter-select checkbox" id="magnet-filter">
+			<%=hidden_field_tag "high_school[magnet]", false %>
+			<%=check_box_tag "high_school[magnet]", true, ( params[:high_school] && params[:high_school]["magnet"] == true ), { class: 'checkbox' } %>
+			<%= label_tag "magnet" %> 
+		</div>
+
+		<div class="filter-select checkbox" id="charter-filter">
+			<%=hidden_field_tag "high_school[charter]", false %>
+			<%=check_box_tag "high_school[charter]", true, ( params[:high_school] && params[:high_school]["charter"] == true ), { class: 'checkbox' } %>
+			<%= label_tag "charter" %> 
+		</div>
+
+		<div class="filter-select checkbox" id="capstone-filter">
+			<%=hidden_field_tag "high_school[capstone]", false %>
+			<%=check_box_tag "high_school[capstone]",  true, ( params[:high_school] && params[:high_school]["capstone"] == true ), { class: 'checkbox' }  %>
+			<%= label_tag "capstone" %> 
+		</div>
+
+		<div class="filter-select checkbox" id="intl_bacc-filter">
+			<%=hidden_field_tag "high_school[intl_bacc]", false %>
+			<%=check_box_tag "high_school[intl_bacc]",  true, ( params[:high_school] && params[:high_school]["intl_bacc"] == true ), { class: 'checkbox' } %>
+			<%= label_tag "intl_bacc", "Intl Bacc" %> 
+		</div>
+	</div>
+
+	<div class="filter-select select" id="religion-filter">
+		<%= label_tag "religious affiliation" %> <br>
+		<% religion_array = [ "ALL", "Nonsectarian", ["Other Religious", "Other religious"], "Catholic", "Jewish"] %>
+ 		<%= select_tag "high_school[religion]", 
+			options_for_select(religion_array, 
+				( params[:high_school] && params[:high_school]["religion"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+
+	<div class="filter-select select" id="students_count-filter">
+		<%= label_tag "number of students" %> <br>
+		<% students_count_array = [ ["ALL", (0..50000)],
+										             ["Under 100", (0..99)],
+										             ["100-500", (100..500)], 
+										             ["501-1000", (501..1000)],
+										             ["1001-3000", (1001..3000)], 
+										             ["3000 +", (3000..50000)] ] %>
+		<%= select_tag "high_school[students_count]", 
+			options_for_select(students_count_array, 
+				(params[:high_school] && params[:high_school]["students_count"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>					 
+
+	<div class="filter-select select" id="gender-filter">
+		<%= label_tag "gender" %> <br>
+		<% gender_array = [ ["ALL", "ALL"], ["All Male", 100], ["All Female", 0 ]] %>
+		<%= select_tag "high_school[percent_male]", 
+			options_for_select(gender_array, 
+				(params[:high_school] && params[:high_school]["percent_male"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="filter-select select" id="diversity-filter">
+		<%= label_tag "diversity" %> <br>
+		<% diversity_array = [["ALL", (0..100)], 
+											  	["Less Diverse", (75..100)],
+													["Somewhat Diverse", (50..74)],
+													["Diverse", (0..49)]] %>
+		<%= select_tag "high_school[percent_white]", 
+			options_for_select(diversity_array, 
+				(params[:high_school] && params[:high_school]["percent_white"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+ 
+	
+
+	<div class="filter-select select" id="graduation_rate-filter">
+		<%= label_tag "graduation rate" %> <br>
+		<% graduation_rate_array = [ ["ALL", (0..100)],
+										 							["Under 50%", (0..49)],
+										 							["50-75%", (50..75)], 
+										 							["76-90%", (76..90)], 
+										 							["Over 90%", (91..100)] ] %>
+		<%= select_tag "high_school[graduation_rate]", 
+			options_for_select(graduation_rate_array, 
+				(params[:high_school] && params[:high_school]["graduation_rate"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="filter-select select" id="median_income-filter">
+		<%= label_tag "median income" %> <br>
+		<% median_income_array = [ ["ALL", (0..9999999)],
+								 							 ["Under 50K", (0..50000)],
+								 							 ["50-75K", (50000..75000)], 
+								 							 ["76-100K", (76000..100000)], 
+								 							 ["101-150K", (100001..150000)],
+								 							 ["Over 150K", (151000..9999999)] ] %>
+		<%= select_tag "high_school[median_income]", 
+			options_for_select(median_income_array, 
+				(params[:high_school] && params[:high_school]["median_income"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="filter-select select" id="reduced_lunch-filter">
+		<%= label_tag "free/reduced lunch" %> <br>
+		<% reduced_lunch_array = [ ["ALL", (0..100)],
+															 ["Less than 50%", (0..49)],
+															 ["More than 50%", (50..100)] ] %>
+		<%= select_tag "high_school[reduced_lunch]", 
+			options_for_select(reduced_lunch_array, 
+				(params[:high_school] && params[:high_school]["reduced_lunch"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="filter-select select" id="act-filter">
+		<%# label_tag "avg ACT score" %> 
+		<label for="act_total">Avg ACT Score</label><br>
+		<% act_array = [ ["ALL", (0..36)],
+										 ["Under 19", (0..19)],
+										 ["20-24", (20..24)], 
+										 ["25-30", (25..30)], 
+										 ["30 +", (30..36)] ] %>
+		<%= select_tag "high_school[act]", 
+			options_for_select(act_array, 
+				(params[:high_school] && params[:high_school]["act"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+	<div class="filter-select select" id="sat_total-filter">
+		<%# label_tag "avg SAT score" %>
+		<label for="sat_total">Avg SAT Score</label><br>
+		<% sat_total_array = [ ["ALL",(0..2400)],
+													 ["Under 1000", (0..999)], 
+													 ["1000-1500", (1000..1500)],
+													 ["1501-1800",(1501..1800)],
+													 ["1801 +", (1801..2400) ]] %>
+		<%= select_tag "high_school[sat_total]", 
+			options_for_select(sat_total_array, 
+				(params[:high_school] && params[:high_school]["sat_total"] || "ALL") ),
+				{ class: 'filter_drop_down all' } %>	
+	</div>
+
+</div>
+
+

@@ -1,0 +1,23 @@
+<div class="text-center">
+	<br>
+	<div id="hs-name-search">
+		<%= text_field_tag "note[hs_name_query]",
+				nil,
+				id: "notes-hs-name-search",
+				placeholder: 'SEARCH BY HIGH SCHOOL' %>
+	</div>
+
+	<div id="hs-keyword-search">
+		<%= text_field_tag "note[hs_keyword_query]",
+				nil,
+				id: "notes-hs-keyword-search",
+				placeholder: 'SEARCH BY KEYWORD' %>
+	</div>
+
+	<div id="search-button-container">
+		<button type="submit" user-id="<%= @user.id %>" id="notes-keyword-search-button" class="btn">SEARCH</button>
+	</div>
+
+	<br><br><hr>
+
+</div>

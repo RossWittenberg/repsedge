@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="editVisitModalLabel">Sync with your calendar</h4>
+</div>
+
+<div class="modal-body">        
+  <div class="calendar-sync-container">
+    <ul>
+      <li><a id="google-tab" href="#google">Google Calendar</a></li>
+      <li><a id="other-tab" href="#other">iCal, Outlook, and Other</a></li>
+    </ul>
+
+    <div id="google">
+      <%= render(partial: "visits/sync/google", locals: { user: @user } ) %>
+    </div>
+
+    <div id="other">
+      <%= render(partial: "visits/sync/other", locals: { user: @user } ) %>
+    </div>
+  </div>  
+</div>

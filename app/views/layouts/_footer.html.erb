@@ -1,0 +1,28 @@
+<div id="mail-modal" class="mfp-hide white-popup-block">
+	<p id="form-label">Enter your email below to learn more about <strong>RepsEdge</strong> and to be notified of the official launch in mid-July.</p>	
+	<div class="form-container" >
+		<form id="signup" action="/index.php" method="get">
+			<div class="mc-field-group email-i">
+				<input type="email" value="" name="EMAIL" class="required email" id="email" placeholder="Email address">
+				<input type="submit" value="Send" class="button pure-button pure-button-primary">
+			</div>
+			<span id="response"></span>  
+		</form>
+	</div>
+</div>
+
+<div class="footer row">
+	<span id="footer-text-left" class="col-md-4 col-sm-4">
+		<p>&#169; TB Tech Solutions, Inc.  All rights reserved.</p>
+	</span>
+	<span id="footer-text-center" class="col-md-4 col-sm-3">
+		<p>Made with <i id="heart" class="fa fa-heart"></i> by <a href="http://verbalplusvisual.com" title="Verbal + Visual" target="_blank">V+V</a></p>
+	</span>
+	<span id="footer-text-right" class="col-md-4 col-sm-5">
+		<%= link_to 'Help & Contact', help_help_contact_path %> / 
+		<%= link_to 'About', help_about_path %>  / 
+		<%= link_to 'Terms & Privacy', help_terms_privacy_path %>  /  
+		<a href="https://www.facebook.com/repsedge" target="_blank"><i class="fa fa-facebook"></i></a>
+		<a href="https://twitter.com/RepsEdge" target="_blank"><i class="fa fa-twitter"></i></a>
+	</span>
+</div>

@@ -1,0 +1,15 @@
+<div class="container mail">
+	<a name="contact"></a>
+	<h1 class="text-center">Get in Touch!</h1>
+	<h3 class="text-center">Communication is Key</h3>
+	<div class="col-md-12 formContainer">
+
+		<%=form_tag( help_help_contact_form_path, method: :put ) do %>
+			<%= label_tag :email, "Email Address" %>
+			<%= text_field_tag :email %>
+		    <%= text_area_tag :questions_comments, nil, size: "50x20", placeholder: "Questions? Comments?" %>
+		   <button class="btn btn-primary">Submit</button>
+		<% end %> 
+
+	</div>
+</div>

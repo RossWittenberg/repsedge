@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  county: MyString
+  description: MyText
+  publi_private: MyString
+  capstone: false
+  intl_bacc: false
+  students_total: 1
+  special_type: MyString
+  sat_total: 1
+  act: 1.5
+  reduced_lunch: 1.5
+  state: MyString
+  city_query: MyString
+  name_query: MyString
+  user_id: 
+
+two:
+  county: MyString
+  description: MyText
+  publi_private: MyString
+  capstone: false
+  intl_bacc: false
+  students_total: 1
+  special_type: MyString
+  sat_total: 1
+  act: 1.5
+  reduced_lunch: 1.5
+  state: MyString
+  city_query: MyString
+  name_query: MyString
+  user_id: 

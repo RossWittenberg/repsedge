@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="save-search-modal">Prospective Students Email</h4>
+</div>
+
+<div class="modal-body">
+  <div class="saved-search-param-container prospective-student-email-form name">  
+    <p class="modal-label name">Subject</p>
+    <%= text_field :subject, nil, placeholder: "Subject" %>
+    <p class="modal-label name">Body</p>
+    <textarea name="content" class="wysihtml5 modal-content name" id="prospectiveStudentEmailContent" placeholder="Write your email here"></textarea><br>
+    <h4 class="modal-label name">Recipients:</h4>
+  <table>
+    <thead>
+      <tr>
+        <th class"hidden-xs">Name</th>
+        <th>E-Mail</th>
+      </tr>
+    </thead>
+    <tbody id="recipients">
+
+    </tbody>
+  </table>    
+  </div>
+</div>
+<div class="modal-footer">
+  <%= button_tag 'Send Test', remote: true, user: @user.id, id: "sendProspectiveStudentEmailTest", 'data-disable-with' =>  "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+  
+  <%= button_tag 'Send', remote: true, user: @user.id, id: "sendProspectiveStudentEmail", 'data-disable-with' =>  "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+</div>

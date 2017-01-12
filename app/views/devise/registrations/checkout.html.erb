@@ -1,0 +1,70 @@
+<div class="purchaseLoader">
+  <div class="loader">
+    <div class="square" ></div>
+    <div class="square"></div>
+    <div class="square last"></div>
+    <div class="square clear"></div>
+    <div class="square"></div>
+    <div class="square last"></div>
+    <div class="square clear"></div>
+    <div class="square "></div>
+    <div class="square last"></div>
+  </div>
+</div>
+
+
+<div class="registration-tabs">
+  <ul>
+    <li><a id="information-tab" href="#information">Step 1: Information </a></li>
+    <li><a id="payment-tab" href="#payment">Step 2: Confirmation and Payment </a></li>
+  </ul>
+
+  <div id="information" class="registration-information-container">
+    <%= render(partial: "devise/registrations/information", locals: { states: @states } ) %>
+  </div>
+	
+	<div id="payment" class="registration-payment-select-container">
+	 
+	  <div class="payment-selection">
+	    <%= render(partial: "devise/registrations/payment_selection") %>
+	  </div>
+
+	  <div class="credit-card-form row signUpModule">
+	    <%= render(partial: "devise/registrations/credit_card_form") %>
+	  </div>
+
+	  <div class="registration-institution-select-container row signUpModule">
+	    <%= render(partial: "devise/registrations/purchase_order") %>
+	  </div>
+	
+	</div> 
+
+</div>
+
+<button type="button" id="creditCardConfirmationButton" style="display: none;" data-toggle="modal" data-target="#creditCardConfirmationModal">
+</button>
+
+<button type="button" id="purchaseOrderConfirmationButton" style="display: none;" data-toggle="modal" data-target="#purchaseOrderConfirmationModal">
+</button>
+
+
+<div class="modal fade" id="creditCardConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="creditCardConfirmationModalLabel">
+	<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body confirmation-message-container">
+        <%= link_to 'Sign In', home_users_path, :class => "modalBtn" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="purchaseOrderConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="purchaseOrderConfirmationModalLabel">
+	<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body confirmation-message-container">
+        <a href="https://app.repsedge.com/users/login" class="modalBtn">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+

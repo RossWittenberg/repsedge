@@ -1,0 +1,34 @@
+<span class="error-message general-credit-card-error"></span>
+
+<div class="credit-card-form col-md-12">
+	<%= form_tag accounts_path, id: "stripe-form" do %>
+
+    <div class="formset col-md-4 col-sm-4">
+			<%= label_tag :credit_number, "Card Number" %>
+			<%= number_field_tag :credit_number, nil, class: "credit-number" %>
+			<span class="error-message number"></span>
+		</div>
+
+		<div class="formset col-md-4 col-sm-4">
+			<%= label_tag :cvc, "Security Code/CVC" %>
+			<%= number_field_tag :credit_security, nil, class: "credit-security" %>
+			<span class="error-message cvc"></span>
+		</div>
+
+		<div class="formset col-md-4 col-sm-4">
+			<%= label_tag :exp_date, "Expiration (MM/YYYY)" %>
+			<%= number_field_tag :exp_date_month, nil, class: "card-expiry-month", maxlength: 2 %>
+      			<span> / </span>
+			<%= number_field_tag :exp_date_year, nil, class: "card-expiry-year", maxlength: 4 %>
+			<span class="error-message exp"></span>
+		</div>
+
+		<%= hidden_field_tag :user_id %>
+   		<%= hidden_field_tag :stripe_card_token %>
+		
+	<div class="col-md-12">
+		<%= submit_tag "Submit", 'data-disable-with' => "processing payment..." %>
+	</div>
+
+  <% end %>  
+</div>

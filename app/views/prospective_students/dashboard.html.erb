@@ -1,0 +1,51 @@
+<div class="home-header">
+  <h1>Prospective Students</h1>
+  <h2>View or Add Prospective Students</h2>
+</div>
+
+
+<div class="container prospective">
+
+	<div class="col-md-12">
+		<div class="col-md-6 col-sm-6">
+
+			<h1>Add New Prospective Student</h1>
+			<%= button_to "Add Prospective Student", new_prospective_student_path, method: :get %>
+			
+			<br/>
+			<br/>
+			<br/>
+
+			<%= button_to "Download CSV", export_prospective_students_path(format: :csv), method: :get %>
+
+			<br/>
+			<br/>
+
+
+		</div>
+
+		<div class="col-md-6 col-sm-6">
+
+			<h1>Search Prospective Students</h1>
+			<label>View by High School</label>
+			<%= form_tag prospective_students_path(current_user), method: :get do %>
+				<%= text_field_tag :high_school_name, nil,
+					  				autocomplete: "off",
+										id: "high-school-name-search",
+									  placeholder: 'Enter HS Name' %>
+				<%= submit_tag "Go", id: "prospective_students_by_hs_button", disabled: true %>
+			<% end %>						  
+
+			<br/>
+
+			<label>View Prospective Transfer Students</label>
+			<%= button_to "View Transfer Students", prospective_students_path, method: :get %>
+
+			<br/>
+			<br/>
+			
+		</div>
+	</div>
+
+	
+</div>

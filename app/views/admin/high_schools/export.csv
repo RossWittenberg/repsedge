@@ -1,0 +1,10 @@
+first_name,middle_name,last_name,birthday,gender,street_address,city,state,zip_code,email,home_phone_num,cell_phone_num,enrollment_type,high_school_id,institution_id,term,year,created_at,intended_major
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,20591,Fall,2016,2015-09-10 19:45:29 UTC,Maths
+TEST,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,High School,466755,,Fall,2015,2015-09-10 16:00:40 UTC,""
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Minnesota,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,21020,Fall,2016,2015-09-10 21:25:01 UTC,""
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Colorado,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,22007,Fall,2015,2015-09-10 15:21:01 UTC,undecided
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,19046,Spring,2016,2015-09-10 19:45:40 UTC,undecided
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,20591,Fall,2015,2015-09-10 19:44:23 UTC,undecided
+Ross,"",Wittenberg,1993-03-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,17847,Fall,2017,2015-09-10 14:51:50 UTC,undecided
+Ross,"",Wittenberg,1998-09-10 00:00:00 UTC,Male,58 Bushwick Apt 4b,Brooklyn,Alabama,11211,ross.wittenberg@gmail.com,6469577491,6469577491,Transfer,466635,,Fall,2015,2015-09-10 15:37:07 UTC,undecided
+Ross,"",Wittenberg,1993-03-10 00:00:00 UTC,Male,66 Dekoven Ct,Brooklyn,Alabama,11230,ross.wittenberg@gmail.com,6469577481,6469577481,Transfer,,17906,Summer,2016,2015-09-10 14:53:46 UTC,undecided

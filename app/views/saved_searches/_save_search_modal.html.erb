@@ -1,0 +1,104 @@
+<div class="modal fade" id="save-search-modal" tabindex="-1" role="dialog" aria-labelledby="save-search-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <% if @saved_search %>
+      <%= form_for user_saved_searches_path(@user), method: :put do |f| %> 
+     
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="save-search-modal">Save Search</h4>
+      </div>
+
+      <div class="modal-body">
+          <div class="saved-search-param-container name">  
+              <p class="modal-label name">Name This Saved Search</p>
+              <%= f.text_field :name, class: "modal-content name", id: "saved-search-name-content" %><br>
+          <span class="error-message"></span>    
+          </div><br>
+        <div class="saved-search-param-container">          
+          <p class="modal-label" id="saved-search-state-label">State</p>
+          <p class="modal-content" id="saved-search-state-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-county-label">County</p>
+          <p class="modal-content" id="saved-search-county-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-city-label">City</p>
+          <p class="modal-content" id="saved-search-city-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-hs_type-label">Type</p>
+          <p class="modal-content" id="saved-search-hs_type-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-classification-label">Classification</p>
+          <p class="modal-content" id="saved-search-classification-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-capstone-label">Capstone</p>
+          <p class="modal-content" id="saved-search-capstone-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-intl_bacc-label">Intl Bacc</p>
+          <p class="modal-content" id="saved-search-intl_bacc-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-boarding-label">Boarding</p>
+          <p class="modal-content" id="saved-search-boarding-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-magnet-label">Magnet</p>
+          <p class="modal-content" id="saved-search-magnet-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-charter-label">Charter</p>
+          <p class="modal-content" id="saved-search-charter-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-religion-label">Relgious Affiliation</p>
+          <p class="modal-content" id="saved-search-religion-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-students_total-label">Number of Students</p>
+          <p class="modal-content" id="saved-search-students_total-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-gender-label">Gender</p>
+          <p class="modal-content" id="saved-search-gender-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-diversity-label">Diversity</p>
+          <p class="modal-content" id="saved-search-diversity-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-graduation_rate-label">Graduation Rate</p>
+          <p class="modal-content" id="saved-search-graduation_rate-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-median_income-label">Median Income</p>
+          <p class="modal-content" id="saved-search-median_income-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-reduced_lunch-label">Free/Reduced Lunch</p>
+          <p class="modal-content" id="saved-search-reduced_lunch-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-act-label">Average ACT Score</p>
+          <p class="modal-content" id="saved-search-act-content"> </p>
+        </div>
+        <div class="saved-search-param-container">  
+          <p class="modal-label" id="saved-search-sat_total-label">Average SAT Score</p>
+          <p class="modal-content" id="saved-search-sat_total-content"> </p>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" user=<%= @user.id %> id="save-current-search-button"class="btn btn-primary" >Save</button>
+      </div>
+      <% end %> 
+    <% end %>
+    </div>
+  </div>
+</div>        

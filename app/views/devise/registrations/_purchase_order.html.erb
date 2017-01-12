@@ -1,0 +1,12 @@
+<div class="col-md-12">
+	<div class="purchase-order-form-container col-md-12">
+		<div>
+			Please note that by paying with a purchase order, your account will not be activated until the Purchase Order is received by RepsEdge Staff. At that point your account will be activated and you will receive instructions how to access it and add additional Reps.
+		</div>
+		<div>
+			<%= form_tag accounts_path, id: "purchase-order-form-form" do %>
+				<%= submit_tag "Submit", 'data-disable-with' => "processing payment..." %>
+			<% end %>	
+		</div>
+	</div>
+</div>

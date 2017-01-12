@@ -1,0 +1,167 @@
+var stripeResponseHandler = function(status, response) {
+  var $form = $("#stripe-form")
+  if (response.error !== undefined) {
+    if ( response.error.param == "number"){
+      $('.error-message.number').text(response.error.message);
+      $('.error-message.number').prev('input').addClass('erroneous-input');
+      $('.purchaseLoader').fadeOut();
+    } else {
+      $('.error-message.number').prev('input').removeClass('erroneous-input');
+      $('.error-message.number').empty();
+    };
+    if ( response.error.param == "cvc"){
+      $('.error-message.cvc').text(response.error.message);
+      $('.error-message.cvc').prev('input').addClass('erroneous-input');
+      $('.purchaseLoader').fadeOut();
+    } else {
+      $('.error-message.cvc').prev('input').removeClass('erroneous-input');
+      $('.error-message.cvc').empty();
+    };
+    if ( response.error.param == "exp_year"){
+      $('.error-message.exp').text(response.error.message);
+      $('input.card-expiry-month').addClass('erroneous-input');
+      $('input.card-expiry-year').addClass('erroneous-input');
+      $('.purchaseLoader').fadeOut();
+    } else {
+      $('input.card-expiry-month').removeClass('erroneous-input');
+      $('input.card-expiry-year').removeClass('erroneous-input');
+      $('.error-message.exp').empty();
+    };
+    $form.find('input[type=submit]').prop('disabled', false);
+  } else {
+    var token = response.id;
+    var cardId = response.card.id;
+    $('input#stripe_card_token').val(token);
+    var userId = $('input#user_id').val()
+    
+    var billingStreetAddressElement = $("input[model-attribute='new-account-billing_street_address']")
+    var billingStreetAddress = billingStreetAddressElement.val();
+
+    var billingCityElement = $("input[model-attribute='new-account-billing_city']")
+    var billingCity = billingCityElement.val();
+
+    var billingStateElement = $("span[model-attribute='new-account-billing_state']")
+    var billingState = billingStateElement.text();
+
+    var billingZipCodeElement = $("input[model-attribute='new-account-billing_zip_code']")
+    var billingZipCode = billingZipCodeElement.val();
+
+    $.ajax({
+        url: '/accounts',
+        type: 'POST',
+        data: {stripe_token: token,
+               card_id: cardId,
+               user_id: userId}
+    }).done(function(data) {
+      console.log(data);
+      if ( data.errors !== undefined && data.errors.error !== undefined ){
+        console.log(data.errors)
+        $('.purchaseLoader').fadeOut();
+        if ( data.errors.error.param === "number"){
+          $('.error-message.number').text(data.errors.error.message);
+          $('.error-message.number').prev('input').addClass('erroneous-input');
+          $('.purchaseLoader').fadeOut();
+        } else {
+          $('.error-message.number').prev('input').removeClass('erroneous-input');
+          $('.error-message.number').empty();
+        };
+
+        if ( data.errors.error.param === "cvc"){
+          $('.error-message.cvc').text(data.errors.error.message);
+          $('.error-message.cvc').prev('input').addClass('erroneous-input');
+          $('.purchaseLoader').fadeOut();
+        } else {
+          $('.error-message.cvc').prev('input').removeClass('erroneous-input');
+          $('.error-message.cvc').empty();
+        };
+
+        if ( data.errors.error.param === "exp_year"){
+          $('.error-message.exp').text(data.errors.error.message);
+          $('input.card-expiry-month').addClass('erroneous-input');
+          $('input.card-expiry-year').addClass('erroneous-input');
+          $('.purchaseLoader').fadeOut();
+        } else {
+          $('input.card-expiry-month').removeClass('erroneous-input');
+          $('input.card-expiry-year').removeClass('erroneous-input');
+          $('.error-message.exp').empty();
+        };
+
+        if ( data.errors.error.code === "card_declined"){
+          $('.error-message.number').text(data.errors.error.message);
+          $('.error-message.number').prev('input').addClass('erroneous-input');
+          $('.purchaseLoader').fadeOut();
+        } else {
+          $('.error-message.number').prev('input').removeClass('erroneous-input');
+          $('.error-message.number').empty();
+        };
+
+        $form.find('input[type=submit]').prop('disabled', false);
+      } else {
+        renderCreditCardConfirmation( data )
+      };  
+    });
+  }
+};
+
+jQuery(function($) {
+  Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>");  
+  $("#stripe-form").submit(function(e) {
+    var $form = $(this);
+    $form.find('input[type=submit]').prop('disabled', true);
+    $('.purchaseLoader').fadeIn();
+    Stripe.createToken({
+        number: $('.credit-number').val(),
+        cvc: $('.credit-security').val(),
+        exp_month: $('.card-expiry-month').val(),
+        exp_year: $('.card-expiry-year').val()
+    }, stripeResponseHandler);
+    return false;
+  });
+});  
+
+function renderCreditCardConfirmation( data ){
+  // var creditCardConfirmationMessage = "<h1>Almost done!</h1> <h2>Check your " + data.user.email + " inbox for a confirmation message to access your account.</h2>"
+  var creditCardConfirmationMessage = "<h1>Almost done!</h1> <h2>Click below to sign-in and access your account.</h2>" 
+  $('.confirmation-message-container').prepend(creditCardConfirmationMessage)
+  creditCardConfirmationButton.click()
+  $('.purchaseLoader').fadeOut();
+};
+
+function renderEditBillingAddressForm( data ){
+  console.log("address validation error");
+  $('.purchaseLoader').fadeOut();
+};
+
+function renderCardErrorMessages( data ){
+  console.log("card error messages");
+  $('.purchaseLoader').fadeOut();
+};
+
+jQuery(function($) {
+  $("#purchase-order-form-form").submit(function(e) {
+    var $form = $(this);
+    var userId = $('input#user_id').val()
+    $form.find('input[type=submit]').prop('disabled', true);
+    $('.purchaseLoader').fadeIn();
+   
+    $.ajax({
+      url: "/accounts/",
+      type: "POST",
+      data: { payment_type: "Purchase Order",
+              user_id: userId }
+    }).success(function(data){ 
+      renderPurchaseOrderConfirmation( data )
+    }).error(function(data) {
+      $('.purchaseLoader').fadeOut();
+      console.log(data)
+    });  
+    return false;
+  });
+}); 
+
+function renderPurchaseOrderConfirmation( data ){
+  var purchaseOrderConfirmationMessage = "<h1>Almost done!</h1> <h2>Check your " + data.user.email + "  inbox for a confirmation email containing an invoice and instructions on where to send your purchase order. Once we have received your purchase order, you will receive instructions on how to access your account. <br> If you have any questions please email <a href='mailto:sales@repsedge.com'>sales@repsedge.com</a> </h2>";
+  $('.confirmation-message-container').prepend(purchaseOrderConfirmationMessage)
+  purchaseOrderConfirmationButton.click();
+  $('.purchaseLoader').fadeOut();
+};

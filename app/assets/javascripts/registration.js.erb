@@ -1,0 +1,399 @@
+$(document).on("page:load ready", function(){
+  if ($('.registration-tabs').length > 0){
+    $('.registration-tabs').tabs({
+      disabled: [ 1 ]
+    });
+  };
+
+  $('a#information-tab').attr('href', 'information').click(function(event) {
+    clearInformationTabValidaitonErrorNotifications();
+  });
+
+  $('.purchase-order-form-container').hide()
+  $('.credit-card-form').hide()
+
+	$( "#institution-search.sign-up-institution-input" ).autocomplete({ 
+    source: get_institutions_by_location, 
+    minLength: 2,
+    select: function (event, ui) {
+      console.log(ui)
+      console.log(event)
+      params = { institution: ui.item.value }
+      $(".institution-confirmation-container").show();
+      $("#institution-name").empty();
+      $("#institution-enrollment").empty();
+      $("#institution-plan-level").empty();
+      $("#institution-plan-cost").empty();
+      $.get('/institutions/institution', 
+        params
+        ).success(function(data) {
+         console.log(data.name)
+         $('.institution-error-message').empty();
+         var name = "You selected " + data.name;
+         // var enrollment = "Current data shows " + data.enrollment.toLocaleString() + " students.";
+         var planLevel = "You qualified as a: " + planLevelString( data.enrollment );
+         var cost = "Plans start at " + costString(data.enrollment) + " per year."; 
+         $('#institution-name').append(name)
+         // $('#institution-enrollment').append( enrollment )
+         $('#institution-plan-level').append(planLevel)
+         $('#institution-plan-cost').append(cost)
+      });
+    }
+  });
+  $('select#plan_years').change(function() {
+    $("span[model-attribute='new-account-plan_price']").text( '$' + parseInt($(this).val()).toLocaleString() )
+  });
+  $('#state-institution-select').change(function() {
+    $('#institution-search').val("")
+    $('.institution-input-container').show()
+  });
+
+  $( 'button#institution-select-next-button' ).click(function(event) {
+    console.log("institution next button has been clicked") 
+    if ( $('#institution-search').val().length > 0 ){
+      var institution = $('input#institution-search').val()
+      console.log("institution has been selected") 
+      $.ajax({
+        url: "/checkout",
+        type: "PUT",
+        data: {institution: institution} 
+      }).error(function(data) {
+        return false
+      }).success(function(data){
+        console.log("institution chosen")
+      });
+    }
+  });
+
+  $("input[name='payment_type']").change(function(){
+    if ( $('input#payment_type_purchase_order').prop("checked") === true ){
+      console.log("purchase order selected")
+      $('.purchase-order-form-container').show()
+      $('.credit-card-form').hide()
+    }else if ( $('input#payment_type_credit_card').prop("checked") === true ){
+      console.log("credit card selected")
+      $('.credit-card-form').show()
+      $('.purchase-order-form-container').hide()
+    }else{
+      $('.purchase-order-form-container').hide()
+      $('.credit-card-form').hide()
+    };
+  })
+
+});    
+ 
+function get_institutions_by_location(request, response){
+  var params = {institution_query: request.term, state: $('#state-institution-select').val()};
+  $.getJSON(
+    "/institutions/institution_auto_complete",
+    params 
+    ).done(function(data){
+      console.log(data)
+      response(data.institutions)
+    }); 
+}
+
+function planLevelString( enrollment ){
+  if (enrollment < 5000){
+    return "Small Institution"
+  } else if(enrollment > 5000 && enrollment < 15000){
+    return "Medium Institution"
+  } else {
+    return "Large Institution"
+  }
+}
+
+function costString( enrollment ){
+  if (enrollment < 5000){
+    return "$1,500"
+  } else if(enrollment > 5000 && enrollment < 15000){
+    return "$1,800"
+  } else {
+    return "$2,000"
+  }
+} 
+
+function createAccount(event){
+  var institution = $('input#user_institution').val()
+
+  //////////////////////////////////////////////////////////////////////////
+
+  var planLevel = $("span[model-attribute='new-account-plan_level']").text();
+
+  var planYears = parseInt($('select#plan_years :selected').text()[0]);
+
+  var planPrice = parseInt($("span[model-attribute='new-account-plan_price']").text().replace(/\$/g,'').replace(/\,/g,''));
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  var billingStreetAddressLine1Element = $("input#user_billing_street_address_line_1");
+  var billingStreetAddressLine1 = billingStreetAddressLine1Element.val();  
+
+  var billingStreetAddressLine2Element = $("input#user_billing_street_address_line_2");
+  var billingStreetAddressLine2 = billingStreetAddressLine2Element.val();  
+
+  var billingCityElement = $("input#user_institution_billing_city");
+  var billingCity = billingCityElement.val(); 
+
+
+  var billingStateElement = $("select#user_institution_billing_state");
+  var billingState = billingStateElement.prop('selected', 'selected').val();
+
+  var billingZipCodeElement = $("input#user_institution_billing_zip_code");
+  var billingZipCode = billingZipCodeElement.val(); 
+
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  var firstNameElement = $("input[model-attribute='new-account-first_name']");
+  var firstName = firstNameElement.val();
+
+  var lastNameElement = $("input[model-attribute='new-account-last_name']");
+  var lastName = lastNameElement.val();
+
+  var phoneNumElement = $("input[model-attribute='new-account-phone_num']");
+  var phoneNum = phoneNumElement.val();
+
+  //////////////////////////////////////////////////////////////////////////
+
+  var emailElement = $("input[model-attribute='new-account-email']");
+  var email = emailElement.val();
+
+  var emailConfirmationElement = $("input[model-attribute='new-account-email_confirmation']");
+  var emailConfirmation = emailConfirmationElement.val();
+
+  //////////////////////////////////////////////////////////////////////////
+
+
+  var passwordElement = $("input[model-attribute='new-account-password']");
+  var password = passwordElement.val();
+
+  var passwordConfirmationElement = $("input[model-attribute='new-account-password_confirmation']");
+  var passwordConfirmation = passwordConfirmationElement.val();
+
+  var data = { user: {
+                role: 1,
+                weekly_agenda: true,
+                first_name: firstName,
+                last_name: lastName,
+                phone_num: phoneNum,
+                institution: institution,
+                billing_street_address_line_1: billingStreetAddressLine1,
+                billing_street_address_line_2: billingStreetAddressLine2,
+                billing_city: billingCity,
+                billing_state: billingState,
+                billing_zip_code: billingZipCode,
+                password: password,
+                password_confirmation: passwordConfirmation,  
+                email: email,
+                email_confirmation: emailConfirmation,
+                plan_level: planLevel,
+                plan_years: planYears,
+                plan_price: planPrice
+              }};
+
+  if (billingStreetAddressLine1.length > 0 && billingCity.length > 0 && billingZipCode.length > 0){            
+    $.ajax({
+      url: "/users/",
+      type: "POST",
+      data: data 
+    }).error(function(data){ 
+      console.log(data.responseJSON);
+      if ( data.responseJSON.errors.first_name !== undefined ){
+        console.log(data.responseJSON.errors.first_name[0]);
+        firstNameElement.addClass('erroneous-input');
+        firstNameElement.parent().find('.error-message').html(data.responseJSON.errors.first_name[0]);
+      } else {
+        firstNameElement.removeClass('erroneous-input');
+        firstNameElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.last_name !== undefined ){
+        console.log(data.responseJSON.errors.last_name[0]);
+        lastNameElement.addClass('erroneous-input');
+        lastNameElement.parent().find('.error-message').html(data.responseJSON.errors.last_name[0]);
+      } else {
+        lastNameElement.removeClass('erroneous-input');
+        lastNameElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.phone_num !== undefined ){
+        console.log(data.responseJSON.errors.phone_num[0]);
+        phoneNumElement.addClass('erroneous-input');
+        phoneNumElement.parent().find('.error-message').html(data.responseJSON.errors.phone_num[0]);
+      } else {
+        phoneNumElement.removeClass('erroneous-input');
+        phoneNumElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.email !== undefined ){
+        console.log(data.responseJSON.errors.email[0]);
+        emailElement.addClass('erroneous-input');
+        emailElement.parent().find('.error-message').html(data.responseJSON.errors.email[0]);
+      } else {
+        emailElement.removeClass('erroneous-input');
+        emailElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.email_confirmation !== undefined ){
+        console.log(data.responseJSON.errors.email_confirmation[0]);
+        emailConfirmationElement.addClass('erroneous-input');
+        emailConfirmationElement.parent().find('.error-message').html(data.responseJSON.errors.email_confirmation[0]);
+      } else {
+        emailConfirmationElement.removeClass('erroneous-input');
+        emailConfirmationElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.password !== undefined ){
+        console.log(data.responseJSON.errors.password[0]);
+        passwordElement.addClass('erroneous-input');
+        passwordElement.parent().find('.error-message').html(data.responseJSON.errors.password[0]);
+      } else {
+        passwordElement.removeClass('erroneous-input');
+        passwordElement.parent().find('.error-message').empty();
+      };
+
+      if ( data.responseJSON.errors.password_confirmation !== undefined ){
+        console.log(data.responseJSON.errors.password_confirmation[0]);
+        passwordConfirmationElement.addClass('erroneous-input');
+        passwordConfirmationElement.parent().find('.error-message').html(data.responseJSON.errors.password_confirmation[0]);
+      } else {
+        passwordConfirmationElement.removeClass('erroneous-input');
+        passwordConfirmationElement.parent().find('.error-message').empty();
+      };
+
+      if (data.responseJSON.errors.billing_street_address_line_1 !== undefined){
+        console.log(data.responseJSON.errors.billing_street_address_line_1[0]);
+        billingStreetAddressLine1Element.addClass('erroneous-input');
+        billingStreetAddressLine1Element.parent().find('.error-message').html(data.responseJSON.errors.billing_street_address_line_1[0]);
+      } else {
+        billingStreetAddressLine1Element.removeClass('erroneous-input');
+        billingStreetAddressLine1Element.parent().find('.error-message').empty();
+      };
+
+      if (data.responseJSON.errors.billing_city !== undefined){
+        console.log(data.responseJSON.errors.billing_city[0]);
+        billingCityElement.addClass('erroneous-input');
+        billingCityElement.parent().find('.error-message').html(data.responseJSON.errors.billing_city[0]);
+      } else {
+        billingCityElement.removeClass('erroneous-input');
+        billingCityElement.parent().find('.error-message').empty();
+      };    
+
+      if (data.responseJSON.errors.billing_zip_code !== undefined){
+        console.log(data.responseJSON.errors.billing_zip_code[0]);
+        billingZipCodeElement.addClass('erroneous-input');
+        billingZipCodeElement.parent().find('.error-message').html(data.responseJSON.errors.billing_zip_code[0]);
+      } else {
+        billingZipCodeElement.removeClass('erroneous-input');
+        billingZipCodeElement.parent().find('.error-message').empty();
+      }; 
+    }).success(function(data){
+      $('.registration-tabs').tabs("enable", 1);
+      $("#payment-tab").click();
+      renderPaymentSelection( data );
+    });
+    return false;
+  } else {
+    if (billingStreetAddressLine1.length === 0){
+      billingStreetAddressLine1Element.addClass('erroneous-input');
+      billingStreetAddressLine1Element.parent().find('.error-message').html("Can't be blank");
+    } else {
+      billingStreetAddressLine1Element.removeClass('erroneous-input');
+      billingStreetAddressLine1Element.parent().find('.error-message').empty();
+    };
+
+    if(billingCity.length === 0){
+      billingCityElement.addClass('erroneous-input');
+      billingCityElement.parent().find('.error-message').html("Can't be blank");
+    } else {
+      billingCityElement.removeClass('erroneous-input');
+      billingCityElement.parent().find('.error-message').empty();
+    };
+
+    if (billingZipCode.length === 0){
+      billingZipCodeElement.addClass('erroneous-input');
+      billingZipCodeElement.parent().find('.error-message').html("Can't be blank");
+    } else {
+      billingZipCodeElement.removeClass('erroneous-input');
+      billingZipCodeElement.parent().find('.error-message').empty();
+    };
+    return false;
+  };  
+};
+
+function renderPaymentSelection( data ){
+  console.log("select payment method")
+  console.log(data)
+  var planYears = data.account.plan_years;
+  var planPrice = data.account.plan_price;
+  var firstName = data.user.first_name;
+  var lastName = data.user.last_name;
+  var compoundName = firstName + " " + lastName;
+  var phoneNum = data.user.phone_num;
+  var email = data.user.email;
+  var billingAddressLine1 = data.account.billing_street_address_line_1
+  var billingAddressLine2 = data.account.billing_street_address_line_2
+  var billingCity = data.account.billing_city;
+  var billingState = data.account.billing_state;
+  var billingZipCode = data.account.billing_zip_code;
+  $("span[model-attribute='payment-select-plan_years']").text(planYears + " year(s)")
+  $("span[model-attribute='payment-select-plan_price']").text(planPrice.toLocaleString('en'))
+  $('input#user_id').val(data.user.id)
+  $('.info-name').text(compoundName);
+  $('.info-phone-num').text(phoneNum);
+  $('.info-email').text(email);
+  $('.billing-street-address-line-1').text(billingAddressLine1)
+  $('.billing-street-address-line-2').text(billingAddressLine2)
+  $('.billing-city-state-zip').text(billingCity + ",  " + billingState + " " + billingZipCode)
+}
+
+function clearInformationTabValidaitonErrorNotifications(){
+  var billingStreetAddressLine1Element = $("input#user_billing_street_address_line_1");
+  var billingStreetAddressLine1 = billingStreetAddressLine1Element.val();  
+  var billingStreetAddressLine2Element = $("input#user_billing_street_address_line_2");
+  var billingStreetAddressLine2 = billingStreetAddressLine2Element.val();  
+  var billingCityElement = $("input#user_institution_billing_city");
+  var billingCity = billingCityElement.val(); 
+  var billingStateElement = $("select#user_institution_billing_state");
+  var billingState = billingStateElement.prop('selected', 'selected').val();
+  var billingZipCodeElement = $("input#user_institution_billing_zip_code");
+  var billingZipCode = billingZipCodeElement.val(); 
+  var firstNameElement = $("input[model-attribute='new-account-first_name']");
+  var firstName = firstNameElement.val();
+  var lastNameElement = $("input[model-attribute='new-account-last_name']");
+  var lastName = lastNameElement.val();
+  var phoneNumElement = $("input[model-attribute='new-account-phone_num']");
+  var phoneNum = phoneNumElement.val();
+  var emailElement = $("input[model-attribute='new-account-email']");
+  var email = emailElement.val();
+  var emailConfirmationElement = $("input[model-attribute='new-account-email_confirmation']");
+  var emailConfirmation = emailConfirmationElement.val();
+  var passwordElement = $("input[model-attribute='new-account-password']");
+  var password = passwordElement.val();
+  var passwordConfirmationElement = $("input[model-attribute='new-account-password_confirmation']");
+  var passwordConfirmation = passwordConfirmationElement.val();
+  firstNameElement.removeClass('erroneous-input');
+  firstNameElement.parent().find('.error-message').empty();
+  lastNameElement.removeClass('erroneous-input');
+  lastNameElement.parent().find('.error-message').empty();
+  phoneNumElement.removeClass('erroneous-input');
+  phoneNumElement.parent().find('.error-message').empty();
+  emailElement.removeClass('erroneous-input');
+  emailElement.parent().find('.error-message').empty();
+  emailConfirmationElement.removeClass('erroneous-input');
+  emailConfirmationElement.parent().find('.error-message').empty();
+  passwordElement.removeClass('erroneous-input');
+  passwordElement.parent().find('.error-message').empty();
+  passwordConfirmationElement.removeClass('erroneous-input');
+  passwordConfirmationElement.parent().find('.error-message').empty();
+  billingStreetAddressLine1Element.removeClass('erroneous-input');
+  billingStreetAddressLine1Element.parent().find('.error-message').empty();
+  billingCityElement.removeClass('erroneous-input');
+  billingCityElement.parent().find('.error-message').empty();
+  billingZipCodeElement.removeClass('erroneous-input');
+  billingZipCodeElement.parent().find('.error-message').empty();
+
+}
+
+

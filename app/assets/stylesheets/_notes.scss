@@ -1,0 +1,342 @@
+$lightBlue: #79c3e2;
+
+.update-note-button{
+	display: none;
+}
+button.update-note{
+	display: none !important;
+}
+
+.index-notes-container{
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	color: #959595;
+	font-family: 'Open Sans', sans-serif;
+	margin-top: 10px;
+	font-weight: 300;
+	line-height: 20px;
+	font-size: 14px;
+	
+	.notes-search-container{
+		display: block;
+		margin: 0 auto;
+		max-width: 900px;
+		background-color: #fff;
+		padding: 30px;
+		margin-bottom: 50px;
+
+		p{
+			display: inline-block;
+			color: #959595;
+			font-family: 'Open Sans', sans-serif;
+			margin-top: 10px;
+			font-weight: 300;
+			line-height: 20px;
+			font-size: 14px;
+		}
+
+		#hs-name-search,
+		#hs-keyword-search{
+			display: inline-block;
+			margin-right: 15px;
+
+			input[type=text]{
+				width: 200px;
+				height: 36px;
+				line-height: 36px;
+			}
+		}
+
+		#search-button-container{
+			display: inline-block;
+
+			button{
+				display: inline-block;
+				height: 34px;
+				width: 100px;
+				margin-left: 8px;
+				background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+				background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+				background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+				background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+				background-color: #FF8322;
+				border: 0px;
+				color: white;
+				font-family: 'Roboto', sans-serif;
+				font-size: 14px;
+				font-weight: 400;
+				letter-spacing: 1px;
+				transition: background-color 0.3s ease-in-out;
+
+				&:hover{
+					background-color: #f08f46;
+				}
+			}
+
+		}
+		
+	}
+	.notes-search-results{
+
+		h2{
+			font-size: 18px;
+    		letter-spacing: .5px;
+    		margin-bottom: 0px;
+    		font-weight: 600;
+		}
+
+		h5{
+			display: inline-block;
+			color: #ffab6b;
+			font-family: 'Roboto', sans-serif;
+			font-weight: 400;
+			font-size: 13px;
+		}
+
+		span.highlighted-high_school{
+			background-color: $lightBlue;
+		}
+		span.highlighted-content{
+			background-color: $lightBlue;
+		}
+
+		.close{
+			margin-top: 18px;
+		}
+	}
+
+	.note-container{
+
+		button{
+			display: inline-block;
+		    height: 34px;
+		    width: 100px;
+		    margin-left: 0px;
+		    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+		    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+		    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+		    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+		    background-color: #FF8322;
+		    border: 0px;
+		    border-radius: 4px;
+		    color: white;
+		    font-family: 'Roboto', sans-serif;
+		    font-size: 14px;
+		    font-weight: 400;
+		    letter-spacing: 1px;
+		    text-transform: uppercase;
+		    transition: background-color 0.3s ease-in-out;
+
+		    &:hover{
+		    	background-color: #f08f46;
+		    }
+		}
+
+		textarea{
+			font-size: 12px;
+		    color: #35657b;
+		    width: 100%;
+		    height: 170px;
+		    border: 0;
+		    resize: vertical;
+		    padding: 8px;
+		    border-radius: 4px;
+		    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+		    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+		    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+		    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+		    background-color: #f7f7f7;
+		    color: #959595;
+		}
+	}
+}
+
+.viewNotes{
+	display: block;
+  	height: 34px;
+  	width: 145px;
+  	margin: 0 auto;
+  	margin-bottom: 10px;
+  	background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  	background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  	background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  	background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  	background-color: #FF8322;
+  	border: 0px;
+  	color: #fff;
+  	font-family: 'Roboto', sans-serif;
+  	font-size: 14px;
+  	font-weight: 500;
+  	border-radius: 5px;
+  	line-height: 34px;
+  	text-transform: uppercase;
+  	text-align: center;
+  	text-decoration: none;
+  	letter-spacing: 1px;
+  	transition: background-color 0.3s ease-in-out;
+  	&:hover,
+  	&:focus,
+  	&:active{
+  		background-color: #f08f46;
+  		color: #fff;
+  		text-decoration: none;
+  	}
+}
+
+
+.plans h1,
+.plans h3,
+.mail h1,
+.mail h3{
+	color: #35657a;
+	font-size: 40px;
+  	letter-spacing: 0px;
+  	font-weight: 600;
+}
+
+.plans h3,
+.mail h3{
+	font-weight: 100;
+	font-size: 25px;
+	margin-top: 10px;
+  	margin-bottom: 30px;
+}
+
+.help form{
+	position: relative;
+    display: block;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.mail{
+	margin: 60px auto 110px auto;
+}
+
+.mail .col-md-12{
+	margin-top: 15px;
+}
+
+.mail p{
+	font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #35657b;
+    margin-bottom: 5px;
+}
+
+.mail label{
+	display: block;
+	margin-bottom: 4px;
+}
+
+.mail input[type=text]{
+	display: block;
+	width: 100%;
+	height: 40px;
+	padding-left: 7px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	margin-bottom: 10px !important;
+	transition: all 0.3s ease-in-out;
+	border: 0px;
+}
+
+.mail button{
+    height: 34px;
+    width: 100px;
+    margin-left: 8px;
+    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+    background-color: #FF8322;
+    border: 0px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease-in-out;
+	float: right;
+}
+
+.mail button:hover{
+ background-color: #f08f46;
+}
+
+.mail textarea{
+	width: 400px;
+  	height: 200px;
+  	padding: 7px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	resize: vertical;
+	outline: none !important;
+	transition: all 0.3s ease-in-out;
+	background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+    background-color: #f7f7f7;
+    display: block;
+    margin: 0px auto 15px auto;
+    border: 0px;
+}
+
+
+.formContainer{
+	display: block;
+	margin: 0 auto;
+	max-width: 680px;
+	float: none;
+ 	padding-top: 30px;
+}
+
+@media only screen and (max-width: 665px){
+
+	.notes{
+		#hs-name-search,
+		#hs-keyword-search,
+		#search-button-container,
+		input[type=text],
+		input[type=submit]{
+			display: block !important;
+			margin: 7px auto !important;
+		}
+	}
+
+.index-notes-container{
+	.notes-search-container{
+		padding: 15px;
+		#hs-name-search input[type=text], 
+		#hs-keyword-search input[type=text]{
+			width: 100%;
+		}
+		.col-md-12{
+			padding: 0px;
+		}
+		.notes-search-results{
+			&.col-md-12{
+				padding: 0px;
+			}
+		}
+	}
+}
+	
+
+	.mail {
+
+		.col-md-12 {
+		    padding: 0px;
+		}
+
+		input[type=text],
+		textarea {
+		    width: 100%;
+		}
+	}
+
+}

@@ -1,0 +1,18 @@
+<div class="flash_messages">
+  <% if flash && @high_school %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>-profile" style="display: none;">
+    <% end %>  
+  <% elsif flash.present? %>
+    <% flash.each do |key, value| %>
+      <% unless value === "" %> 
+        <div class="alert alert-<%= key %>">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <p ><%= value %></p>
+        </div>
+      <%end%>  
+    <% end %>  
+  <% end %>
+</div>
+

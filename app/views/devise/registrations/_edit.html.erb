@@ -1,0 +1,86 @@
+<br>
+<h3>Your Information</h3>
+<hr>
+<br>
+
+<% if @user %>  
+  <%= form_for @user, html: { "onsubmit" => "event.preventDefault(); return updateRep();", 'user-id' => @user.id }, data: {  disable_with: 'Updating Settings...' } do |f| %>
+    <div class="names-and-phone row col-md-12">
+      <div class="field inline first-name col-md-4 col">
+        <%= f.label :first_name, "First Name" %><br />
+        <%= f.text_field :first_name, autofocus: true, 'model-attribute' => 'update-first_name' %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="field inline last-name col-md-4 col">
+        <%= f.label :last_name, "Last Name" %><br />
+        <%= f.text_field :last_name, autofocus: true, 'model-attribute' => 'update-last_name' %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="field inline phone col-md-4 col">
+        <%= f.label :phone_num, "Phone Number" %><br />
+        <%= f.text_field :phone_num, autofocus: true, 'model-attribute' => 'update-phone_num' %>
+        <span class="error-message"></span> 
+      </div>
+    </div>      
+
+    <div class="email-password-agenda-submit">
+      <div class="email-and-password col-md-6">      
+        <div class="field">
+          <%= f.label :email do
+            'Email Address <i>(This will be your username)</i>'.html_safe
+          end%><br />
+          <%= f.email_field :email, autofocus: true, 'model-attribute' => 'update-email' %>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="field userTimeZone">
+          <%= f.label :time_zone do
+            'Time Zone <i>(This is the default display time zone)</i>'.html_safe
+          end %>
+          <%= f.collection_select :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s, selected: @user.time_zone || "Eastern Time (US & Canada)" %> 
+        </div>
+
+        
+        <br>
+        <h3>Change Password</h3>
+        <hr>
+        <br>
+
+        <div class="field">
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password, autocomplete: "off", 'model-attribute' => 'update-current_password' %>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="field">
+          <%= f.label :password, "New Password", 'model-attribute' => 'update-password' %>
+          <%= f.password_field :password, autocomplete: "off", 'model-attribute' => 'update-password' %>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, "New Password Confirmation", 'model-attribute' => 'update-password_confirmation'  %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", 'model-attribute' => 'update-password_confirmation' %>
+          <span class="error-message"></span> 
+        </div> 
+      </div>    
+
+      <div class="agenda-container col-md-6">      
+        <div class="agenda">
+          <h2>Email me my weekly agenda!</h2>
+          <div class="field">
+            <%= f.radio_button :weekly_agenda, true, :checked => true, class: 'checkbox' %> 
+            <%= label_tag :user_weekly_agenda_true, "<span></span> Yes!".html_safe %>
+            <%= f.radio_button :weekly_agenda, false, class: 'checkbox' %>
+            <%= label_tag :user_weekly_agenda_false, "<span></span> Not right now".html_safe %>
+          </div>
+        </div>
+      </div>
+    <%= f.button "Save" %>
+    </div>   
+  <% end %>
+<% end %> 
+
+

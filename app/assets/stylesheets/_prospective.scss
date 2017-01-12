@@ -1,0 +1,391 @@
+span.message.sucess{
+  padding: 12px;
+  background-color: papayawhip;
+  color: coral;
+  display: block;
+}
+
+.bootstrap-wysihtml5-insert-image-modal{
+	width: 104%;
+	height: 104%;
+	background-color: #fff;
+	margin: 0;
+	.modal-dialog {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    .modal-content{
+    	height: 100% !important;
+			width: 100% !important;
+			background: none !important;
+    }
+	}
+}
+
+button#sendProspectiveStudentEmailTest{
+  background-color: #79c3e2 !important;
+  float: left;
+}
+
+.prospective-students-container{
+	input[type="checkbox"]{
+		opacity: 1;
+		position: relative;
+		width: 20px;
+		height: 20px;
+		margin: 0;
+	}
+	input[type="submit"]#check-all-email, input[type="submit"]#showProspectiveEmailForm{
+	  display: block;
+  	margin-bottom: 20px;
+  	float: right;
+  	clear: both;
+  	background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0));
+    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0));
+    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0));
+    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0));
+	  background-color: #FF8322;
+	}
+	input[type="submit"]#check-all-email{
+    background-color: #79c3e2 !important;
+	}
+}
+
+.prospective-student-email-form{
+	#prospectiveStudentEmailContent{
+		height: 300px;
+	}
+	table{
+		width: 100%;
+		th{
+			background-color: #79c3e2;
+			color: #fff;
+		}
+		tbody{
+			tr{
+				border-bottom: 1px solid #efefef;
+			}
+		}		
+	}
+}
+
+
+.prospective{
+	display: block;
+	position: relative;
+	margin: 0 auto 75px auto;
+	padding: 15px 15px 20px 15px;
+	max-width: 900px;
+	background-color: #fff;
+
+	h1{
+		font-family: 'Roboto', sans-serif;
+	    font-size: 25px;
+	    font-weight: 300;
+	    color: #959595;
+	}
+
+	p{
+		color: #959595;
+	}
+
+	input[type=submit],
+	button {
+	    display: inline-block;
+	    height: 34px;
+	    width: auto;
+	    margin-left: 0px;
+	    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+	    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+	    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+	    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+	    background-color: #FF8322;
+	    border: 0px;
+	    border-radius: 4px;
+	    color: white;
+	    font-family: 'Roboto', sans-serif;
+	    font-size: 14px;
+	    font-weight: 400;
+	    letter-spacing: 1px;
+	    text-transform: uppercase;
+	    transition: background-color 0.3s ease-in-out;
+	}
+
+	#s2id_prospective-students-year-select{
+		text-align: left;
+	}
+
+	&.forms{
+		label{
+			display: block;
+			margin-top: 10px;
+		}
+
+		input[type=text]{
+			width: 100%;
+		}
+
+		.birth{
+			max-width: 268px;
+			.select2-container .select2-choice{
+				width: 74px;
+			}
+		}
+
+		.gender{
+			.select2-container .select2-choice{
+				width: 90px;
+			}
+		}
+
+		.state{
+			.select2-container .select2-choice{
+				width: 67px;
+			}
+		}
+	}
+
+	&.view{
+		h3{
+			display: block;
+			text-align: center;
+			font-size: 25px;
+			font-weight: 300;
+			color: #35657b;
+
+			bold{
+				font-weight: 500;
+			}
+		}
+
+		.center{
+			display: block;
+			margin: 0 auto;
+			text-align: center;
+		}
+	}
+
+
+	.pure-table{
+		width: 100%;
+		margin: 45px auto;
+
+		thead{
+			font-family: 'Open Sans', sans-serif;
+			font-size: 14px;
+			font-weight: 200;
+			height: 40px;
+			color: #fff;
+			background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+		    background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+		    background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+		    background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+		    background-color: #79c3e2;
+
+		    th{
+		    	font-size: 14px;
+				font-weight: 200;
+				height: 40px;
+				letter-spacing: 1px;
+				padding-left: 10px;
+				border-right: 1px solid #fff;
+
+				&:last-child{
+					border-right: 0px;
+				}
+		    }
+		}
+		h6{
+			font-size: 15px;
+			font-weight: 700;
+			color: #35657b;
+		}
+
+		p{
+			font-size: 12px;
+			color: #959595;
+			margin-bottom: 3px;
+
+			span{
+				text-transform: uppercase;
+				margin-left: 3px;
+			}
+		}
+
+		tr{
+			border-bottom: 1px solid #eee;
+			td{
+				padding-left: 10px;
+				padding-bottom: 10px;
+				border-right: 1px solid #eee;
+				color: #959595;
+
+				&:last-child{
+					border-right: 0px;
+				}
+
+			}
+		}
+
+	}
+
+}
+
+
+#prospective-students-tabs{
+	border: 0px;
+	padding: 0px;
+	margin: 30px 0px 0px 0px;
+
+	#high-school,
+	#transfer{
+		padding: 20px 0px;
+	}
+
+	.ui-tabs-nav{
+		width: 100%;
+		border: none;
+		border-radius: 0;
+		padding: 0;
+		z-index: 2;
+		height: 40px;
+		li.ui-state-default{
+			width: 50%;
+			margin: 0;
+			padding: 0;
+			border-radius: 0;
+			border: none;
+			z-index: 2;
+			font-size: 12px;
+			text-align: center;
+			a{
+				outline: 0;
+				padding-top: 10px;
+				font-family: 'Open Sans', sans-serif;
+				font-weight: 300;
+				font-size: 14px;
+				height: 40px;
+				width: 100%;
+				color: #ebebeb;
+				background: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+	 			background: -o-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+	  			background: -moz-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0));
+		  		background: linear-gradient(to 90deg, rgba(0,0,0,.1), rgba(255,255,255,0));
+				background-color: #bdbdbd;
+				transition: background 0.3s ease-in-out;
+				&:focus{
+					outline: 0;
+				}
+				&:hover{
+					outline: 0;
+					background-color: #959595;
+					cursor: pointer;
+				}
+			}
+		}
+		li.ui-tabs-active{
+			width: 50%;
+			margin: 0;
+			padding: 0;
+			border-radius: 0;
+			z-index: 2;
+			font-size: 14px;
+			text-align: center;	
+			a{
+				padding-top: 10px;
+				outline: 0;
+				border: 0;
+				font-family: 'Open Sans', sans-serif;
+				font-weight: 600;
+				height: 40px;
+				font-size: 14px;
+				color: white;
+				width: 100%;
+				background: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+	 			background: -o-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+	  			background: -moz-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0));
+		  		background: linear-gradient(to 90deg, rgba(0,0,0,.1), rgba(255,255,255,0));
+				background-color: #79c3e2;
+				transition: background 0.3s ease-in-out;
+				&:focus{
+					outline: 0;
+				}
+				&:hover{
+					outline: 0;
+					background-color: #79c3e2;
+					cursor: pointer;
+				}
+			}	
+		}
+	}
+}
+.id-tag{
+	font-size: 1px;
+	opacity: 0;
+}
+
+@media only screen and (max-width: 768px){
+
+	#s2id_prospective_student_birthday_3i, #s2id_prospective_student_birthday_2i {
+		padding-right: 8px;
+	}
+	#s2id_prospective_student_birthday_2i{
+		width: 98px;
+		a.select2-choice{
+			width: 100%;
+		}
+	}
+
+	#s2id_prospective_student_year, #s2id_prospective_student_intended_major{
+		width: 100%;
+		a.select2-choice{
+			width: 100%;
+		}
+	}
+
+	.button.add{
+  	margin: 20px auto !important;
+  	display: block !important;
+  	width: 50% !important;
+	}
+
+	.no-pad{
+		padding: 0;
+	}
+
+
+	.container{
+		width: 100%;
+	}
+
+	.prospective{
+		max-width: 750px;
+		padding: 0px;
+
+		.col-md-12{
+			padding: 0px;
+		}
+
+		&.view{
+			.col-md-12{
+				padding: 15px;
+			}
+		}
+
+		&.forms{
+			.birth,
+			.gender{
+				padding: 0px;
+			}
+
+			.col-md-5{
+				padding-left: 0px;
+			}
+		}
+	}
+
+}
+
+input#prospective_student_intended_major{
+	margin-top: 8px;
+}

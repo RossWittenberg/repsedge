@@ -1,0 +1,59 @@
+<div id="preferred-phone">
+	<div class="preferred-contacts-message">
+		<%if flash && flash[:phone_errors] %>
+			<div class="webflash">	
+	      <% flash[:phone_errors].each do |msg| %>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	      	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<p><%=msg[1][0]%></p>
+				<% end %>
+			</div>	
+		<% end %>
+	</div>
+
+	<% if @preferred_phones.blank? && @high_school.guidance_phone_num.blank?%>
+		<i class="glyphicon glyphicon-phone-alt"></i>
+		<p class="contact-blank">Preferred Guidance Phone...</p><br>
+	<% elsif @preferred_phones.blank? && @high_school.guidance_phone_num %>
+		<i class="glyphicon glyphicon-phone-alt"></i>
+		<% if @high_school.guidance_phone_num_ext %>
+			<p class="db-contact"><%= @high_school.guidance_phone_num %> ext: <%= @high_school.guidance_phone_num_ext %><br></p>		
+		<% else %>
+			<p class="db-contact"><%= @high_school.guidance_phone_num %><br></p>		
+		<% end %>		
+	<% else %>
+<!-- 		<i class="glyphicon glyphicon-phone-alt"></i>
+		<p class="db-contact"><#%= @high_school.guidance_phone_num %><br></p> -->
+		<% @preferred_phones.each do |preferred_phone| %>
+			<i class="glyphicon glyphicon-phone-alt"></i>
+			<p class="preferred-contact"> <%= preferred_phone.num %></p>
+			<% unless preferred_phone.extension.blank? %>
+				<p class="preferred-contact">+ ext. <%= preferred_phone.extension %></p> 
+			<% end %>
+
+			<%= button_to "&times;".html_safe, user_preferred_phone_path(@user, preferred_phone), 
+				method: :delete, 
+				params: { high_school_id: @high_school.id },
+				class: "button delete" %><br>		
+
+		<% end %>
+	<% end %><br>
+	<button id="add-preferred-phone-button">Add new...</button><br>
+	<button id="cancel-add-preferred-phone-button">Cancel</button><br>
+</div>
+
+<%= form_for [@user, @preferred_phone] do |f| %>
+	<div class="preferred-contacts-message">
+		<%= render(partial: 'preferred_phones/messages',locals: {message: @message}) %>
+	</div>
+	<%= f.text_field :num, 
+			{ placeholder: "add new phone number",
+			  id: "preferred_phone_num-field" } %>
+	<%= f.text_field :extension,
+			{ placeholder: 'ext.', 
+				id: "preferred_phone_extension-field"} %>			
+	<%= f.hidden_field :high_school_id, value: @high_school.id %>
+	<%= f.hidden_field :user_id, value: @user.id %>
+	<%= f.submit "Add", { class: "button add" }	%>
+<% end %>
+<hr>

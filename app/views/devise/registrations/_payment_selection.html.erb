@@ -1,0 +1,47 @@
+<div class="row signUpModule">
+
+  <div class="plan-details-container col-md-12">
+    <div class="plan-level col-md-4 col-sm-4">
+      <%= label_tag :plan_level, "Institution Size: " %><br>
+      <span class="info" model-attribute="payment-select-plan_level"><%= @user.institution.plan_level %></span>
+    </div>
+
+    <div class="plan-years col-md-4 col-sm-4">
+      <%= label_tag :plan_years, "Duration of plan: " %><br>
+      <span class="info" model-attribute="payment-select-plan_years"></span> 
+    </div>
+    
+    <div class="plan-price-container col-md-4 col-sm-4">
+      <%= label_tag :total_price, "Total: " %><br>
+      $<span class="info" model-attribute="payment-select-plan_price"></span> 
+    </div>
+  </div>  
+  <div class="col-md-12 accountInfo">
+    <div class="col-md-6">  
+      <h2>Account Information</h2>
+      <div id="account-info">
+        <p class="info-name"></p>
+        <p class="info-institution"><%= @user.institution.name %> </p>
+        <p class="info-phone-num"></p>
+        <p class="info-email"></p>
+      </div>
+    </div>  
+    <div id="billing-info" class="col-md-6">  
+      <h2>Billing Information</h2>
+      <p class="billing-street-address-line-1"></p>
+      <p class="billing-street-address-line-2"></p>
+      <p class="billing-city-state-zip"></p>
+    </div>
+  </div>  
+
+  <div class="selection-container col-md-12">
+    <div class="col-md-12">
+  	   <span class="info blue">I am paying with:</span>
+      	<%=radio_button_tag :payment_type, "credit card"  %>
+      	<%=label_tag :payment_type_credit_card, "<span></span>Credit Card".html_safe %>
+      	<%=radio_button_tag :payment_type, "purchase order"  %>
+      	<%=label_tag :payment_type_purchase_order, "<span></span>Purchase Order".html_safe %>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="container editAccount">
+	
+	<% if @account && @account.errors %>
+		<% @account.errors.full_messages.each do |msg| %>
+			<!-- <p class="webflash"><%=msg%></p> -->
+		<% end %>
+	<% end %>
+
+	<% if flash && flash[:admin] %>
+		<% flash[:admin].each do |msg| %>	
+			<% msg.each do |msg| %>	
+				<p class="webflash"><%=msg%></p>
+			<% end %>	
+		<% end %>	
+	<% end %>
+
+<%= render(partial: 'admin/accounts/form',locals: { account: @account } )%>
+	
+</div>	
+
+<%= link_to("Delete this Account?", 
+						account_path(@account), 
+						method: :delete,
+						data: {confirm: "Deleting an account will also destroy all related content, i.e. reps, notes, visits, preferred contacts, etc. This action cannot be undone. Are you sure you want to delete this account?"})%>

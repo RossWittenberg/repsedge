@@ -1,0 +1,13 @@
+<div class="home-search-container">
+	<div id="admin-high-school-search">
+		<h3>Edit Existing High School</h3>
+	  	<label>Search by Name or CEEB</label>
+
+	  <div id="search-name-ceeb">
+	    <%= form_tag( high_schools_path, method: :get, class: "name-or-ceeb-search-form") do %>
+	      <%= render(partial: 'admin/high_schools/name_or_ceeb_search',locals: { states: @states }) %>
+	    <% end %>
+	  </div>
+	
+	</div>
+</div>

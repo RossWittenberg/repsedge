@@ -1,0 +1,106 @@
+<%= form_for :visit, url: "/users/#{@user.id}/visits", method: "PUT", :html => {class:  'updateForm'}  do |f| %> 
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="editVisitModalLabel">Edit Event</h4>
+  </div>
+  <div class="modal-body">
+      <div class="editVisitForm">
+    
+        <div class="field visit-high-school">
+          <%= f.label "High School" %>
+          <%= text_field_tag :high_school_name, nil,
+            autocomplete: "off",
+            id: "edit-vist-high-school-name-search",
+            placeholder: 'Enter HS Name' %>
+          <%= f.hidden_field :high_school_id, value: "" %>
+          <label id="high-school-name-label" style="display: none;">High School Name</label>
+          <p id="high-school-name" ></p>
+          <label id="high-school-address-label" style="display: none;">High School Addres</label%>
+          <p id="high-school-address"></p>
+          <label id="high-school-city-label" style="display: none;">High School City</label>
+          <p id="high-school-city"></p>
+          <label id="high-school-state-label" style="display: none;">High School State</label>
+          <p id="high-school-state"></p>
+        </div>  
+
+        <div class="field">
+          <%= f.label "title" %>
+          <%= f.text_field :title,  id: "visit_title"%>
+        </div>
+
+        
+        <div class="field location">
+          <%= f.label "location" %>
+          <%= f.text_field :location, id: "visit_location" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label "Phone #" %>
+          <span id="visit_phone_num"></span>
+        </div>
+
+        <div class="field">
+          <%= f.label "category" %>
+          <%= f.select :category, 
+                options_for_select( ['High School Visit', 'College Fair', 'Hotel', 'Reminder', 'Other'] 
+                ), {}, class: "visit-category-edit" %>
+        </div>
+        
+        <div class="calendar-time-picker-container">
+          <div class="field datepicker-container">
+            <label>Start</label>
+            <%= f.text_field :start_date_raw, class: "datepicker editDatePicker"  %>
+            <%= f.time_select :start_time_raw, { 
+                              ignore_date: true, 
+                              minute_step: 5, 
+                              ampm: true }, 
+                              class: "editTimePicker" %>
+          </div>
+        </div>
+
+        <div class="calendar-time-picker-container">
+          <div class="field datepicker-container">
+            <label>End</label>
+            <%= f.text_field :end_date_raw, class: "datepicker editDatePicker"  %>
+            <%= f.time_select :end_time_raw, { 
+                              ignore_date: true, 
+                              minute_step: 5, 
+                              ampm: true },
+                              class: "editTimePicker" %>
+          </div>  
+        </div>
+      <div class="field select time-zone">
+        <%= f.label :time_zone %>
+        <%= f.collection_select :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s %>
+      </div>
+
+      <div class="field filter-select checkbox-confirmed checkbox-confirmed-edit">
+        <%= f.label :confirmed, "Confirmed?" %>
+        <%= f.check_box :confirmed, {class: 'confirmed-checkbox', id: 'visit-confirmation-edit'} %>
+      </div>
+        
+    </div>  
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "Save Event" %>
+    <% end %>
+    <div class="modal-sub-footer">
+
+    </div> 
+  </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

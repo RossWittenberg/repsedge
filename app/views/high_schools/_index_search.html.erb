@@ -1,0 +1,29 @@
+<div class="index-search-and-filter-container col-md-12" data-no-turbolink> 
+  
+  <% if params[:high_school]["city_query"] %>
+    <%= form_tag( high_schools_path, method: :get, class: "city-search-form" ) do %>
+      <%= render(partial: 'high_schools/city_search',locals: { states: @states }) %>
+      <%= render(partial: 'high_schools/filters',locals: { states: @states }) %>
+      <%= submit_tag 'SEARCH', { class: "index-search-button"} %>
+    <% end %>
+  <% end %>  
+
+  <% if params[:high_school]["county"] %>
+    <%= form_tag( high_schools_path, method: :get, class: "county-search-form") do %>
+      <%= render(partial: 'high_schools/county_search',locals: { states: @states }) %>
+      <%= render(partial: 'high_schools/filters',locals: { states: @states }) %>
+      <%= submit_tag 'SEARCH', { class: "index-search-button" } %>
+    <% end %>
+  <% end %>  
+
+  <% if params[:high_school]["name_or_ceeb_query"] %>
+    <%= form_tag( high_schools_path, method: :get, class: "name-or-ceeb-search-form") do %>
+      <%= render(partial: 'high_schools/name_or_ceeb_search') %>
+      <%= render(partial: 'high_schools/filters',locals: { states: @states }) %>
+      <%= submit_tag 'SEARCH', { class: "index-search-button" } %>
+    <% end %>
+  <% end %>  
+  <br>
+    <button id="clear-filters-button">CLEAR</button>
+  <br>
+</div>

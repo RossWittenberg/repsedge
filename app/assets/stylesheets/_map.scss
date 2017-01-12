@@ -1,0 +1,28 @@
+$darkBlue: #35657b;
+$lightBlue: #79c3e2;
+$greyText: #6e6e6e;
+$darkOrange: #ffab6b;
+
+.nearbys-map-container{
+	max-width: 430px;
+	top: 30px;
+	.acf-map {
+		height: 272px;
+		width: 400px;
+		.pin-lables{
+			color: $darkBlue;
+	    background-color: #fff;
+	    font-family: "Open Sans", sans-serif;
+	    font-size: 10px;
+	    text-align: center;
+	    max-width: 100px;     
+	    border: 2px solid black;
+	    white-space: nowrap;
+		}
+	}
+}	
+
+
+.gm-style-cc{
+	display: none;
+}

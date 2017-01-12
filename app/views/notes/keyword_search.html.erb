@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <%= link_to ("&nbsp; <i class='fa fa-chevron-left'></i>&nbsp; Back").html_safe, :back, { :class=>"backBtn" } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="home-header">
+  <h1>Notes</h1>
+  <h2>Search and view your notes</h2>
+</div>
+
+
+
+<div class="index-notes-container">
+
+  <div class="notes-search-container">
+    <%= render(partial: 'notes/search',locals: { user: @user }) %>
+
+      <div class="notes-search-results">
+
+        <h2>Search Results:</h2><hr>
+        <% unless @search %> 
+          <p>No notes matched your search parameters. Please try again.</p>
+        <% else %>    
+          <% @search.each_hit_with_result do |hit, note| %>
+            <% if hit.highlights(:high_school).length > 0 && hit.highlights(:content).length > 0 %>
+              
+              <%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+                user_note_path(@user.id, note.id),
+                method: :delete,
+                data: { confirm: "Delete this note?" },
+                remote: true,
+                class: 'close' %>
+          
+              <%= link_to high_school_path(note.high_school.id) do %>
+                <% hit.highlights(:high_school).each do |hit| %>
+                  <h2><%= hit.format { |fragment| content_tag(:span, fragment, class: "highlighted-high_school") }.html_safe %></h2><br>
+                <% end %>
+              <% end %>
+                <p><%= "#{note.high_school.city}, #{note.high_school.state.abbreviation}"   %> </p>
+    
+              <% hit.highlights(:content).each do |hit| %>
+                <%= hit.format { |fragment| content_tag(:span, fragment, class: "highlighted-content") }.html_safe %>
+              <% end %>  
+
+              <br>   
+            <% elsif hit.highlights(:high_school).length > 0 && hit.highlights(:content).blank? %>
+
+              <%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+                user_note_path(@user.id, note.id),
+                method: :delete,
+                data: { confirm: "Delete this note?" },
+                remote: true,
+                class: 'close' %>
+
+              <%= link_to high_school_path(note.high_school.id) do %>
+                <% hit.highlights(:high_school).each do |hit| %>
+                  <h2><%= hit.format { |fragment| content_tag(:span, fragment, class: "highlighted-high_school") }.html_safe %></h2><br>
+                <% end %>
+              <% end %>  
+                  <%= "#{note.high_school.city}, #{note.high_school.state.abbreviation}"   %> </p>
+              
+              <p> <%= hit.stored(:content)[0] %> </p>
+              <br><hr>
+            <% elsif hit.highlights(:high_school).blank? && hit.highlights(:content).length > 0 %>
+
+              <%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+                user_note_path(@user.id, note.id),
+                  method: :delete,
+                  data: { confirm: "Delete this note?" },
+                  remote: true,
+                  class: 'close' %>
+              <%= link_to high_school_path(note.high_school.id) do %>
+                <h2 class="unhighlighted-high-school"> <%= hit.stored(:high_school)[0] %> </h2> 
+              <% end %>
+                <p><%= "#{note.high_school.city}, #{note.high_school.state.abbreviation}"   %> </p>                  
+               
+                <% hit.highlights(:content).each do |hit| %>
+                <%= hit.format { |fragment| content_tag(:span, fragment, class: "highlighted-content") }.html_safe %>
+                <% end %>  
+                <br><hr><br>
+            <% end %>
+          <% end %>
+        <% end %> 
+
+        <div class="col-md-12">
+          <%= link_to "View all Notes", all_notes_user_high_schools_path(current_user.id), class: "viewNotes"%>
+        </div><br><br>
+
+      </div>
+  </div>
+</div>  
+
+
+
+
+
+

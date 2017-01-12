@@ -1,0 +1,552 @@
+$darkBlue: #35657b;
+$greyText: #6e6e6e;
+$darkOrange: #f79548;
+$lightBlue: #79c3e2;
+
+
+.home-main-container{
+	.home-search-container{
+		#horizontal-rule{
+		  position: absolute;
+		  top: 109px;
+		  height: 0.5px;
+		  width: 100%;
+		  opacity: .2;
+		  background-color: #959595;
+		}
+		#search-tabs{
+			padding: 0;
+			max-width: 900px;
+			margin: 0 auto;
+			border-radius: 0;
+			border: none;
+			.saved-search-index{
+				margin-top: 50px !important;
+				h3{
+					font-family: 'Roboto', sans-serif;
+					font-weight: 300;
+					font-size: 25px;
+					color: $greyText;
+					margin-bottom: 10px;
+				}
+				a{
+					font-family: 'Roboto', sans-serif;
+					font-weight: 300;
+					font-size: 14px;
+					color: $greyText;
+					text-decoration: none;
+
+					&.saved{
+						color: #797979;
+					    font-family: 'Open Sans', sans-serif;
+					    font-weight: 700;
+					    text-decoration: underline;
+					    transition: all 0.3s ease-in-out;
+					    &:hover{
+					    	color: #35657b;
+					    }
+					}
+				}
+				p {
+					font-family: 'Roboto', sans-serif;
+					font-weight: 300;
+					font-size: 14px;
+					color: $greyText;
+				}
+
+				.saved-searches-tab{
+					.saved-search-container{
+						display: block;
+						margin: 0 auto;
+						max-width: 500px;
+
+						
+						.searchItem{
+							display: block;
+							margin-bottom: 15px;
+						}
+
+
+						hr{
+							margin-top: 0px;
+						}
+
+						.close{
+							float: right;
+
+							i{
+								margin-right: 7px;
+							}
+						}
+					}
+				}
+			}
+			form.city-search-form, 
+			form.county-search-form, 
+			form.name-or-ceeb-search-form, 
+			.saved-search-index{
+				position: relative;
+				margin-top: 34px;
+				width: 100%;
+				#home-search-container{
+					width: 424px;
+					height: 125px;
+					display: block;
+					margin: 0 auto;
+					.name-or-ceeb-container{
+						#name-or-ceeb-filter{
+							input{
+								width: 300px;
+								background: -webkit-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.05)); 
+							  background: -o-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.05)); 
+							  background: -moz-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.05));
+							  background: linear-gradient(to 90deg, rgba(0,0,0,.05), rgba(255,255,255,.05));
+								background-color: transparent; 
+							}
+						}
+					}
+					.city-state-container, 
+					.county-state-container, 
+					.name-or-ceeb-container{
+						float: left;
+						width: 332px;
+						position: relative;
+						margin: 0 auto;
+						display: block;
+						#state-city-filter, 
+						#state-city-filter-city, 
+						#state-county-filter, 
+						#state-county-filter-county, 
+						#name-or-ceeb-filter {
+							display: inline-block;
+							input#city-search{
+								margin-top: 0px;
+								height: 34px;
+								width: 150px;
+								font-family: 'Roboto', sans-serif;
+							  	font-size: 12px;
+							  	line-height: 12px;
+								color: $darkBlue;
+							}
+							input#name-search{
+								color: $darkBlue;
+								margin-top: 42px;
+							  border: 0;
+							  height: 34px;
+							  padding: 6px;
+							  width: 326px;
+								margin-bottom: 0px;
+								font-family: 'Roboto', sans-serif;
+							  font-size: 12px;
+							  line-height: 12px;
+							  border-radius: 4px;
+							  padding-top: 12px;
+							  outline: none;
+							  &:-webkit-autofill {
+							    -webkit-box-shadow: 0 0 0px 1000px white inset;
+								border: 0;
+								}
+							}
+						}
+					}
+					#search-button-container{
+						float: right;
+						width: 90px;
+						height: 88px;
+						button{
+							position: absolute;
+							top: 40px;
+						  	height: 34px;
+						  	width: 100px;
+						  	margin-left: 8px;
+							background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							background-color: #FF8322;
+							border: 0px;
+							color: white;
+							font-family: 'Roboto', sans-serif;
+							font-size: 14px;
+							font-weight: 400;
+							letter-spacing: 1px;
+							transition: background-color 0.3s ease-in-out;
+							&:hover{
+								background-color: #f08f46;
+							}
+						}	
+					}
+				}
+				.filters-container{
+					position: relative;
+					margin: 0 auto;
+					overflow: hidden;
+					max-width: 680px;
+					min-height: 360px;
+					.filter-select{
+						position: relative;
+						width: 150px;
+						height: 74px;
+						margin: 0 10px;
+						float: left;
+						display: inline-block;
+
+						&.checkbox{
+							height: 40px;
+							width: 80px;
+							padding-left: 20px;
+							label{
+								padding-left: 0;
+  								margin-top: 12px;
+							} 
+						}
+					}	
+				} 	
+			}
+			.ui-tabs-nav{
+				width: 100%;
+				position: absolute;
+				border: none;
+				border-radius: 0;
+				padding: 0;
+				z-index: 2;
+				height: 34px;
+				li.ui-state-default{
+					width: 25%;
+					margin: 0;
+					padding: 0;
+					border-radius: 0;
+					border: none;
+					z-index: 2;
+					font-size: 12px;
+					text-align: center;
+					a{
+						font-family: 'Open Sans', sans-serif;
+		  				font-weight: 300;
+		  				font-size: 14px;
+						height: 34px;
+						width: 100%;
+						color: #ebebeb;
+						background: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+		   				background: -o-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+			  			background: -moz-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0));
+				  		background: linear-gradient(to 90deg, rgba(0,0,0,.1), rgba(255,255,255,0));
+						background-color: #bdbdbd;
+						transition: background 0.3s ease-in-out;
+						border-right: 1px solid #fff;
+						&:focus{
+		 					outline: 0;
+						}
+						&:hover{
+							outline: 0;
+							background-color: #959595;
+							cursor: pointer;
+						}
+					}
+
+					&:last-child{
+						a{
+							border-right: 1px solid transparent;
+						}
+					}
+				}
+				li.ui-tabs-active{
+					width: 25%;
+					margin: 0;
+					padding: 0;
+					border-radius: 0;
+					z-index: 2;
+					font-size: 14px;
+					text-align: center;	
+					a{
+						border: 0;
+						font-family: 'Open Sans', sans-serif;
+		  				font-weight: 600;
+						height: 34px;
+		  				font-size: 14px;
+						color: white;
+						width: 100%;
+						background: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+		   				background: -o-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+			  			background: -moz-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0));
+				  		background: linear-gradient(to 90deg, rgba(0,0,0,.1), rgba(255,255,255,0));
+						background-color: #79c3e2;
+						border-right: 1px solid #fff;
+						transition: background-color 0.3s ease-in-out;
+						&:focus{
+		 					outline: 0;
+						}
+						&:hover{
+							outline: 0;
+							background-color: #79c3e2;
+							cursor: pointer;
+						}
+					}	
+				}
+			}	
+		}
+	}
+}
+.ui-autocomplete{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+	color: $greyText;
+	border: 2px solid $lightBlue;
+	z-index: 1051;
+	a{
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		font-size: 14px;
+		color: $greyText;
+	}
+	li.ui-state-focus{
+		background: none;
+		background-color: $lightBlue;
+		color: #fff;
+		border: none;
+		a{
+			color: #fff;
+		}
+	}
+}
+
+
+@media only screen and (max-width: 990px){
+
+	.home-main-container{
+
+		.home-search-container{
+
+			#search-tabs{
+
+				.ui-tabs-nav{
+					height: 55px;
+
+					li.ui-state-default a,
+					li.ui-tabs-active a{
+						height: 55px;
+						white-space: normal;
+						padding-left: 5px;
+						padding-right: 5px;
+						display: block;
+						text-align: center;
+					}
+
+				}
+
+			}
+		}
+
+	}
+
+}
+
+
+@media only screen and (max-width: 745px){
+
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter,
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter-county,
+	.home-main-container .home-search-container #search-tabs form.city-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs form.county-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs .saved-search-index .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter-city {
+		width: 46%;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .name-or-ceeb-container #name-or-ceeb-filter,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container, 
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .county-state-container, 
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .name-or-ceeb-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .city-state-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .name-or-ceeb-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .city-state-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .county-state-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .name-or-ceeb-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container .city-state-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container .county-state-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container .name-or-ceeb-container,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container #search-button-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container #search-button-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container #search-button-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container #search-button-container{
+		display: block;
+		margin: 0 auto;
+		position: relative;
+		float: none !important;
+		width: 100%;
+		clear: both;
+	}
+
+
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .name-or-ceeb-container{
+		margin-top: 75px;
+	}
+	
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container #search-button-container button, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container #search-button-container button, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container #search-button-container button, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container #search-button-container button{
+		display: block;
+		margin: 0 auto;
+		position: relative;
+		top: 17px;
+		float: none;
+		clear: both;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container #search-button-container button{
+		top: 1px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container .name-or-ceeb-container #name-or-ceeb-filter input#name-search,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter-city input#city-search{
+		width: 100% !important;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter,
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter{
+		margin-right: 20px;
+	}
+
+	.home-search-container{
+
+		.select2-container{
+			width: 100%;
+
+			.select2-choice{
+				width: 100%;
+			}
+		}
+
+		.checkbox-container{
+			display: block;
+			position: relative;
+			float: left;
+			margin-top: -7px;
+			margin-bottom: 15px;
+		}
+	}
+
+	.home-main-container .home-search-container #horizontal-rule {
+	  top: 150px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container {
+	  height: 150px;
+	}
+}
+
+
+
+@media only screen and (max-width: 603px){
+
+	.home-search-container{
+		margin-bottom: 75px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs form.county-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form .filters-container .filter-select,
+	.home-main-container .home-search-container #search-tabs .saved-search-index .filters-container .filter-select {
+		width: 98%;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form .filters-container .filter-select.checkbox, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form .filters-container .filter-select.checkbox, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form .filters-container .filter-select.checkbox, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index .filters-container .filter-select.checkbox {
+	  margin-right: 3px;
+	}
+
+	.filters-container{
+
+		.select2-container{
+			width: 98%;
+
+			.select2-choice{
+				width: 100%;
+			}
+		}
+	}
+
+}
+
+
+@media only screen and (max-width: 492px){
+
+	.home-main-container{
+
+		.home-search-container{
+
+			#search-tabs{
+
+				.ui-tabs-nav{
+					height: 65px;
+
+					li.ui-state-default a,
+					li.ui-tabs-active a{
+						height: 65px;
+						white-space: normal;
+						font-size: 13px;
+						padding-left: 5px;
+						padding-right: 5px;
+						display: block;
+						text-align: center;
+					}
+
+				}
+
+			}
+		}
+
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter {
+	  margin-right: 0px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form #home-search-container, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index #home-search-container {
+	  height: 235px;
+	 }
+
+	 .home-main-container .home-search-container #horizontal-rule {
+	  top: 230px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter-county, 
+	.home-main-container .home-search-container #search-tabs form.city-search-form .filters-container .filter-select, 
+	.home-main-container .home-search-container #search-tabs form.county-search-form .filters-container .filter-select, 
+	.home-main-container .home-search-container #search-tabs form.name-or-ceeb-search-form .filters-container .filter-select, 
+	.home-main-container .home-search-container #search-tabs .saved-search-index .filters-container .filter-select, 
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter, 
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter-city {
+	  width: 97%;
+	  margin-left: 10px;
+	}
+
+	.home-main-container .home-search-container #search-tabs form.county-search-form #home-search-container .county-state-container #state-county-filter,
+	.home-main-container .home-search-container #search-tabs form.city-search-form #home-search-container .city-state-container #state-city-filter{
+		margin-top: 20px;
+		margin-bottom: 13px;
+	}
+
+}
+
+
+

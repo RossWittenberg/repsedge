@@ -1,0 +1,1 @@
+solr = RSolr.connect url: "http://index.websolr.com/solr/089b0ca445e"

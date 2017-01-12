@@ -1,0 +1,7 @@
+<% if flash && flash[:email_errors] %>
+  <div class="webflash alert">  
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p class="email-error-msg"><%=flash[:email_errors]["address"][0] %></p>
+  </div>  
+<% end %>

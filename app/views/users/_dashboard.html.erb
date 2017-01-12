@@ -1,0 +1,105 @@
+<div class="main-content-container">
+	
+	<div class="dashboard-action-blocks row">
+
+		<div class="col-md-4 col-sm-4 col-xs-12">
+
+			<div class="schedule-block">
+				<%= link_to user_visits_path(current_user.id) do %>
+					<div id="dashboard-block">
+						<h1>Schedule</h1>
+						<h3>With our Easy to use Calendar</h3>
+						<%= image_tag("RepsCalendar.svg", class: "dashboard-icon calendarIcon", alt: "calendar icon") %>
+					</div>
+				<% end %>
+			</div>
+
+
+			<div class="visits-container">	
+				<h3 class="sub-header">Upcoming Events</h3>
+				<% if @visits.empty? %>
+					<p class="visit-description" id="default">No upcoming events</p>
+				<% else %>
+					<%= render(partial: 'visits/agenda',locals: { user: @user, visits: @visits, visit: @visit }) %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-md-4 col-sm-4 col-xs-12">
+
+			<div class="schedule-block">
+				<%= link_to all_notes_user_high_schools_path(current_user.id) do %>
+					<div id="dashboard-block">
+						<h1>Notes</h1>
+						<h3>Easy to reference notes</h3>
+						<%= image_tag("RepsNotes.svg", class: "dashboard-icon", alt: "calendar icon") %>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="notes-container">	
+				<h3 class="sub-header">Recent Notes</h3>
+				<% if @notes.empty? %>
+					<p class="light">You have no notes</p>
+						<%= link_to 'Start a new search', search_high_schools_path, class: 'bold' %> 
+				<% elsif @notes  %>
+					<% @notes.each do |note| %>
+					<div class="note">
+						<div class="visit-date">
+							<p class="note-date"><%= note.time_tag.strftime("%m/%d") %></p>
+						</div>
+						<div class="visit-description-">
+							<p class="note-title">
+								<%= link_to note.high_school.name, user_high_school_notes_path(current_user.id, note.high_school.id) %>
+							</p>
+
+							<p id="note-content">
+								<%= truncate( note.content, length: 45 ) %>
+							</p>
+						</div>
+					</div>
+					<% end %>	
+				<% end %>
+			</div>
+
+		</div>
+
+
+
+		<div class="col-md-4 col-sm-4 col-xs-12">
+
+			<div class="search-block">
+				<%= link_to search_high_schools_path do %>
+					<div id="dashboard-block">
+						<h1>Search</h1>
+						<h3>Over 25,000 Schools</h3>
+						<%= image_tag("RepsMap.svg", class: "dashboard-icon", alt: "search icon") %>
+					</div>
+				<% end %>
+			</div>
+
+
+				<div class="saved-searches-container">
+					<h3 class="sub-header">Saved Searches</h3>
+					<% if @saved_searches.empty? %>
+						<p class="saved-search-name" id="default">No saved searches </p>
+							<%= link_to 'Start a new search', search_high_schools_path %> 
+					<% else %>		
+						<% @saved_searches.each do |saved_search| %>
+							<div class="saved-search">
+								<p class="saved-search-name">
+									<a href=<%= saved_search.query_string %> >
+										<%= truncate( saved_search.name, length: 28 ) %>
+									</a>
+								</p><br>
+							</div>
+						<% end %>
+					<% end %>
+				</div>	
+
+		</div>
+
+
+	</div>	
+
+</div> 

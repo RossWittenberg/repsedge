@@ -1,0 +1,193 @@
+<div class="home-header">
+  <h1>New</h1>
+  <h2>Account</h2>
+</div>
+<% if @account && @account.errors %>
+	<% @account.errors.full_messages.each do |msg| %>
+		<p class="webflash"><%=msg%></p>
+	<% end %>
+<% end %>
+
+<% if flash && flash[:notice] %>
+	<p><%flash[:notice]%></p>
+<% end %>
+
+<div class="container editAccount">
+	<%= form_for [:admin, @account], url: {controller: "admin/accounts", action: "create", method: "POST"} do |f| %>
+
+		<div class="admin-account-info-container col-md-12">
+			<div class="col-md-12">
+				<h1>Account Manager Details</h1>
+				<hr>
+			</div>
+
+			<div class="col-md-3 col-sm-3">
+				<%= label_tag "First Name*" %><br>
+				<%= text_field_tag "user[first_name]", nil, {placeholder: "First Name"} %><br>
+			</div>
+
+			<div class="col-md-3 col-sm-3">
+				<%= label_tag "Last Name*" %><br>
+				<%= text_field_tag "user[last_name]", nil, {placeholder: "Last Name"} %><br>
+			</div>
+
+			<div class="col-md-3 col-sm-3">
+				<%= label_tag "Email*" %><br>
+				<%= text_field_tag "user[email]", nil, {placeholder: "Email Address"} %><br>
+			</div>
+
+			<div class="col-md-3 col-sm-3">
+				<%= label_tag "Phone*" %><br>
+				<%= text_field_tag "user[phone_num]", nil, {placeholder: "Phone Number"} %><br>
+			</div>
+			<%= f.hidden_field "user[password]", value: "RepsEdge2015!" %>
+	    <%= f.hidden_field "user[password_confirmation]", value: "RepsEdge2015!" %>
+		</div>
+
+
+		<div class="admin-account-institution-container col-md-12">
+
+			<div class="col-md-12">
+				<br>
+				<h1>Select Instiution</h1>
+				<hr>
+			</div>
+			
+				<div class="state-select select col-md-5 col-sm-7" id="state-institution">
+		      <%= label_tag "First, choose the state in which your institution is located:" %> <br>
+		      <%= select_tag "state", 
+		        options_from_collection_for_select(
+		          @states,
+		          "name",
+		          "name", params[:state] 
+		          ),{ include_blank: "SELECT STATE", 
+		            id: 'state-institution-select' } %>
+		    </div>
+
+		    <div class="col-md-12">
+		  		<br>
+		  	</div>
+
+		    <div class="institution-input-container col-md-5 col-sm-7">
+		      <div id="institution-input">
+		        <%= label_tag "Now, input your institution:" %> <br>
+		        <%= text_field_tag "user[institution]", params && params[:institution],
+		            { autocomplete: "on",
+		              id: "institution-search",
+		              class: "new-user-institution-input",
+		              placeholder: 'Institution Name'} %>
+		        <br>
+		      </div>
+		    </div>
+
+		</div>
+
+		<div class="admin-account-payment-container col-md-12">
+			<div class="col-md-12">
+				<br>
+				<h1>Payment Details</h1>
+				<hr>
+			</div>
+		    <div class="payment-status col-md-3 col-sm-3">
+					<% payment_status_array = [ [ "Paid", true],
+			                                [ "Unpaid",false] ] %>
+					<%= f.label "Payment Status" %><br>
+			    <%= f.select :is_paid, 
+			      options_for_select( payment_status_array, 
+			        ( @account.is_paid ) ),
+			        { class: 'filter_drop_down' } %>
+			  </div>
+
+		    <div class="payment-duration col-md-3 col-sm-3">
+					<% payment_years_array = [ [ "1", 1],
+			                                [ "2", 2],
+			                                ["3", 3] ] %>
+					<%= f.label :plan_years, "Plan Duration" %><br>
+			    <%= f.select :plan_years, 
+			      options_for_select( payment_years_array, 
+			      	selected: @account.plan_years,
+			      	class: 'filter_drop_down' )%>
+		      <span class="error-message"></span> 
+				</div>
+				<div class="payment-type col-md-3 col-sm-3">
+					<% payment_types_array = [ "Credit Card (PO)",
+			                                "Check",
+			                                "Money Order",
+			                                "RepsEdge Trial",
+			                                ["Purchase Order (payment pending)", "Purchase Order" ] ] %>
+					<%= f.label :payment_type, "Payment Method *** " %><br>
+			    <%= f.select :payment_type, 
+			      options_for_select( payment_types_array, 
+			        selected: "RepsEdge Beta Trial", 
+			        class: 'filter_drop_down' )%>
+		      <span class="error-message"></span> 
+				</div>
+			
+				<div class="payment-type col-md-3 col-sm-3">
+					<% is_recurring_array = [ ["Yes", true],
+			                                
+			                                ["No", false ] ] %>
+					<%# f.label :is_recurring, "Recurring?" %><br>
+			    <%# f.select :is_recurring, 
+			      options_for_select( is_recurring_array, 
+			        selected: @account.is_recurring, 
+			        class: 'filter_drop_down' )%>
+		      <span class="error-message"></span> 
+				</div>
+
+			<div class="col-md-12">
+				<br>
+				<h1>Billing Address</h1>
+				<hr>
+			</div>
+
+			 <div class="billing_street_address_line_1 col-md-6 col-sm-6">
+		      	<%= f.label :billing_street_address_line_1, "Billing Street Address Line 1" %><br>
+		      	<%= f.text_field :billing_street_address_line_1, class: "info", value: @account.billing_street_address_line_1 %>
+		      	<span class="error-message"></span> 
+		    </div> 
+
+		    <div class="billing_street_address_line_2 col-md-6 col-sm-6">
+		      	<%= f.label :billing_street_address_line_2, "Billing Street Address Line 2" %><br>
+		      	<%= f.text_field :billing_street_address_line_2, class: "info", value: @account.billing_street_address_line_2 %>
+		      	<span class="error-message"></span> 
+		    </div> 
+
+		    <div class="billing_city col-md-4 col-sm-4">
+		      	<%= f.label :billing_city, "Billing City" %><br>
+		      	<%= f.text_field :billing_city, class: "info", value: @account.billing_city %>
+		      	<span class="error-message"></span> 
+		    </div> 
+
+		    <div class="billing_state col-md-4 col-sm-4">
+		      <%= f.label :billing_state, "Billing State" %><br>
+		      <div class="filter-select state-select select" id="state-county-filter">
+		        <%= select_tag "account[billing_state]", 
+		          options_from_collection_for_select(
+		            @states,
+		            "name",
+		            "name", @account.billing_state
+		              ),{ id: 'county-state-search-input' } %>
+		      </div> 
+		    </div>
+
+		    <div class="billing_zip_code col-md-4 col-sm-4">
+		      <%= f.label :billing_zip_code, "Billing Zip Code" %><br>
+		      <%= f.text_field :billing_zip_code, class: "info", value: @account.billing_zip_code %>
+		      <span class="error-message"></span> 
+		    </div>      
+
+		</div>
+
+		<div class="col-md-12">
+			<div class="col-md-12">
+				<br>
+				<%= f.submit %>
+				<br>
+				<br>
+			</div>
+		</div>
+	<% end %>
+
+</div>
+

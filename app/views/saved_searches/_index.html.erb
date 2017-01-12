@@ -1,0 +1,24 @@
+<div class="saved-searches-tab">
+	<div class="saved-search-container">	
+		<div class="row">
+			<h3>Saved Searches</h3><hr>
+		</div>
+
+
+		<% if user.saved_searches.blank? %>
+			<p>No saved searches</p>
+		<% else %>
+			<% user.saved_searches.each do |saved_search| %>
+				<div class="row searchItem">
+					<%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+											user_saved_search_path(user.id, saved_search.id),
+											method: :delete,
+											data: { confirm: "Delete this saved search?" },
+											remote: true,
+											class: 'close' %>
+						<a href=<%= saved_search.query_string %> class="saved"><%= truncate( saved_search.name, length: 25 )%></a>
+				</div>
+			<% end %>
+		<% end %>		
+	</div>	
+</div>

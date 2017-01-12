@@ -1,0 +1,45 @@
+<div class="home-header">
+  <h1>Search High Schools</h1>
+</div>
+
+
+<div id="search-tabs">
+
+  <ul>
+    <li><a id="name-ceeb-tab" href="#search-name-ceeb">Search by Name or CEEB</a></li>
+    <li><a id="county-tab" href="#search-county">Search by State and County</a></li>
+    <li><a id="city-tab" href="#search-city">Search by State and City</a></li>
+    <li><a id="saved_searches-tab" href="#searches-saved">Saved Searches</a></li>
+  </ul>
+
+  <div id="search-name-ceeb">
+    <%= form_tag( high_schools_path, method: :get, class: "name-or-ceeb-search-form") do %>
+      <%= render(partial: 'high_schools/name_or_ceeb_search',locals: { states: @states }) %>
+    <% end %>
+  </div>
+
+  <div id="search-county">
+    <%= form_tag( high_schools_path, method: :get, class: "county-search-form") do %>
+      <br><%= render(partial: 'high_schools/county_search',locals: { states: @states }) %>
+      <div id="horizontal-rule"></div>
+      <%= render(partial: 'high_schools/filters',locals: { states: @states }) %>
+    <% end %> 
+  </div>
+
+  <div id="search-city">
+    <%= form_tag( high_schools_path, method: :get, class: "city-search-form" ) do %>
+      <br><%= render(partial: 'high_schools/city_search',locals: { states: @states }) %>
+      <div id="horizontal-rule"></div>
+      <%= render(partial: 'high_schools/filters',locals: { states: @states }) %>
+    <% end %> 
+  </div>
+
+  <div id="searches-saved">
+    <div class="saved-search-index">
+      <%= render(partial: 'saved_searches/index',locals: { user: current_user, states: @states }) %>
+    </div>  
+  </div>
+
+</div>	
+
+	

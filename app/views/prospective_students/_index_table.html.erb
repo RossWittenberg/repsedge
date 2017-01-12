@@ -1,0 +1,81 @@
+<table class="pure-table">
+	<input type="submit" id="check-all-email" value="SELECT ALL STUDENTS">
+	<input type="submit" id="showProspectiveEmailForm" class="disabled" disabled="disabled" data-toggle="modal" data-target="#prospectiveStudentEmailForm" value="Send Email to Selected Students">
+
+  <thead>
+      <tr>
+          <th>Prospective Student Info</th>
+          <th>Date Added</th>
+          <th class="hidden-xs">Edit</th>
+          <th>E-Mail</th>
+      </tr>
+  </thead>
+
+  <tbody>
+
+		<% @prospective_students.each do |prospective_student| %>
+			<tr>
+				<%= hidden_field_tag :prospective_student_id, prospective_student.id %> 
+				<td>
+					<h6>
+						<%= "#{prospective_student.first_name} " %>
+						<% unless  prospective_student.middle_name.blank?	%>
+							<%= "#{prospective_student.middle_name} " %>
+						<% end %>
+						<%= prospective_student.last_name %>
+					</h6>
+
+					<p>
+						<%= prospective_student.birthday.strftime("%m/%d/%y") %>
+
+						<span><%= prospective_student.gender %></span>
+
+					</p>
+			
+					<% if prospective_student.institution %>
+						<p>
+							Current institution: <%= prospective_student.institution.name %>
+						</p>
+					<% end %>
+
+	
+
+					<p>
+						<%= prospective_student.formatted_address %>
+					</p>
+
+					<p>
+						<%= prospective_student.email %>
+					</p>
+
+					<p>
+						<%= prospective_student.intended_major %>
+					</p>
+
+					<p>
+						<%= prospective_student.phone_num  %>
+					</p>
+
+
+				</td>
+				
+				<td>
+					<%= prospective_student.created_at.strftime("%m/%d/%y") %>
+				</td>
+
+				<td class="hidden-xs">
+					<%= link_to "Edit", edit_prospective_student_path(prospective_student), action: :edit %>
+					<%= link_to "Delete", prospective_student_path(prospective_student), method: :delete, 
+					data: { confirm: 'Are you sure you want to delete this prospective student?' } %><br>
+				</td>
+
+				<td>
+					<div class="filter-select checkbox" id="email-check">
+						<%= check_box_tag :email, prospective_student.id, false, class: "emailCheckBox", id: "email" %>
+					</div>
+				</td>
+
+			</tr>
+			<% end %>
+		</tbody>
+	</table>

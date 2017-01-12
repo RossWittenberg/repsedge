@@ -1,0 +1,104 @@
+$darkBlue: #35657b;
+$lightBlue: #79c3e2;
+$greyText: #b7b7b7;
+$darkOrange: #ffab6b;
+
+
+
+.flash_messages{
+  color: coral;
+  p{
+    display: inline-block;
+  }
+  button{
+    margin-left: 6px;
+  }
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  .alert-search, .alert-notes_success {
+    background-color: papayawhip;
+    z-index: 3000;
+    position: absolute;
+    right: 30px;
+    top: 8px;
+  }
+  .alert-alert{
+    background-color: papayawhip;
+    z-index: 3000;
+    position: absolute;
+    right: 30px;
+    top: 8px;
+  }
+  .alert-notice{
+    background-color: papayawhip;
+    z-index: 3000;
+    position: absolute;
+    right: 30px;
+    top: 8px;
+  }
+  .alert-new-rep{
+    background-color: papayawhip;
+    z-index: 3000;
+    position: absolute;
+    top: 8px;
+    left: 100px;
+    max-height: 100px;
+    max-width: 390px;
+  }
+  .alert-calendar_errors, .alert-search,  .alert-admin, .alert-calendar_success, .alert-calendar_update, .alert-missing, .alert-email_errors, .alert-calendar_update_errors, .alert-prospective_student_errors, .alert-prospective_student_success {
+    display: none;
+    // background-color: papayawhip;
+    // z-index: 3000;
+    // position: absolute;
+    // top: 8px;
+    // left: 100px;
+    // max-height: 100px;
+    // max-width: 390px;
+  }
+  .alert-calendar-profile{
+    background-color: papayawhip;
+    z-index: 3000;
+  }
+  .alert-destroy_user_message, .alert-create_user_message, .alert-update_user_message{
+    display: none;
+  }
+  .alert-no_institution{
+    background-color: papayawhip;
+    z-index: 3000;
+    position: absolute;
+    top: 8px;
+    left: 100px;
+    max-height: 200px;
+    max-width: 600px;
+  }
+} 
+.error-message{
+  display: block;
+  color: $darkOrange;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: capitalize;
+  margin: 10px auto;
+}
+.erroneous-input{
+  border: 2px solid $darkOrange;
+} 
+.webflash{
+  padding: 6px;
+  width: 100%;
+  background-color: papayawhip;
+  color: coral;
+  z-index: 3000;
+  &.calendar-error, &.calendar-success{
+    margin-bottom: 16px;
+    margin-top: 30px;
+  }
+  &.calendar-update, &.calendar_update_errors, &.calendar_success {
+    margin-top: 36px;
+  }
+}  
+
+.jGrowl-message {
+  font-size: 12px;
+}

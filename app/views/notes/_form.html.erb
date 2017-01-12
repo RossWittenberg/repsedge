@@ -1,0 +1,23 @@
+<%if flash && flash[:notes_error] %>
+	<div class="webflash">	
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<p><%=flash[:notes_error]%></p>
+	</div>
+<% end %>
+
+<% if @high_school %>
+	<%= form_for [@user, @note], remote: true do |f| %>
+		<div class="notes-message">
+			<%= render(partial: 'notes/messages',locals: {message: @message}) %>
+		</div>
+		<%= f.text_area :content, 
+				{ placeholder: 'Take notes here...',
+				id: "note_content-field" } %>	
+		<%= f.hidden_field :high_school_id, value: @high_school.id %>
+		<%= f.hidden_field :user_id, value: @user.id %>
+		<div class="button-container">
+			<%= f.submit "SAVE", { class: "button save" }	%>
+		</div>	
+	<% end %>	
+<% end %>	

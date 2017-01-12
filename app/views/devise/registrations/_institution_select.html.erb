@@ -1,0 +1,41 @@
+<div class="loginModule signUp">
+
+  <h2>Sign Up</h2>
+  
+  <%= form_tag '/checkout', method: :put do |f| %>
+    <div class="state-select select" id="state-institution">
+      <%= label_tag "First, choose the state in which your institution is located:" %> <br>
+      <%= select_tag "state", 
+        options_from_collection_for_select(
+          @states,
+          "name",
+          "name", params[:state] 
+          ),{ include_blank: "ALL", 
+            id: 'state-institution-select' } %>
+    </div>
+  <br>
+    <div class="institution-input-container">
+      <div id="institution-input">
+        <%= label_tag "Now, input your institution:" %> <br>
+        <%= text_field_tag "user[institution]", params && params[:institution],
+            { autocomplete: "off",
+              id: "institution-search",
+              class: "sign-up-institution-input",
+              placeholder: 'Institution Name'} %>
+        <br>
+      </div>
+    </div>
+
+    <div class="institution-confirmation-container">
+      <div class="institution-confirmation">
+      <span id="institution-name"></span>
+      <span id="institution-plan-level"></span>
+      <span id="institution-plan-cost"></span>
+
+      </div>
+      <button type="submit" id="institution-select-next-button">Next</button>
+    </div>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,388 @@
+<div class="container new-high-school-container">
+
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <h1>Add a New High School</h1>
+      <hr>
+    </div>
+  </div>
+
+  <%= form_for [:admin, @high_school] do |f|%>
+
+  	<div class="col-md-6">
+
+      <div class="name col-md-12">
+        <%= f.label :name, "Name" %><br>
+        <%= f.text_field :name, class: "info", value: @high_school.name %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="ceeb col-md-4">
+        <%= f.label :ceeb, "CEEB" %><br>
+        <%= f.text_field :ceeb, class: "info", value: @high_school.ceeb %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="address col-md-12">
+        <%= f.label :address, "Address" %><br>
+        <%= f.text_field :address, class: "info", value: @high_school.address %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="city col-md-6">
+        <%= f.label :city, "City" %><br>
+        <%= f.text_field :city, class: "info", value: @high_school.city %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="filter-select state-select select col-md-6" id="state-county-filter">
+          <%= f.label "State" %><br>
+          <%= select_tag "state", 
+            options_from_collection_for_select(
+              @states,
+              "abbreviation",
+              "name", @high_school.state && @high_school.state.abbreviation 
+                ),{ id: 'county-state-search-input' } %>
+      </div>
+
+      <div class="col-md-12"></div>
+
+      <div class="filter-select select county-select col-md-6" id="state-county-filter-county">
+          <%= f.label "County" %><br>
+          <select id="county-search-input" name="county" county="<%=@high_school.county%>"></select>
+      </div>
+
+      <div class="zip_code col-md-6">
+        <%= f.label :zip_code, "Zip Code" %><br>
+        <%= f.text_field :zip_code, class: "info", value: @high_school.zip_code %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="latitude col-md-6">
+        <%= f.label :latitude, "Latitude" %><br>
+        <%= f.text_field :latitude, class: "info", value: @high_school.latitude %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="longitude col-md-6">
+        <%= f.label :longitude, "Longitude" %><br>
+        <%= f.text_field :longitude, class: "info", value: @high_school.longitude %>
+        <span class="error-message"></span> 
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="guidance_phone_num col-md-12">
+        <%= f.label "Type" %> <br>
+        <%= f.select :hs_type, 
+        options_for_select( [ 'Public', 'Private'],
+          ( @high_school.hs_type || "Public" ) ),
+          { class: 'filter_drop_down' } %>
+          <span class="error-message"></span>
+      </div>
+
+      <div class="classification col-md-6">
+        <%= f.label "classification" %> <br>
+        <% classification_array = [ [ "Traditional","Traditional"],
+                                  [ "Other/Alternative","Other/Alternative school"],
+                                  [ "Sp. Programs...","Special program emphasis"],
+                                  [ "Vocational","Vocational school"],
+                                  [ "Special Education","Special Education"],
+                                  [ "Montessori","Montessori"] ] %>
+        <%= f.select :classification, 
+          options_for_select( classification_array, 
+            ( @high_school.classification || "Traditional") ),
+            { class: 'filter_drop_down' } %>
+        <span class="error-message"></span>
+      </div>
+
+
+      <div class="filter-select select col-md-6" id="religion-filter">
+        <%= f.label"religious affiliation" %> <br>
+        <% religion_array = [ "Nonsectarian", ["Other Religious", "Other religious"], "Catholic", "Jewish"] %>
+        <%= f.select :religion, 
+          options_for_select(religion_array, 
+            ( @high_school && @high_school.religion || "Nonsectarian") ),
+            { class: 'filter_drop_down' } %>
+        <span class="error-message"></span>
+      </div>
+
+      <div class="filter-select checkbox col-md-3" id="boarding-filter">
+        <%=hidden_field_tag "high_school[boarding]", false %>
+        <%=check_box_tag "high_school[boarding]", true, ( @high_school && @high_school.boarding == true ), { class: 'checkbox' } %>
+        <%= label_tag "boarding" %> 
+      </div>
+
+      <div class="filter-select checkbox col-md-3" id="magnet-filter">
+        <%=hidden_field_tag "high_school[magnet]", false %>
+        <%=check_box_tag "high_school[magnet]", true, ( @high_school && @high_school.magnet == true ), { class: 'checkbox' } %>
+        <%= label_tag "magnet" %> 
+      </div>
+
+      <div class="filter-select checkbox col-md-3" id="charter-filter">
+        <%=hidden_field_tag "high_school[charter]", false %>
+        <%=check_box_tag "high_school[charter]", true, ( @high_school && @high_school.charter == true ), { class: 'checkbox' } %>
+        <%= label_tag "charter" %> 
+      </div>
+
+      <div class="filter-select checkbox col-md-3" id="capstone-filter">
+        <%=hidden_field_tag "high_school[capstone]", false %>
+        <%=check_box_tag "high_school[capstone]",  true, ( @high_school && @high_school.capstone == true ), { class: 'checkbox' }  %>
+        <%= label_tag "capstone" %> 
+      </div>
+
+      <div class="filter-select checkbox col-md-3" id="intl_bacc-filter">
+        <%=hidden_field_tag "high_school[intl_bacc]", false %>
+        <%=check_box_tag "high_school[intl_bacc]",  true, ( @high_school && @high_school.intl_bacc == true ), { class: 'checkbox' } %>
+        <%= label_tag "intl_bacc", "Intl Bacc" %> 
+      </div>
+
+    </div>
+
+
+
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <br/>
+        <h1>Contact Information</h1>
+        <hr>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+
+      <div class="website col-md-12">
+        <%= f.label :website, "High School Website" %><br>
+        <%= f.text_field :website, class: "info", value: @high_school.website %>
+        <span class="error-message"></span> 
+      </div>
+    
+      <div class="hs_phone_num col-md-5">
+        <%= f.label :hs_phone_num, "Phone Number" %><br>
+        <%= f.text_field :hs_phone_num, class: "info", value: @high_school.hs_phone_num %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="guidance_phone_num col-md-5">
+        <%= f.label :guidance_phone_num, "Guidance Phone Number" %><br>
+        <%= f.text_field :guidance_phone_num, class: "info", value: @high_school.guidance_phone_num %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="guidance_phone_num_ext col-md-2">
+        <%= f.label :guidance_phone_num_ext, "Extension" %><br>
+        <%= f.text_field :guidance_phone_num_ext, class: "info", value: @high_school.guidance_phone_num_ext %>
+        <span class="error-message"></span> 
+      </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+      <div class="guidance_url col-md-12">
+        <%= f.label :guidance_url, "Guidance Website" %><br>
+        <%= f.text_field :guidance_url, class: "info", value: @high_school.guidance_url %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="calendar_url col-md-12">
+        <%= f.label :calendar_url, "Calendar URL" %><br>
+        <%= f.text_field :calendar_url, class: "info", value: @high_school.calendar_url %>
+        <span class="error-message"></span> 
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <br/>
+        <h1>Statistics</h1>
+        <hr>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-md-6">
+
+      <div class="seniors_count col-md-6">
+        <%= f.label :seniors_count, "Number of Seniors" %><br>
+        <%= number_field_tag "high_school[seniors_count]", @high_school.seniors_count || nil, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+       
+      <div class="students_count col-md-6">
+        <%= f.label :students_count, "Number of Students" %><br>
+        <%= number_field_tag "high_school[students_count]", @high_school.students_count || nil, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_male percent col-md-6">
+        <%= f.label :percent_male, "Male" %><br>
+        <%= number_field_tag "high_school[percent_male]", @high_school.percent_male || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_female percent col-md-6">
+        <%= f.label :percent_female, "Female" %><br>
+        <%= number_field_tag "high_school[percent_female]", @high_school.percent_female || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_asian_am percent col-md-4">
+        <%= f.label :percent_asian_am, "Asian-American" %><br>
+        <%= number_field_tag "high_school[percent_asian_am]", @high_school.percent_asian_am || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_african_am percent col-md-4">
+        <%= f.label :percent_african_am, "African-American" %><br>
+        <%= number_field_tag "high_school[percent_african_am]", @high_school.percent_african_am || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_white percent col-md-4">
+        <%= f.label :percent_white, "White (non-Hispanic)" %><br>
+        <%= number_field_tag "high_school[percent_white]", @high_school.percent_white || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_hispanic_am percent col-md-4">
+        <%= f.label :percent_hispanic_am, "Hispanic-American" %><br>
+        <%= number_field_tag "high_school[percent_hispanic_am]", @high_school.percent_hispanic_am || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="percent_other percent col-md-4">
+        <%= f.label :percent_other, "Other" %><br>
+        <%= number_field_tag "high_school[percent_other]", @high_school.percent_other || 0, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="reduced_lunch percent col-md-4">
+        <%= f.label :reduced_lunch, "Free/Reduced Lunch" %><br>
+        <%= number_field_tag "high_school[reduced_lunch]", @high_school.reduced_lunch || nil, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="four_year_school percent col-md-4">
+        <%= f.label :four_year_school, "Attend Four Yr School" %><br>
+        <%= number_field_tag "high_school[four_year_school]", @high_school.four_year_school || nil, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="graduation_rate percent col-md-4">
+        <%= f.label :graduation_rate, "Graduation Rate" %><br>
+        <%= number_field_tag "high_school[graduation_rate]", @high_school.graduation_rate || nil, max: 100, class: "info", step: 'any'  %>
+
+        <span class="input-group-addon add-on">
+          %
+        </span>
+
+        <span class="error-message"></span> 
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="sat_total col-md-4">
+        <%= f.label :sat_total, "SAT: Total" %><br>
+        <%= number_field_tag "high_school[sat_total]", @high_school.sat_total || nil, in: 0...2401, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="sat_math col-md-4">
+        <%= f.label :sat_math, "SAT: Math" %><br>
+        <%= number_field_tag "high_school[sat_math]", @high_school.sat_math || nil, in: 0...801, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="sat_reading col-md-4">
+        <%= f.label :sat_reading, "SAT: Reading" %><br>
+        <%= number_field_tag "high_school[sat_reading]", @high_school.sat_reading || nil, in: 0...801, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="sat_writing col-md-4">
+        <%= f.label :sat_writing, "SAT: Writing" %><br>
+        <%= number_field_tag "high_school[sat_writing]", @high_school.sat_writing || nil, in: 0...801, class: "info"  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="act col-md-4">
+        <%= f.label :act, "ACT: Total" %><br>
+        <%= number_field_tag "high_school[act]", @high_school.act || nil, in: 0...37, class: "info", step: 'any'  %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="median_income col-md-4">
+        <%= f.label :median_income, "Median Income" %><br>
+        <%= number_field_tag "high_school[median_income]", @high_school.median_income || nil, min: 0, class: "info" %>
+        <span class="error-message"></span> 
+      </div>
+    </div>  
+
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <br>
+        <%= f.submit "Save" %>
+      </div>
+    </div>
+  <% end %>
+</div>

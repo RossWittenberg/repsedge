@@ -1,0 +1,39 @@
+<div class="profile-banner-outer-container">
+	<div class="profile-banner-inner-container">	
+		<div class="profile-banner container">	
+		<div class="container">
+			<%= link_to ("&nbsp; <i class='fa fa-chevron-left'></i>&nbsp; Back").html_safe, :back, { :class=>"backBtn" } %>
+		</div>
+			<div class="col-md-12">
+				<h1><%=@high_school.name%></h1>
+				
+				<% if mobile_device? %>
+					<a target='_blank' href='<%="maps:q=#{@high_school.address}"%>'>
+						<h2 class="profile-banner-info"><%=@high_school.address%></h2>
+						<h2 class="profile-banner-info"><%=@high_school.cityStateZipCounty%></h2>
+					</a>
+				<% else %>
+					<h2 class="profile-banner-info"><%=@high_school.address%></h2>
+					<h2 class="profile-banner-info"><%=@high_school.cityStateZipCounty%></h2>
+				<% end %>
+
+				<a href='tel:<%=@high_school.hs_phone_num%>'><h3 class="profile-banner-info"><%=@high_school.hs_phone_num%></h3></a>
+				<% if @high_school.website %>
+					<h3 class="profile-banner-info"><a target="_blank" href=<%= @high_school.website %>>View School Website</a></h3>
+				<% end %>	
+			</div>
+		</div>
+	</div>	
+</div>	
+	
+<div class="profile-page-container container">
+
+	<div class="col-md-8 col-sm-8" id="static-data-container">
+		<%= render(partial: 'high_schools/profile_page/static_data',locals: { high_school: @high_school }) %>
+	</div>
+
+	<div class="col-md-4 col-sm-4" id="user-data-container">	
+		<%= render(partial: 'high_schools/profile_page/user_data',locals: { high_school: @high_school }) %>
+	</div>
+
+</div>		

@@ -1,0 +1,171 @@
+<div class="index-main-container col-md-12">
+
+	<div id="total-results-outer-container">  
+	  <div id="total-results-inner-container">
+			<div id="total-results-left-side-container" class="col-md-2 col-sm-2">
+				<button id="save-current-search" data-toggle="modal" data-target="#save-search-modal" user=<%= @user %> > Save Current Search</button><br>
+				<%= link_to 'Start New Search', search_high_schools_path %>
+			</div>	
+			<div id="total-results-right-side-container" class="col-md-10 col-sm-10 col-xs-12">
+
+				<div id="total-results">
+					<h2><%= @total_results %></h2> <p>results for </p> 
+				
+					<% unless params[:high_school][:city_query].blank? %>
+						<h3><%= params[:high_school][:city_query]%> / </h3>	
+					<% end %>
+					<% unless params[:high_school][:name_or_ceeb_query].blank? %>
+						<h3><%= params[:high_school][:name_or_ceeb_query]%></h3>	
+					<% end %>
+					<% unless params[:high_school][:county].blank? %>
+						<h3><%= params[:high_school][:county]%></h3>	
+					<% end %>
+
+					<% unless params[:state].blank? %>
+						<h3> / <%= params[:state]%></h3>	
+					<% end %>
+
+
+				</div>
+				<div id="results-string">
+					<% if generateResultsString(params[:high_school]).blank? %>
+						<p>with no filters selected</p>
+					<% else %>	
+						<p>Filtered by: <p id="filters"><%= generateResultsString(params[:high_school])%>	</p></p>
+					<% end %>	
+				</div>
+			</div>
+
+
+		</div>	
+	</div>
+	
+	<div class="index-search-container col-md-2 col-sm-3" data-no-turbolink>
+		<div id="results-tabs">
+			<ul>
+			  <li><a id="current-search-tab" href="#results-tabs-1">Advanced</a></li>
+			  <li><a id="saved-searches-tab" href="#results-tabs-2">Saved</a></li>
+			</ul>
+
+			<div id="results-tabs-1">
+				<%= render(partial: '/high_schools/index_search',locals: { states: @states }) %>
+			</div>
+
+			<div id="results-tabs-2">
+				<%= render(partial: '/saved_searches/index', locals: {user: @user, saved_searches: @saved_searches}) %>
+			</div>
+
+				<div class="seeSchool">
+	<div class="col-md-12">
+		<a href="#schoolMissing" data-toggle="modal">See a school missing? Let us know</a>
+	</div>
+
+	</div>
+
+		</div>
+	</div>
+
+	<div class="index-search-results-container col-md-10 col-sm-9 col-xs-12">
+			<div class="table-responsive">
+				<table id="high-schools" class="table-striped table tablesorter">
+					<thead id="table-header">
+
+						<tr>
+
+							<th class="name">
+								<button class="btn btn-default" id="name" id="column-header-sorter" >
+
+									<p>School Name</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="city">
+								<button class="btn btn-default" id="city" id="column-header-sorter" >
+
+									<p>City</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="state">
+								<button class="btn btn-default" id="state" id="other" id="column-header-sorter" >
+
+									<p>State</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="total_students">
+								<button class="btn btn-default" id="total_students" id="column-header-sorter" >
+
+									<p>Students</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="diversity">
+								<button class="btn btn-default" id="diversity" id="column-header-sorter" >
+
+									<p>Diversity</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="graduation_rate">
+								<button class="btn btn-default" id="graduation_rate" id="column-header-sorter" >
+
+									<p>Grad Rate</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+							<th class="income">
+								<button class="btn btn-default" id="income" id="column-header-sorter" >
+
+									<p>Median Income</p>
+									<%= image_tag("downArrow.png", class: "tableArrow", alt: "arrow") %>
+
+								</button>
+							</th>
+
+						</tr>
+					</thead>
+					<tbody class="high-school-results">
+						<%= render(partial: '/high_schools/results',locals: { high_schools: @high_schools }) %>
+					</tbody> 
+				</table>
+			</div>
+
+			<div class="mobileSchoolError col-md-12 hidden-lg hidden-md">
+				<a href="#schoolMissing" data-toggle="modal">See a school missing? Let us know</a>
+			</div>
+	</div>
+
+	<div id="scroll-to-top">
+		<span class="glyphicon glyphicon-chevron-up">
+		<p>top</p>	
+		</span>
+	</div>
+
+	
+
+
+
+	
+</div>	
+
+
+
+
+
+
+			
+
+

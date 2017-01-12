@@ -1,0 +1,23 @@
+<div id="home-search-container">
+	<div class="county-state-container">
+		<div class="filter-select state-select select" id="state-county-filter">
+			<%= label_tag "State" %><br>
+			<%= select_tag "state", 
+				options_from_collection_for_select(
+					@states,
+					"abbreviation",
+					"name", params[:state] 
+					),{ include_blank: "STATE", 
+						id: 'county-state-search-input' } %>
+		</div>
+		<div class="filter-select select county-select" id="state-county-filter-county">
+			<%= label_tag "County" %><br>
+			<select id="county-search-input" name="county"></select>
+		</div>
+	</div>	
+	<div id="search-button-container">	
+		<% if params[:high_school].blank?%>
+			<button type="submit" id="county-search-button" class="btn">SEARCH</button>
+		<% end %>	
+	</div>	
+</div>	

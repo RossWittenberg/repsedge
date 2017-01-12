@@ -1,0 +1,13 @@
+<% if @message %>
+  <div id="error-explanation">
+    <h2>
+      <%= pluralize(@preferred_guidance_website.errors.count, "error") %> prohibited
+      this preferred_guidance_website from being saved:
+    </h2>
+    <ul>
+      <% @preferred_guidance_website.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

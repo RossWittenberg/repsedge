@@ -1,0 +1,88 @@
+<div class="scrollMobile">	
+	
+
+	<div id="prospective-students-container">
+
+		<div class="prospective-students-header-container col-md-12">
+			<h2 class="prospective-students-header">Prospective Students</h2>
+		</div>
+
+		<div class="prospective-students-content-container col-md-12">
+			<%= form_tag "/prospective_students", method: :get do %>
+				<%# select_tag :year, options_for_select([ @year, @year + 1, @year + 2, @year + 3 ], @year) %>
+				<% if Time.now > (Date.new(Time.now.year, 8, 15)) %>	
+					<%= select_tag :year, options_for_select([ @year, @year + 1, @year + 2, @year + 3, @year + 4 ],  (@year + 1) ) %>
+				<% else %>	
+					<%= select_tag :year, options_for_select([ @year, @year + 1, @year + 2, @year + 3, @year + 4 ],  @year) %>
+				<% end %>
+				<%= hidden_field_tag 'high_school_id', @high_school.id %>
+				<%= submit_tag "Go", :class => "go" %>
+			<% end %>
+				<div class="col-md-12 center">
+					- or -
+				</div>
+			<%= button_to "Add Prospective Student", new_prospective_student_path, params: { high_school_id: @high_school.id }, method: :get, :class => "addProspective" %>
+		</div>
+	</div>
+
+	<div id="preferred-contact-container">	
+	
+		<div class="preferred-contact-header-container col-md-12">
+			<h2 class="preferred-contact-header">Preferred Contacts</h2>
+		</div>
+		<div class="preferred-contact-content-container col-md-12">
+			<%= render(partial: '/preferred_phones/form',locals: { high_school: @high_school, user: @user, preferred_phone: @preferred_phone, preferred_phones: @preferred_phones })%>
+
+			<%= render(partial: '/preferred_guidance_websites/form',locals: { high_school: @high_school, user: @user, preferred_guidance_website: @preferred_guidance_website, preferred_guidance_websites: @preferred_guidance_websites, message: @message })%>
+
+			<%= render(partial: '/preferred_calendars/form',locals: { high_school: @high_school, user: @user, preferred_calendar: @preferred_calendar })%>
+
+			<%= render(partial: '/preferred_emails/form',locals: { high_school: @high_school, user: @user, preferred_email: @preferred_email })%>
+		</div>
+	</div>	
+
+	<div id="add-to-calendar-container">	
+		<div class="add-to-calendar-header-container col-md-12">
+			<h2 class="add-to-calendar-header">Add to Calendar</h2>
+		</div>
+		<div class="add-to-calendar-content-container col-md-12">
+		<% if flash && flash[:calendar_errors] %>
+	    <% flash[:calendar_errors].each do |msg| %>
+	      <div class="webflash alert calendar_update_errors">
+	        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <p>Unable to create your visit. <%=msg%></p>
+	      </div>
+	    <% end %>  
+	  <% elsif flash[:calendar_success] %>
+	    <div class="webflash calendar-success">
+	      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	      <p><%=flash[:calendar_success]%></p>
+	    </div>
+		<% end %>
+			<%= render(partial: 'visits/new_form',locals: { user: @user, states: @states, high_school: @high_school }) %>	
+		</div>
+	</div>	
+
+	<div id="add-note-container">	
+		<div class="add-note-header-container col-md-12">
+			<h2 class="add-note-header">Take Notes</h2>
+		</div>
+		<div class="add-note-content-container col-md-12">
+			<%= render(partial: 'notes/form',locals: { high_school: @high_school, user: @user, note: @note }) %>	
+		</div>	
+	</div>
+
+	<div id="view-notes-container">	
+		<div class="view-notes-header-container col-md-12">
+			<h2 class="view-notes-header">Recent Notes</h2>
+		</div>
+		<div class="view-notes-content-container col-md-12">
+			<%= render(partial: 'notes/high_school_index', locals: { high_school: @high_school, user: @user, notes: @notes }) %>
+
+			<div class="btn">
+				<%= link_to "View all notes", user_high_school_notes_path(@user.id, @high_school.id) %>
+			</div>
+		</div>	
+	</div>
+</div>

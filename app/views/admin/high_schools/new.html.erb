@@ -1,0 +1,7 @@
+<% if @high_school && @high_school.errors %>
+	<% @high_school.errors.full_messages.each do |msg| %>
+		<p class="webflash"><%=msg%></p>
+	<% end %>
+<% end %>
+<%= render(partial: 'admin/high_schools/form',locals: { high_school: @high_school}) %>
+

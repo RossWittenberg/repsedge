@@ -1,0 +1,315 @@
+@import "colors";
+
+#newVisitModal{
+	.modal-dialog{
+
+		#new-vist-high-school-name-search,
+		#visit_title,
+		#visit_location{
+			width: 300px;
+		}
+
+		.modal-content{		
+			form{
+				.modal-header{
+				}	
+				.modal-body{
+					height: 500px;
+					@media only screen and (max-width: 668px){
+						height: 600px;
+					}
+					.field{
+						padding: 8px;
+						label{
+							width: 90px;
+						}
+						input{
+
+						}
+						select#visit_category, select#visit_time_zone{
+							padding: 6px;
+							font-family: 'Roboto', sans-serif;
+							color: $darkBlue;
+					  	line-height: 1;
+					  	border-radius: 2px;
+					  	border: none;
+					  	overflow: hidden; 
+							width: 268px;
+					  	-webkit-appearance: none;
+					  	height: 30px;
+			  			font-size: 10.4px;
+			  			-moz-appearance: none;
+							text-indent: 0.01px;
+							text-overflow: '';
+	  	  			background: url('down-arrow-dropdown-large.png') no-repeat right bottom;
+						}
+						select#visit_start_time_raw_4i, select#visit_start_time_raw_5i, select#visit_end_time_raw_4i, select#visit_end_time_raw_5i{
+							font-family: 'Roboto', sans-serif;
+							color: $darkBlue;
+							font-weight: 300;
+							font-size: 11px;
+							padding-bottom: 0;
+						}
+					}
+				}
+				.modal-footer{
+					.tentative-button-wrapper,
+					.confirmed-button-wrapper {
+						background-color: transparent;
+						@media only screen and (max-width: 668px){
+						  width: 186px;
+    					margin: 10px auto;
+						}
+					}
+					.tentative-button-wrapper{
+						@media only screen and (max-width: 668px){
+							margin-bottom: 20px;
+							float: none;
+						}
+					}
+					.confirmed-button-wrapper{
+						float: left;
+						@media only screen and (max-width: 668px){
+							float: none;
+						}
+					}
+					input[type="submit"]{
+						  width: 115px;
+						  height: 40px;
+						  display: block;
+						  color: #fff;
+						  font-family: 'Roboto', sans-serif;
+						  font-weight: 500;
+						  font-size: 15px;
+						  float: right;
+						  letter-spacing: 1px;
+						  text-transform: uppercase;
+						  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background-color: #FF8322;
+						  border: 0px;
+						  border-radius: 5px;
+						  transition: background-color 0.3s ease-in-out;
+						&:hover{
+							background-color: #f08f46;
+						}
+						&.confirmed-button,
+						&.tentative-button {
+							width: 185px;
+							margin-bottom: 10px;
+						}
+						&.confirmed-button {
+						  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background-color: $confirmed_visit;
+						  &:hover {
+								background-color: $confirmed_visit_rollover;
+						  }							
+						}
+						&.tentative-button {
+						  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  background-color: $tentative_visit;
+						  &:hover {
+							  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+							  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  	background-color: $tentative_visit_rollover;
+						  }							
+						}
+					}
+				}
+			}	
+		}
+	}
+}	
+
+#showVisitModal{
+	.modal-dialog{
+		.modal-content{		
+			.modal-header{
+				h5{
+					padding-left: 15px;
+				}
+			}	
+			.modal-body{
+				height: 400px !important;
+				label{
+					font-weight: 400;
+					font-size: 14px;
+					color: $darkBlue;
+				}
+			}
+		}
+	}
+}
+
+#editVisitModal{
+	.modal-dialog{
+
+		#edit-vist-high-school-name-search,
+		#visit_title,
+		#visit_location{
+			width: 300px;
+		}
+
+		.modal-content{		
+			form{
+				.modal-header{
+				}	
+				.modal-body{
+					height: 500px;
+
+					.field{
+						padding: 8px;
+						label{
+							width: 90px;
+						}
+						input{
+							height: 36px;
+						}
+						select#visit_category, select#visit_time_zone{
+							padding: 6px;
+							font-family: 'Roboto', sans-serif;
+							color: $darkBlue;
+						  	line-height: 1;
+						  	border-radius: 2px;
+						  	border: none;
+						  	overflow: hidden; 
+							width: 268px !important;
+						  	-webkit-appearance: none;
+						  	height: 30px;
+				  			font-size: 10.4px;
+				  			-moz-appearance: none;
+							text-indent: 0.01px;
+							text-overflow: '';
+			  	  			background: url('down-arrow-dropdown-large.png') no-repeat right bottom;
+						}
+						select#visit_start_time_raw_4i, select#visit_start_time_raw_5i, select#visit_end_time_raw_4i, select#visit_end_time_raw_5i{
+							font-family: 'Roboto', sans-serif;
+							color: $darkBlue;
+							font-weight: 300;
+							font-size: 11px;
+							padding-bottom: 0;
+						}
+					}
+
+					.calendar-time-picker-container {
+					    margin-top: 0px;
+					}
+				}
+				.modal-footer{
+					padding-bottom: 30px;
+  					padding-right: 30px;
+
+					input {
+						width: 115px;
+						height: 40px;
+						display: block;
+						color: #fff;
+						font-family: 'Roboto', sans-serif;
+						font-weight: 500;
+						font-size: 15px;
+						margin: 0 auto;
+						letter-spacing: 1px;
+						text-transform: uppercase;
+						background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						background-color: #FF8322;
+						border: 0px;
+						border-radius: 5px;
+						transition: background-color 0.3s ease-in-out;
+						float: left;
+    					display: inline-block;
+						&:hover{
+							background-color: #f08f46;
+						}
+					}
+					.modal-sub-footer{
+						margin: 0px auto;
+					    float: right;
+					    display: inline-block;
+						button {
+							width: 150px;
+						  	height: 40px;
+						  	display: block;
+						  	margin: 0 auto;
+						  	color: #fff;
+						  	font-family: 'Roboto', sans-serif;
+						  	font-weight: 500;
+						  	font-size: 15px;
+						  	letter-spacing: 1px;
+						  	text-transform: uppercase;
+						  	background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  	background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  	background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						  	background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+						 	background-color: #FF8322;
+						  	border: 0px;
+						  	border-radius: 5px;
+						  	transition: background-color 0.3s ease-in-out;
+						  	float: none;
+							&:hover{
+								background-color: #f08f46;
+							}
+						}
+					}
+				}	
+			}	
+		}
+	}
+}	
+
+.datepicker{
+	&.datepicker-dropdown{
+		border-radius: 0;
+		border: 2px solid $lightBlue;
+		color: $darkBlue;
+		thead{
+			th.datepicker-switch{
+				text-align: center;
+			}
+		}	
+		tbody{
+			td.day{
+				text-align: center;
+				&.today{
+					border-radius: 3px;
+					background-color: #ebebeb;
+				}
+				&.active{
+					border-radius: 3px;
+					background-color: $lightBlue;
+					color: #fff;
+				}
+				&.new, &.old{
+					color: #d1d1d1;
+				}
+			}
+		}
+	}
+	&:hover{
+		cursor: pointer;
+	}
+}
+
+@media only screen and (max-width: 500px){
+	select#visit_time_zone, select#visit_category{
+		width: 100% !important;
+		-webkit-appearance: menulist !important;
+		background: none !important;
+	}
+	.modal-footer{
+		padding: 20px;
+	}
+}
+

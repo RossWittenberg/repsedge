@@ -1,0 +1,1065 @@
+$darkBlue: #35657b;
+$greyText: #6e6e6e;
+$darkOrange: #f79548;
+
+select {
+	padding: 0px 0px 5px 8px;
+	font-family: 'Roboto', sans-serif;
+	color: $greyText;
+	line-height: 12px;
+	border-radius: 2px;
+	border: none;
+	width: 150px;
+	overflow: hidden; 
+	-webkit-appearance: none;
+	height: 34px;
+	width: 140px;
+	background-color: transparent;
+	cursor: pointer;
+ 	&:hover{
+ 		cursor: pointer;
+ 	}
+  &#visit_start_time_raw_4i, &#visit_end_time_raw_4i {
+		width: 65px !important;
+		height: 36px !important;
+		background: url('down-arrow-dropdown-xtra-small-hour.png') no-repeat right bottom !important;
+		cursor: pointer;
+		&:hover{
+			background: url('down-arrow-dropdown-xtra-small-hour-hover.png') no-repeat right bottom !important;
+			cursor: pointer;
+		}
+	}
+	&#visit_start_time_raw_5i, &#visit_end_time_raw_5i {
+		width: 50px !important;
+		height: 36px !important;
+		background: url('down-arrow-dropdown-xtra-small-minute.png') no-repeat right bottom !important;
+		cursor: pointer;
+		&:hover{
+			background: url('down-arrow-dropdown-xtra-small-minute-hover.png') no-repeat right bottom !important;
+			cursor: pointer;
+		}
+	}
+}
+input {
+	color: $darkBlue;
+	background: -webkit-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1)); 
+	background: -o-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1)); 
+	background: -moz-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1));
+	background: linear-gradient(to 90deg, rgba(0,0,0,.05), rgba(255,255,255,.1));
+	background-color: #f7f7f7;
+  	border: 0;
+  	height: 30px;
+  	padding: 6px 12px;
+  	width: 150px;
+	margin-bottom: 0px;
+	font-family: 'Roboto', sans-serif;
+  	font-size: 14px;
+  	line-height: 14px;
+  	border-radius: 4px;
+  	outline: none;
+  	&:-webkit-autofill {
+    	-webkit-box-shadow: 0 0 0px 1000px #ccc inset;
+		border: 0;
+	}
+  &:focus{
+  
+  }
+}
+label {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #35657b;
+	margin-bottom: 0px;
+}
+.index-main-container{
+	padding: 0;
+	.index-search-container{
+		float: left;
+		padding: 0;
+		background-color: #ffffff;
+		padding-bottom: 30px;
+		min-height: 400px;
+	  #results-tabs{
+	  	position: relative;
+		  width: 100%;
+		  border: none;
+		  border-radius: 0;
+		  background-color: transparent;
+		  z-index: 0;
+		  padding: 0;
+		  margin-top: 70px;
+			.ui-tabs-nav{
+				position: fixed;
+				border: none;
+				border-radius: 0;
+				padding: 0;
+				z-index: 2;
+				height: 40px;
+				li.ui-state-default{
+					margin: 0;
+					padding: 0;
+					border-radius: 0;
+					border: none;
+					z-index: 2;
+					font-size: 12px;
+					text-align: center;
+					a{
+						width: 94px;
+						font-family: 'Open Sans', sans-serif;
+		  				font-weight: 300;
+		  				font-size: 14px;
+						height: 40px;
+						color: #ebebeb;
+						padding-top: 11px;
+						background: -webkit-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+		   				background: -o-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0)); 
+			  			background: -moz-linear-gradient(90deg,rgba(0,0,0,.1),rgba(255,255,255,0));
+				  		background: linear-gradient(to 90deg, rgba(0,0,0,.1), rgba(255,255,255,0));
+						background-color: #bdbdbd;
+						transition: background-color 0.3s ease-in-out;
+						&:focus{
+		 					outline: 0;
+						}
+						&:hover{
+							background-color: $greyText;
+		 					outline: 0;
+						}
+					}
+				}
+				li.ui-tabs-active{
+					margin: 0;
+					padding: 0;
+					border-radius: 0;
+					z-index: 2;
+					font-size: 14px;
+					text-align: center;	
+					a{
+						border: 0;
+						font-family: 'Open Sans', sans-serif;
+		  				font-weight: 600;
+						height: 40px;
+						width: 96px;
+		  				font-size: 14px;
+						padding-top: 11px;
+						color: white;
+  			    		background: -webkit-linear-gradient(90deg,rgba(115,184,212,.5),rgba(255,255,255,0)); 
+					  	background: -o-linear-gradient(90deg,rgba(115,184,212,.5),rgba(255,255,255,0)); 
+					  	background: -moz-linear-gradient(90deg,rgba(115,184,212,.5),rgba(255,255,255,0));
+					  	background: linear-gradient(to 90deg, rgba(115,184,212,.5), rgba(255,255,255,0));
+		  				background-color: #79c3e2;
+						&:focus{
+		 					outline: 0;
+						}
+						&:hover{
+							background-color: #79c3e2;
+		 					outline: 0;
+						}
+					}	
+				}
+			}	
+		  #results-tabs-1{
+				.index-search-and-filter-container{
+					background-color: white;
+					z-index: 0;
+					padding: 0;
+					margin-top: 40px;
+					#state-city-filter,
+					#state-county-filter,
+					#state-county-filter-county,
+					#state-city-filter-city{
+						margin-bottom: 13px;
+
+						label{
+							font-size: 12px;
+							margin-bottom: 3px;
+						}
+					}
+					input#city-search{
+						height: 30px;
+						font-family: 'Roboto', sans-serif;
+					  	font-size: 12px;
+					  	line-height: 12px2px;
+						color: $darkBlue;
+						margin-bottom: 12px;
+					}
+					input#name-search{
+						color: $darkBlue;
+						background: -webkit-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1)); 
+						background: -o-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1)); 
+						background: -moz-linear-gradient(90deg,rgba(0,0,0,.05),rgba(255,255,255,.1));
+						background: linear-gradient(to 90deg, rgba(0,0,0,.05), rgba(255,255,255,.1));
+						background-color: #f7f7f7;
+					  	border: 0;
+					  	height: 30px;
+					  	padding: 6px;
+					  	width: 150px;
+						margin-bottom: 0px;
+						font-family: 'Roboto', sans-serif;
+					  	font-size: 12px;
+					  	line-height: 12px;
+					  	border-radius: 4px;
+					  	outline: none;
+					  	&:-webkit-autofill {
+					    	-webkit-box-shadow: 0 0 0px 1000px #ccc inset;
+							border: 0;
+						}
+					}
+					.index-search-button{
+						color: #ffffff;
+						font-size: 12px;
+						font-family: 'Roboto', sans-serif;
+						font-weight: 500;
+						border: 0; 
+						border-radius: 4px; 
+						margin: 8px auto 0px auto;		
+						height: 34px;
+					  	width: 150px;
+						background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+						background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+						background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+						background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+						background-color: #f79548;
+						letter-spacing: 1px;
+						transition: background-color 0.3s ease-in-out;
+						&:hover{
+							background-color: #f08f46;
+						}
+					}
+					#clear-filters-button{
+						color: #ffffff;
+						font-size: 12px;
+						font-family: 'Roboto', sans-serif;
+						font-weight: 500;
+						letter-spacing: 1px;
+						border: 0;
+						border-radius: 4px; 
+						background: -webkit-linear-gradient(90deg,rgba(0,0,0,.15),rgba(255,255,255,0)); 
+						background: -o-linear-gradient(90deg,rgba(0,0,0,.15),rgba(255,255,255,0)); 
+						background: -moz-linear-gradient(90deg,rgba(0,0,0,.15),rgba(255,255,255,0));
+						background: linear-gradient(to 90deg, rgba(0,0,0,.15), rgba(255,255,255,0));
+						margin: 0px auto;		
+						width: 150px;
+						height: 34px;
+						background-color: #b2b2b2;
+					}
+				}
+		  }  
+			.filters-container{
+				.filter-select.select{
+					margin-bottom: 10px;
+
+					label{
+						font-size: 12px;
+						margin-bottom: 3px;
+					}
+				}
+
+				.filter-select.checkbox{
+					label{
+						font-size: 12px;
+					}
+				}
+			}	
+
+			#results-tabs-2{
+				.saved-searches-tab{
+					.saved-search-container{
+					  background-color: white;
+					  z-index: 0;
+					  margin-top: 50px;
+					}
+					hr{
+						margin-top: 5px;
+					}
+					h3 {
+						font-family: 'Roboto', sans-serif;
+						font-size: 14px;
+						font-weight: 400;
+						color: #35657b;
+					}
+					p, a{
+						font-family: 'Roboto', sans-serif;
+						font-size: 13px;
+						font-weight: 500;
+						color: $greyText;
+					}
+				}
+			}	
+		}	
+	}
+	.index-search-results-container{
+		height: 100%;
+		float: right;
+		padding-left: 40px;
+
+		.table-responsive{
+			width: 945px;
+		}
+
+	  	table#high-schools {
+			position: relative;
+			margin-top: 110px;
+	  	thead{
+	  		position: fixed;
+	  		top: 110px;
+	  		z-index: 2;
+			  tr {
+			  	th {
+					padding: 0;
+					border-bottom: none;
+
+						&.name{
+			  				width: 290px;
+			  			}
+			  			&.city{
+			  				width: 110px;
+			  			}
+			  			&.state{
+			  				width: 85px;
+			  			}
+			  			&.total_students{
+			  				width: 100px;
+			  			}
+			  			&.diversity{
+			  				width: 105px;
+			  			}
+			  			&.graduation_rate{
+			  				width: 105px;
+			  				padding: 0;
+			  			}
+			  			&.income{
+			  				width: 150px;
+			  			}
+
+			  		button {
+			  			background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+						background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+						background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+						background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+						background-color: #79c3e2;
+			  			width: 100%;
+				  		height: 40px;
+						border: 0;
+						border-radius: 0;
+						padding: 7px 0px 7px 13px;
+						font-family: 'Open Sans', sans-serif;
+						font-weight: 400;
+						text-align: left;
+						font-size: 14px;
+						color: #fff;
+						width: 100%;
+						border-right: 1px solid #fff;
+						transition: background-color 0.3s ease-in-out;
+							&#income{
+								border-right: 0px solid transparent;
+							}
+							&:hover{
+								background-color: #80cced;
+							}
+
+						p{
+							display: inline-block;
+							float: left;
+							margin: 0px;
+						}
+						
+						img{
+							float: right;
+							margin: 6px;
+							transition: transform 0.3s ease-in-out;
+
+							&.tableArrow.upArrow{
+								-ms-transform: rotate(-180deg);
+							    -webkit-transform: rotate(-180deg);
+							    transform: rotate(-180deg);
+							}
+						}
+			  		}
+			  	}
+			  }	
+		  }
+		  tbody {
+		  	background-color: #ffffff;
+			position: relative;
+			z-index: 0;
+			max-width: 945px;
+		  	tr {
+		  		td {
+		  			display: block;
+		  			float: left;
+		  			font-family: 'Roboto', sans-serif;
+		  			font-weight: 400;
+		  			color: $greyText;
+		  			border-top: 0;
+		  			border-bottom: 0;
+		  			padding: 7px 10px 7px 15px;
+		  			vertical-align: middle;
+		  			height: 54px;
+		  			&#name{
+		  				width: 290px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  				a{
+		  					color: $greyText;
+		  					text-decoration: none;
+
+		  					&:hover{
+		  						color: #35657b;
+		  					}
+		  				} 
+		  			}
+		  			&#city{
+		  				width: 110px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  			&#state{
+		  				width: 85px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  			&#total_students{
+		  				width: 100px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  			&#diversity{
+		  				width: 105px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  			&#graduation_rate{
+		  				width: 105px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  			&#income{
+		  				width: 150px;
+		  				text-align: left;
+		  				border-right: 1px solid #ebebeb;
+		  			}
+		  		}
+		  	}
+		  }	
+		}
+	}	  
+	
+	#total-results-outer-container{
+		position: fixed;
+		background-color: #C7DDE5;
+	  	height: 72px;
+	  	top: 98px;
+	  	left: 0;
+	  	width: 100%;
+	  	z-index: 2;
+	  #total-results-inner-container{
+	  	position: relative;
+	  	height: 72px;
+	  	display: block;
+	  	width: 1200px;
+			margin: 0 auto;
+			#total-results-left-side-container{
+				position: relative;
+				height: 68px;
+				z-index: 3;
+				margin-top: 0px;
+		  		button#save-current-search{
+			  		  padding: 0;
+					  margin-left: 15px;
+					  border: none;
+					  color: #fff;
+					  font-family: 'Roboto', sans-serif;
+					  font-weight: 500;
+					  text-transform: uppercase;
+					  font-size: 12px;
+					  letter-spacing: 1px;
+					  height: 36px;
+					  width: 190px;
+					  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+					  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+					  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+					  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+					  background-color: #f79548;
+					  transition: background-color 0.3s ease-in-out;
+			  		&:hover{
+			  			background-color: #f08f46;
+				  	}
+		  		}
+		  		a{
+		  		  display: block;
+				  text-align: center;
+				  line-height: 34px;
+		  		  padding: 0;
+				  margin-left: 15px;
+				  border: none;
+				  color: #fff;
+				  font-family: 'Roboto', sans-serif;
+				  font-weight: 500;
+				  text-transform: uppercase;
+				  text-decoration: none;
+				  font-size: 12px;
+				  letter-spacing: 1px;
+				  height: 36px;
+				  width: 190px;
+				  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+				  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+				  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+				  background: linear-gradient(to 90deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+				  background-color: #f79548;
+				  transition: background-color 0.3s ease-in-out;
+
+				  &:hover{
+				  	text-decoration: none;
+				  	background-color: #f08f46;
+				  }
+				}
+		  }	
+			#total-results-right-side-container{
+		  		float: left;
+		  		padding-left: 28px;
+		  		margin-top: 16px;
+				#total-results{
+		  		margin-left: 35px;
+			  	display: inline;
+			  	p {
+			  		font-weight: 400;
+			  		display: inline;
+			  		color: #35657b;
+			  		font-size: 20px;
+			  	}
+			  	h2 {
+			  		display: inline;
+			  		color: #35657b;
+			  		font-size: 20px;
+			  		font-weight: 600;
+			  	}
+			  	h3 {
+			  		display: inline;
+			  		color: #35657b;
+			  		font-size: 20px;
+			  		font-weight: 500;
+			  	}
+				}
+				#results-string{
+					margin-top: 0px;
+					margin-left: 35px;
+					p {
+			  		font-weight: 300;
+			  		display: inline;
+			  		color: #35657b;
+			  		font-size: 14px;
+			  		&#filters{
+			  			font-weight: 400;
+			  			font-style: italic;
+			  		}
+			  	}
+				}
+			}
+		}	
+	}
+	#scroll-to-top{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 150px;
+		width: 200px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		font-size: 16px;
+		color: #35657b;
+		text-align: center;
+		padding: 20px;
+		z-index: 10;
+		transition: all 0.3s ease-in-out;
+
+		span,
+		p{
+			transition: all 0.3s ease-in-out;
+		}
+		:hover{
+			cursor: pointer;
+			color: #fff;
+		}
+	}
+}
+
+@media only screen and (max-width: 1217px){
+
+	.index-main-container{
+
+		.index-search-results-container{
+
+			.table-responsive{
+				width: 795px;
+				
+				table{
+
+					&#high-schools{
+
+						tbody tr td#income,
+						th.income{
+							display: none;
+						}
+					}
+				}
+
+				button{
+
+					&#graduation_rate{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 1130px){
+	.high_schools.index .container {
+	    width: 97.4%;
+	}
+
+	.index-main-container{
+
+		.index-search-container{
+			width: 190px;
+
+		}
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				width: 82.2%;
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 1130px) and (min-width: 1050px){
+	.high_schools.index .container {
+	    width: 97.3%;
+	}
+
+	.index-main-container{
+
+		.index-search-container{
+			width: 190px;
+		}
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				width: 78%;
+				padding-left: 10px;
+			}
+
+			.table-responsive{
+				width: 690px;
+				
+				table{
+
+					&#high-schools{
+
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+					}
+				}
+
+				button{
+
+					&#diversity{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+
+
+@media only screen and (max-width: 1050px) and (min-width: 950px){
+	.high_schools.index .container {
+	    width: 97.3%;
+	}
+
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container a,
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container button#save-current-search {
+	    margin-left: 13px;
+	}
+
+	.index-main-container{
+
+		.index-search-container{
+			width: 190px;
+		}
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				width: 77%;
+				padding-left: 10px;
+			}
+
+			.table-responsive{
+				width: 690px;
+				
+				table{
+
+					&#high-schools{
+
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+					}
+				}
+
+				button{
+
+					&#diversity{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 950px) and (min-width: 850px){
+	.high_schools.index .container {
+	    width: 97.3%;
+	}
+
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container a,
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container button#save-current-search {
+	    margin-left: 11px;
+	}
+
+	.index-main-container{
+
+		.index-search-container{
+			width: 190px;
+		}
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				width: 73%;
+				padding-left: 10px;
+			}
+
+			.table-responsive{
+				width: 585px;
+				
+				table{
+
+					&#high-schools{
+
+						tbody tr td#diversity,
+						th.diversity,
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+					}
+				}
+
+				button{
+
+					&#total_students{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 850px) and (min-width: 768px){
+	.high_schools.index .container {
+	    width: 97.3%;
+	}
+
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container a,
+	.index-main-container #total-results-outer-container #total-results-inner-container #total-results-left-side-container button#save-current-search {
+	    margin-left: 11px;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.name,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#name {
+	    width: 185px;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.state,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#state {
+	    width: 75px;
+	}
+
+	.index-main-container{
+
+		.index-search-container{
+			width: 190px;
+		}
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				width: 71%;
+				padding-left: 10px;
+			}
+
+			.table-responsive{
+				width: 470px;
+				
+				table{
+
+					&#high-schools{
+
+						tbody tr td#diversity,
+						th.diversity,
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+					}
+				}
+
+				button{
+
+					&#total_students{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	}
+}
+
+
+
+@media only screen and (max-width: 768px){
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.name,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#name{
+	    width: 185px;
+	    white-space: normal;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools tbody tr td{
+		white-space: normal;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.state,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#state{
+	    width: 75px;
+	}
+
+	#total-results-left-side-container{
+		width: 190px;
+	}
+
+	#total-results-left-side-container,
+	.index-search-container.col-md-2.col-sm-3{
+		display: none;
+	}
+
+
+	.index-main-container{
+
+		#scroll-to-top {
+		    left: auto;
+		    right: 30px;
+		    height: 75px;
+		    width: 30px;
+		    float: right;
+		}
+
+		#total-results-outer-container{
+			    height: 115px;
+    			top: 48px;
+			#total-results-inner-container{
+				width: 100%;
+				#total-results-right-side-container {
+				    padding-left: 4px;
+				    width: 472px;
+				    display: block;
+				    margin: 20px auto 0px auto;
+				    float: none;
+
+				  #total-results,
+				  #results-string{
+				  	margin-left: 0px;
+				  }
+
+				  #total-results{
+				  	h2,
+				  	h3,
+				  	p{
+				  		font-size: 17px;
+				  	}
+				  }
+				}
+			} 
+		}
+
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				display: block;
+			    margin: 0 auto;
+				width: 472px;
+			    padding: 0px;
+			    float: none;
+			}
+
+			.table-responsive{
+				width: 472px;
+				
+				table{
+
+					&#high-schools{
+						margin-top: 103px;
+
+						tbody tr td#diversity,
+						th.diversity,
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+
+						thead{
+							top: 110px;
+						}
+						
+						tbody tr td{
+							padding: 10px 5px;
+						}
+					}
+				}
+
+				button{
+
+					&#total_students{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+	} 
+}
+
+
+@media only screen and (max-width: 500px){
+
+	body.high_schools.index{
+		.container{
+			padding: 5px;
+		}
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.name,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#name {
+	    width: 105px;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.total_students,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#total_students{
+		width: 75px;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.state,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#state {
+	    width: 57px;
+	}
+
+	.index-main-container .index-search-results-container table#high-schools thead tr th.city,
+	.index-main-container .index-search-results-container table#high-schools tbody tr td#city{
+	    width: 67px;
+	}
+
+	.index-main-container{
+
+		.index-search-results-container{
+
+			&.col-md-10{
+				display: block;
+				margin: 0 auto;
+				width: 306px;
+				padding: 0px;
+				float: none,
+			}
+
+			.table-responsive{
+				width: 306px;
+				
+				table{
+
+					&#high-schools{
+						margin-top: 105px;
+
+						tbody tr td#diversity,
+						th.diversity,
+						tbody tr td#graduation_rate,
+						th.graduation_rate{
+							display: none;
+						}
+
+						tbody tr td{
+							padding: 2px 5px;
+						    font-size: 10px;
+						    line-height: 12px;
+						}
+					}
+				}
+
+				button{
+					padding: 7px 0px 7px 5px !important;
+					font-size: 11px !important;
+
+					&#total_students{
+						border-right: 0px solid transparent;
+					}
+
+				}
+
+			}
+		}
+
+		#total-results-outer-container{
+			#total-results-inner-container{
+					width: 100%;
+				#total-results-right-side-container {
+				    padding-left: 3px;
+					width: 306px;
+					display: block;
+					margin: 19px auto 0px auto;
+					float: none;
+					position: relative;
+				}
+			} 
+		}
+	}
+}
+
+
+

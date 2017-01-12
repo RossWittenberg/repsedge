@@ -1,0 +1,13 @@
+<div class="row" id="settings">
+	<div class="row col-md-12" id="institution-container">
+	  <% if @institution %>
+	  	<h1><%= @institution.name %></h1>
+	  <% end %>
+	  <hr>
+	</div>
+
+	<div class="row col-md-12" id="user-container">
+		<%= render(partial: "devise/registrations/edit", locals: { user: @user } ) %>
+	</div>
+</div>
+

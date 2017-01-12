@@ -1,0 +1,174 @@
+<div class="visible-sm visible-xs">
+	<% @visits.each do |visit| %>		
+		<% confirmed = visit.confirmed? ? 'confirmed' : 'tentative' %>
+		<% if visit.high_school %>
+			<%= link_to high_school_path(visit.high_school.id) do %>
+				<span class='schoolName <%= "#{confirmed} #{visit.category.downcase.gsub(" ", "-")}" %>' >
+					<%= truncate( visit.title, length: 50 ) %>
+				</span>	
+			<% end %>
+		<% else %>
+			<span class='schoolName <%= "#{confirmed} #{visit.category.downcase.gsub(" ", "-")}" %>'>
+				<%= truncate( visit.title, length: 50 ) %>
+			</span>	
+		<% end %>
+
+		<div class="tableContainer">
+			<div class="tableCell">
+				<i class='<%=" #{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-calendar'></i>
+			</div>
+			<div class="tableCell">
+				<span class="grey">
+					<%= visit.user_visit_start_dst_adjuster(@user).strftime("%m/%d")%> - <%= visit.user_visit_end_dst_adjuster(@user).strftime("%m/%d")%>
+				</span>
+			</div>
+		</div>
+
+		<div class="tableContainer">
+			<div class="tableCell">
+				<i class='<%=" #{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-time'></i>
+			</div>
+			<div class="tableCell">
+				<span class="grey">
+					<%= visit.user_visit_start_dst_adjuster(@user).strftime("%I:%M %p") %> - <%= visit.user_visit_end_dst_adjuster(@user).strftime("%I:%M %p") %>
+				</span>
+			</div>
+		</div>
+
+		<div class="tableContainer">
+			<div class="tableCell">
+				<i class='<%=" #{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-info-sign'></i>
+			</div>
+			<div class="tableCell">
+				<span class="grey">
+					<%=visit.category%>
+				</span>
+			</div>
+		</div>
+
+
+
+		<div class="tableContainer">
+			<div class="tableCell">
+				<i class='<%="#{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-map-marker'></i>
+			</div>
+			<div class="tableCell">
+				<span class="grey">
+					<% if mobile_device? %>
+						<a target='_blank' href='<%="maps:q=#{visit.location}"%>'>
+							<%=visit.location%>
+						</a>
+					<% else %>
+						<a target='_blank' href='<%="http://maps.google.com/maps?q=#{visit.location}"%>'>
+							<%=visit.location%>
+						</a>
+					<% end %>
+				</span>
+			</div>
+		</div>
+		
+		<% if visit.high_school	%>
+		
+			<div class="tableContainer">
+				<div class="tableCell">
+					<i class='<%="#{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-phone-alt'></i> 
+				</div>
+				
+				<div class="tableCell">
+					<% unless user.preferred_phones.where(high_school: visit.high_school).empty? %>
+						<span class="grey">
+							<%= user.preferred_phones.where(high_school: visit.high_school).first.num %>
+						</span>
+					<% else %>
+						<span class="grey">
+							<%= visit.high_school.guidance_phone_num || visit.high_school.hs_phone_num || "n/a" %>
+						</span>
+					<% end %>
+				</div>
+			</div>
+
+
+			<div class="tableContainer">
+				<div class="tableCell">
+					<i class='<%=" #{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-envelope'></i>
+				</div>
+
+				<div class="tableCell">
+					<span class="grey">
+						<div class="preferred-emails-message">
+							<%= render(partial: 'preferred_emails/messages',locals: {message: @preferred_email}) %>
+						</div>
+						<a class="add-preferred-email-from-dashboard" type="button" data-hs-id="<%=visit.high_school.id%>"> Add an Email Contact</a>
+						<%= form_for [user, @preferred_email], html: {class: "add-preferred-email-from-dashboard hidden"},remote: true do |f| %>
+							
+							<%= f.text_field :address, 
+									{ placeholder: 'Add an email...',
+									id: "preferred_email_text-field" } %>	
+							<%= f.hidden_field :high_school_id, value: visit.high_school.id %>
+							<%= f.hidden_field :user_id, value: user.id %>
+							<div class="button-container">
+								<%= f.submit "SAVE", { class: "button save" }	%>
+							</div>	
+						<% end %>	
+					</span>
+				</div>
+			</div>
+
+
+			<div class="tableContainer">
+				<div class="tableCell">
+					<i class='<%=" #{confirmed} #{visit.category.downcase.gsub(" ", "-")}"%> glyphicon glyphicon-pencil'></i>
+				</div>
+
+				<div class="tableCell">
+					<span class="grey">
+						<%# link_to high_school_path(visit.high_school.id) do %>
+							<!-- Add a note -->
+						<%# end %>
+						<a class="add-note-from-dashboard" type="button" data-hs-id="<%=visit.high_school.id%>"> Add a Note</a>
+						<%= form_for [user, @note], html: {class: "add-note-from-dashboard hidden"},remote: true do |f| %>
+							<div class="notes-message">
+								<%= render(partial: 'notes/messages',locals: {message: @message}) %>
+							</div>
+							<%= f.text_area :content, 
+									{ placeholder: 'Take notes here...',
+									id: "note_content-field" } %>	
+							<%= f.hidden_field :high_school_id, value: visit.high_school.id %>
+							<%= f.hidden_field :user_id, value: user.id %>
+							<div class="button-container">
+								<%= f.submit "SAVE", { class: "button save" }	%>
+							</div>	
+						<% end %>	
+					</span>
+				</div>
+			</div>
+
+			
+			
+		<%end%>			
+		<hr>
+	<% end %>
+</div>	
+
+<div class="visible-lg visible-md">
+	<% @visits.each do |visit| %>
+	<div id="dashboard-visit">
+		<div class="visit-date"><%= visit.user_visit_start_dst_adjuster(@user).strftime("%m/%d") %></div>
+		<div class="visit-description- <%=visit.category.downcase.gsub(" ", "-")%>">
+			<p class="visit-description" id="dashboard-visit">
+				<% if visit.high_school %>
+					<%= link_to high_school_path(visit.high_school.id) do %>	
+						<%= truncate( visit.title, length: 50 ) %>
+					<% end %><br/>
+				<% else %>
+				
+					<%= link_to user_visits_path(current_user.id) do %>	
+						<%= truncate( visit.title, length: 50 ) %>
+					<% end %><br/>
+				<% end %>	
+				<%= visit.category %>
+			</p>
+		</div>
+	</div>
+	<% end %>	
+</div>

@@ -1,0 +1,68 @@
+<div class="container editAccount">
+	
+	<% if @user && @user.errors %>
+		<% @user.errors.full_messages.each do |msg| %>
+			<p class="webflash"><%=msg%></p>
+		<% end %>
+	<% end %>
+
+  <%= form_for [:admin, @user], url: admins_path do |f| %>
+  	<div class="admin-account-info-container">
+      
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <h3>User Information</h3>
+        </div>
+      </div>
+
+      <div class="names col-md-12">
+        <br>
+        <div class="field inline first-name col-md-6">
+          <%= f.label :first_name, "First Name*" %><br />
+          <%= f.text_field :first_name, autofocus: true %>
+        </div>
+
+        <div class="field inline last-name col-md-6">
+          <%= f.label :last_name, "Last Name*" %><br />
+          <%= f.text_field :last_name, autofocus: true %>
+        </div>
+
+      </div>      
+
+      <div class="col-md-12 email">
+        <br>
+        <div class="email col-md-6">      
+          <div class="field">
+            <%= f.label :email, "Email Address*" %><br/>
+            <%= f.email_field :email, autofocus: true %><br/>
+          </div>
+        </div>
+      </div>   
+
+      <div class="col-md-12">
+        <br>
+  			<div class="password col-md-6">      
+          <div class="field">
+            <%= f.label :password, "Password*" %><br/>
+            <%= f.password_field :password %><br/>
+          </div>
+        </div>
+        <div class="password_confirmation col-md-6">      
+          <div class="field">
+            <%= f.label :password_confirmation, "Password Confirmation*" %><br/>
+            <%= f.password_field :password_confirmation %><br/>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+
+    <div class="button-container col-md-12">
+      <br>
+      <div class="add-user-button col-md-12">
+        <%= f.submit "Create User" %>
+      </div>
+    </div>
+  <% end %>
+  
+</div>    

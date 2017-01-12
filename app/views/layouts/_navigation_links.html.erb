@@ -1,0 +1,18 @@
+<div class="nav col-md-12">
+	<div class="row nav-right-side">	
+	<% if user_signed_in? %>
+		<% if current_user.account_admin? %>
+			<%= link_to 'Admin Panel', dashboard_admin_high_schools_path %>
+		<% end %>
+		<%= link_to "Prospective Students", dashboard_prospective_students_path(current_user) %>
+		<%= link_to 'Search', search_high_schools_path %>
+	  <%= link_to 'Calendar', user_visits_path(current_user.id) %>
+	  <%= link_to 'Notes', all_notes_user_high_schools_path(current_user.id) %>
+	  <%= link_to "Dashboard", root_path %>
+	  <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+	<% else %>
+	  <%= link_to "Sign up", new_user_registration_path %>
+	  <%= link_to "Login", new_user_session_path %>
+	<% end %>
+	</div>
+</div>	

@@ -1,0 +1,43 @@
+<div id="preferred-guidance_website">
+	<div class="preferred-contacts-message">
+		<%if flash && flash[:website] %>
+			<div class="webflash">	
+				<% flash[:website].each do |msg| %>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	      	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<p class=><%=msg[1][0]%></p>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+
+	<% if @preferred_guidance_websites.blank? && @high_school.guidance_url.blank? %>
+		<i class="glyphicon glyphicon-globe"></i>
+		<p class="contact-blank">Preferred Guidance Website...</p><br>
+	<% elsif @preferred_guidance_websites.blank? && @high_school.guidance_url %>
+		<i class="glyphicon glyphicon-globe"></i>
+		<p class="db-contact"><a target="_blank" href=<%= @high_school.guidance_url %>>View Guidance Website</a></p><br>
+	<% else %>	
+		<% @preferred_guidance_websites.each do |preferred_guidance_website| %>
+			<i class="glyphicon glyphicon-globe"></i>
+			<p><a class="preferred-contact" href=<%= preferred_guidance_website.url%> target="_blank" >View Guidance Website</a></p>
+			<%= button_to "&times;".html_safe, user_preferred_guidance_website_path(@user, preferred_guidance_website), 
+				method: :delete, 
+				params: { high_school_id: @high_school.id },
+				class: "button delete" %><br>	
+		<% end %>
+	<% end %>	
+	<button id="add-preferred-guidance_website-button">Add new...</button><br>
+	<button id="cancel-add-preferred-guidance_website-button">Cancel</button><br>
+</div>
+
+<%= form_for [@user, @preferred_guidance_website] do |f| %>
+	<%= f.text_field :url, 
+			{ placeholder: "add new guidance website url",
+			id: "preferred_guidance_website-field" } %>			
+	<%= f.hidden_field :high_school_id, value: @high_school.id %>
+	<%= f.hidden_field :user_id, value: @user.id %>
+	<%= f.submit "Add", { class: "button add" }	%>
+<% end %>
+<hr>
+

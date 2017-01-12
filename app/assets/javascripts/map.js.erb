@@ -1,0 +1,203 @@
+function renderMap( $el ) {
+	var highSchool = $('.school-marker');
+	var hsLat = highSchool.data('lat');
+	var hsLng = highSchool.data('lng');
+	var args = {
+		disableDefaultUI: true,
+    zoomControl: true,
+		zoom		: 12,
+		center		: new google.maps.LatLng( hsLat, hsLng ),
+		mapTypeId	: google.maps.MapTypeId.ROADMAP,
+		streetViewControl: false,
+    mapTypeControl: false,
+		styles		: [
+								  {
+								    "featureType": "poi",
+								    "elementType": "geometry",
+								    "stylers": [
+								      { "visibility": "on" },
+								      { "color": "#B8E3D6" }
+								    ]
+								  },{
+								    "featureType": "landscape.man_made",
+								    "elementType": "geometry",
+								    "stylers": [
+								      { "visibility": "on" },
+								      { "color": "#D9EAEC" }
+								    ]
+								  },{
+								    "featureType": "road",
+								    "elementType": "geometry.stroke",
+								    "stylers": [
+								      { "visibility": "on" },
+								      { "color": "#808080" }
+								    ]
+								  },{
+								    "featureType": "poi",
+								    "elementType": "labels",
+								    "stylers": [
+								      { "visibility": "off" }
+								    ]
+								  },{
+								    "featureType": "water",
+								    "elementType": "geometry.fill",
+								    "stylers": [
+								      { "visibility": "on" },
+								      { "color": "#D9EAED" },
+								      { "saturation": 83 },
+								      { "weight": 0.1 }
+								    ]
+								  },{
+								    "featureType": "road.highway",
+								    "elementType": "geometry.fill",
+								    "stylers": [
+								      { "visibility": "off" }
+								    ]
+								  },{
+								  }
+								]
+	};
+	
+	var map = new google.maps.Map( $el[0], args);
+	var nearbyInfoWindow = new google.maps.InfoWindow({
+		content: " "
+	});
+	var nearbys = $('.nearby');
+	for (var i = 0; i < nearbys.length; i++) {
+    var nearby = nearbys[i]
+		var nearbyLat = $(nearby).data('lat')
+		var nearbyLng = $(nearby).data('lng')
+		var nearbyLatlng = new google.maps.LatLng(nearbyLat, nearbyLng);
+		var nearbySchool = $('.nearby-marker-hidden')[i];
+		var contentForInfoWindow = $(nearbySchool).html();
+		var pinsArray = ["<%= asset_path('repsedge_map_pin.png') %>",
+										 "<%= asset_path('MapPin1.png')%>",
+										 "<%= asset_path('MapPin2.png')%>", 
+										 "<%= asset_path('MapPin3.png')%>", 
+										 "<%= asset_path('MapPin4.png')%>",
+										 "<%= asset_path('MapPin5.png')%>",
+										 "<%= asset_path('MapPin6.png')%>", 
+										 "<%= asset_path('MapPin7.png')%>", 
+										 "<%= asset_path('MapPin8.png')%>",
+										 "<%= asset_path('MapPin9.png')%>", 
+										 "<%= asset_path('MapPin10.png')%>"];
+  	var numberedPin = pinsArray[i];	
+		var nearbyMarkersArray = []
+		var nearbyMarker = new google.maps.Marker({
+    	position: nearbyLatlng,
+    	map:      map,
+      icon: 		numberedPin,
+      title:    $(nearby).attr('name'),
+    	animation:google.maps.Animation.DROP,
+      infoWindow: nearbyInfoWindow
+		});
+		bindInfoWindow(nearbyMarker, map, nearbyInfoWindow, contentForInfoWindow);
+		nearbyMarkersArray.push(nearbyMarker)
+	};
+	
+	// renderHotels(map, args);
+	// renderRestaurants(map, args);
+
+
+	$('input.marker-toggle').change(function(){
+		if ($('input#hotels').prop('checked') === true){
+			renderHotels(map, args);
+			console.log("show hotels")
+		} else {
+			renderMap( $('.acf-map') );
+			console.log("clear hotels")
+		};
+	});	
+};
+
+function renderHotels(map, args){
+	var places = new google.maps.places.PlacesService(map);
+	var search = {
+		limit: 3,
+		location: args.center,
+		radius: '5000',
+    types: ['lodging']
+  };
+ 
+  places.nearbySearch(search, function(results, status) {
+
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+     
+      for (var i = 0; i < 10; i++) {
+
+			// debugger;
+				var place = results[i];
+				var nearbyHotelInfoWindow = new google.maps.InfoWindow({
+					content: " "
+				});
+				// var nearbyHotelLatlng = new google.maps.LatLng(results[i].geometry.location.A, results[i].geometry.location.F);
+      	var hotelIcon = "<%= asset_path('hotel_pin.png') %>";
+				var nearbyHotelMarker = new google.maps.Marker({
+				    	position: place.geometry.location,
+				    	map:      map,
+				      icon: 		hotelIcon,
+							content: "<a target='_blank' href='http://maps.google.com/maps/search/"+results[i].name+results[i].vicinity+"'>"+results[i].name+"</a>",
+				    	animation:google.maps.Animation.DROP
+				});
+								
+
+			  google.maps.event.addListener(nearbyHotelMarker, 'click', function() {
+				   nearbyHotelInfoWindow.setContent(this.content);
+				   nearbyHotelInfoWindow.open(map, this);
+				});
+      }
+    }
+  });
+};
+
+// function renderRestaurants(map, args){
+// 	var places = new google.maps.places.PlacesService(map);
+	
+// 	var search = {
+// 		location: args.center,
+// 		radius: '10000',
+//     types: ['restaurant']
+//   };
+
+//   places.nearbySearch(search, function(results, status) {
+
+//     if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+//       for (var i = 0; i < 10; i++) {
+
+// 				var nearbyRestaurantLatlng = new google.maps.LatLng(results[i].geometry.location.A, results[i].geometry.location.F);
+				
+// 				var nearbyRestaurantInfoWindow = new google.maps.InfoWindow({
+// 					content: " "
+// 				});
+
+// 	      var restaurantIcon = "<%= asset_path('restaurant_pin.png') %>";
+// 				var nearbyRestaurantMarker = new google.maps.Marker({
+// 				    	position: nearbyRestaurantLatlng,
+// 				    	map:      map,
+// 				      icon: 		restaurantIcon,
+// 							content: "<a target='_blank' href='http://maps.google.com/maps?q="+results[i].name+results[i].vicinity+"'>"+results[i].name+"</a>",
+// 				    	animation:google.maps.Animation.DROP
+// 				});
+
+// 	      google.maps.event.addListener(nearbyRestaurantMarker, 'click', function() {
+// 				   nearbyRestaurantInfoWindow.setContent(this.content);
+// 				   nearbyRestaurantInfoWindow.open(map, this);
+// 				});
+//       }
+//     }
+//   });
+// };
+function bindInfoWindow(maker, map, infoWindow, contentForInfoWindow){
+	google.maps.event.addListener(maker, "click", function (e) { 
+		infoWindow.setContent(contentForInfoWindow);	
+		infoWindow.open(map, this);
+	});	
+};
+// ~~~```~~~```~~~```~~~```~~~```~~~```~~~```~~~```~~~```~~~//							 
+$(document).ready(function(){
+	if ($('.acf-map').length > 0 ){
+		renderMap( $('.acf-map') );
+	}
+});

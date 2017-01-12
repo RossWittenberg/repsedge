@@ -1,0 +1,133 @@
+<% unless @user.id.blank? %>
+  <%= form_for :visit, url: "/users/#{@user.id}/visits/", method: "POST", :html => {class: 'createForm'}, remote: true  do |f| %> 
+  
+  <% if @visits %>  
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="editVisitModalLabel">New Event</h4>
+    </div>
+  <% end %>  
+
+  <div class="modal-body">
+    <div class="newVisitForm">
+      
+
+      <div id="flash_messages">
+        <% if flash[:calendar] && @high_school %>
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>-profile">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <p ><%= sanitize(value) %></p>
+            </div>
+          <% end %>      
+        <% end %>
+      </div>
+
+      <% unless @high_school %>
+        <div class="field visit-high-school">
+          <%= f.label :highschool, "High School" %>
+          <%= text_field_tag :high_school_name, nil,
+            autocomplete: "off",
+            id: "new-vist-high-school-name-search",
+            placeholder: 'Enter HS Name' %>
+          <%= f.hidden_field :high_school_id, value: "" %><br>
+          <label id="high-school-name-label" style="display: none;">High School Name</label>
+          <p id="high-school-name"></p>
+          <label id="high-school-address-label" style="display: none;">High School Address</label%>
+          <p id="high-school-address"></p>
+          <label id="high-school-city-label" style="display: none;">High School City</label>
+          <p id="high-school-city"></p>
+          <label id="high-school-state-label" style="display: none;">High School State</label>
+          <p id="high-school-state"></p>
+        </div>  
+      <% end %>
+
+      <div class="field">
+        <%= f.label :title, "Title*" %>
+        <%= f.text_field :title, placeholder: "Title", value: @high_school && @high_school.name || nil %>
+      </div>
+      <div class="field location-">
+        <%= f.label :location, "Location*" %>
+        <%= f.text_field :location, placeholder: "Location", value: @high_school && @high_school.id && @high_school.formatted_address || nil %>
+      </div>
+
+      <div style="display: none;" class="field new_visit_phone_num">
+        <%= f.label "phone_num" %>
+        <span id="visit_phone_num"></span>
+      </div>
+
+      <div class="field select calendarCategory">
+        <%= f.label :category, "Category*" %>
+        <%= f.select :category, 
+              options_for_select( ['High School Visit', 'College Fair', 'Hotel', 'Reminder', 'Other']
+              ) %>
+      </div>
+     
+      <div class="calendar-time-picker-container">
+        <div class="field input-append">
+          <label>Start*</label>
+          <%= f.text_field :start_date_raw, class: "datepicker newDatePicker visitStartDate start-" %>
+          <span class="input-group-addon add-on start_date-"><i class="glyphicon glyphicon-th"></i></span>
+
+            <%= f.time_select :start_time_raw, { 
+                            ignore_date: true, 
+                            minute_step: 5, 
+                            ampm: true,
+                            default: {hour: '09', minute: '00'} },
+                            class: "newTimePicker" %>
+
+
+        </div>
+      </div>
+      
+      <div class="calendar-time-picker-container">
+        <div class="field input-append endTime">
+          <label>End*</label>
+          <%= f.text_field :end_date_raw, class: "datepicker newDatePicker end-" %>
+          <span class="input-group-addon add-on end_date-"><i class="glyphicon glyphicon-th"></i></span>
+          <%= f.time_select :end_time_raw, { 
+                            ignore_date: true, 
+                            minute_step: 5, 
+                            ampm: true,
+                            default: {hour: '10', minute: '00'} },
+                            class: "newTimePicker" %>
+        </div>  
+      </div> 
+      
+      <div class="field select time-zones">
+        <%= f.label :time_zone, "Time Zone*" %>
+        <%= f.collection_select :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s,  selected: @user.time_zone || "Eastern Time (US & Canada)" %>
+      </div>
+
+<!--  <div class="field filter-select checkbox-confirmed checkbox-confirmed-new">
+        <%# f.label :confirmed, "Confirmed?" %>
+        <%# f.check_box :confirmed, {class: 'confirmed-checkbox'}, true %>
+      </div> -->
+
+    </div>
+  </div>
+  <% if @high_school %>   
+    <%= f.hidden_field :high_school_id, value: @high_school.id %>
+  <% end %>  
+  
+  <div class="hs-visit-submit-button-wrapper">  
+    <div class="modal-footer">
+      <div class="tentative-button-wrapper">  
+        <%= f.submit "Save as Tentative", class: "tentative-button", name: "commit" %>
+      </div>
+      <div class="confirmed-button-wrapper">  
+        <%= f.submit "Save as Confirmed", class: "confirmed-button", name: "commit" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden non-hs-visit-submit-button-wrapper">
+    <div class="modal-footer">
+      <%= f.submit "Save Visit", name: "commit" %>
+    </div>
+  </div>
+
+
+  <% end %>
+<% end %>  

@@ -1,0 +1,15 @@
+<%= form_tag('/high_schools/error', method: :put) do %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="errorModal">See an error with <%=@high_school.name%>?</h3>
+	</div>
+
+	<div class="modal-body">
+		<%= hidden_field_tag 'high_school_id', @high_school.id %>
+		<%= text_area_tag 'error', nil, size: "50x20", placeholder: "What's wrong?"%>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary">Report Error</button>
+	</div>
+<% end %>

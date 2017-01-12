@@ -1,0 +1,24 @@
+<% if @notes.blank? %>
+	<p>You have no notes for this school.</p>
+<% else %>
+	<% @notes.reverse_each do |note| %>
+    <div class="note-container">
+
+			<%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+							user_note_path(user.id, note.id),
+							method: :delete,
+							data: { confirm: "Delete this note?" },
+							remote: true,
+							class: 'close' %>
+			<%= link_to user_high_school_notes_path(@user.id, @high_school.id) do %>
+				<p><%= truncate(note.content, length: 40) %></p>
+			<% end %>	
+			<p class="noteCity"><%= "#{note.high_school.city}, #{note.high_school.state.abbreviation}"   %> </p>
+			<h5>Taken on: <%= note.time_tag.in_time_zone(@user.time_zone).strftime("%m/%d/%y") %></h5 style="color: orange;">
+			<br>
+		<% end %>
+	</div>
+<% end %>	
+
+
+

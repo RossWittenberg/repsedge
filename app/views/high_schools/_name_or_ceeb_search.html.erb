@@ -1,0 +1,19 @@
+<div id="home-search-container">
+	<div class="name-or-ceeb-container">
+
+		<div id="name-or-ceeb-filter">
+			<%= text_field_tag "high_school[name_or_ceeb_query]", params[:high_school] && params[:high_school]["name_or_ceeb_query"],
+					{ autocomplete: "on",
+						id: "name-search",
+					  placeholder: 'ENTER HS NAME OR CEEB'} %>
+		</div>
+	</div>
+	<div id="search-button-container">
+		<% if params[:high_school].blank?%>
+			<button type="submit" id="name-or-ceeb-search-button" class="btn">SEARCH</button>
+		<% end %>
+	</div>		
+</div>	
+
+
+

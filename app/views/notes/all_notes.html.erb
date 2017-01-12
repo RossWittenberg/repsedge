@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <%= link_to ("&nbsp; <i class='fa fa-chevron-left'></i>&nbsp; Back").html_safe, :back, { :class=>"backBtn" } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="home-header">
+  <h1>Notes</h1>
+  <h2>Search and view your notes</h2>
+</div>
+
+<div class="index-notes-container">
+  <div class="notes-search-container row">
+    <%= render(partial: 'notes/search',locals: { user: @user }) %>
+      <div class="notes-search-results col-md-12">
+        <% if @notes.blank? %>
+          <p>You do not have any notes.</p>
+        <% else %>  
+          <% @notes.each do |note| %>
+            <div class="note-container">
+            <%= link_to raw("<i class=\"glyphicon glyphicon-remove\"></i>"), 
+                user_note_path(@user.id, note.id),
+                method: :delete,
+                data: { confirm: "Delete this note?" },
+                remote: true,
+                class: 'close' %>
+            <%= link_to high_school_path(note.high_school.id) do %>
+              <h2><%= note.high_school.name %></h2>
+            <% end %>
+            <p><%= "#{note.high_school.city}, #{note.high_school.state.abbreviation}"%> </p> | 
+            <h5>Taken on: <%= note.time_tag.in_time_zone(@user.time_zone).strftime("%m/%d/%y") %></h5>
+              <br>
+              <p class="note-content"><%= note.content %></p>
+              <%=form_for :note, url: user_high_school_note_path(current_user, note.high_school, note), action: :update, method: "PUT" do |f| %>  
+              
+                <%= f.text_area :content, value: note.content, class: "update-note", disabled: true %>
+                <%= button_tag 'Save',  class: "update-note-button", disabled: true,  'data-disable-with' =>  "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+                
+              <% end %>
+              <button class="edit-note-button">EDIT</button>
+            </div>
+            <hr><br>
+          <% end %>  
+        <% end %>  
+      </div>
+  </div>
+  <%= will_paginate @notes %>
+</div>	

@@ -1,0 +1,52 @@
+<div class="home-header">
+  <h1>Dashboard</h1>
+  <h2>Welcome back <strong><%= current_user.first_name %></strong>!</h2>
+</div>
+
+<% if current_user.account_manager? || current_user.account_admin? %>  
+  <div id="home-tabs" class="account-manager admin">
+    
+    <ul>
+      <li><a id="dashboard-tab" href="#dashboard">Dashboard</a></li>
+      <li><a id="settings-tab" href="#settings">Settings</a></li>
+      <li><a id="users-tab" href="#users">Users</a></li>
+      <li><a id="billing-tab" href="#billing">Billing</a></li>
+    </ul>
+
+
+    <div id="dashboard">
+      <%= render(partial: 'users/dashboard',locals: { user: @user, visits: @visits, notes: @notes, saved_searches: @saved_searches }) %>
+    </div>
+
+    <div id="settings">
+      <%= render(partial: "users/settings", locals: { user: @user } ) %>
+    </div>
+
+    <div id="users">
+      <%= render(partial: "users/users", locals: { user: @user, users: @users } ) %>
+    </div>
+
+    <div id="billing">
+      <%= render(partial: "users/billing", locals: { user: @user, customer: @customer }) %>
+    </div>
+
+  </div>  
+<% else %>
+  <div id="home-tabs" class="reps">
+  
+    <ul>
+      <li><a id="dashboard-tab" href="#dashboard">Dashboard</a></li>
+      <li><a id="settings-tab" href="#settings">Settings</a></li>
+    </ul>
+
+    <div id="dashboard">
+      <%= render(partial: 'users/dashboard',locals: { user: @user, visits: @visits, notes: @notes, saved_searches: @saved_searches }) %>
+    </div>
+
+    <div id="settings">
+      <%= render(partial: "users/settings", locals: { user: @user } ) %>
+    </div>  
+
+  </div>
+<% end %>
+

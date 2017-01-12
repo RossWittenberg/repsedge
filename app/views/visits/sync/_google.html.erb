@@ -1,0 +1,4 @@
+<%= link_to 'Sync your RepsEdge Calendar', "/users/#{@user.id}/visits/calendar_feed.ics", data: {type: 'text/calendar'} %><br/>
+<p>Use the above link to download your calendar. Next, go to Google Calendar and in the left column, find Other Calendars. Select 'Import Calendar' from the menu. Then, upload your calendar to sync.</p>
+<%= image_tag 'google-sync-step-one.png', width: '350'%><br>
+<%= image_tag 'google-sync-step-two.png', width: '350'%>

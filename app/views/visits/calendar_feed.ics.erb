@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+PRODID:-//RepsEdge//V+V 2015//EN 
+VERSION:2.0
+METHOD:PUBLISH
+CALSCALE:GERGORIAN
+X-WR-CALNAME:RepsEdge
+<% @visits.each do |visit| %>
+BEGIN:VEVENT
+CLASS:PUBLIC
+UID:<%=visit.id%>@repsedge.com
+DTSTART:<%=visit.user_visit_start_dst_adjuster(@user).strftime("%Y%m%dT%H%M%S")%>
+DTEND:<%=visit.user_visit_end_dst_adjuster(@user).strftime("%Y%m%dT%H%M%S")%>
+DTSTAMP:<%=Time.now.strftime("%Y%m%dT%H%M%S")%>
+DESCRIPTION: <%= visit.description%>
+LOCATION: <% visit.location %>
+SUMMARY: <%= visit.title %>
+TRANSP:TRANSPARENT
+END:VEVENT
+<% end %>
+END:VCALENDAR

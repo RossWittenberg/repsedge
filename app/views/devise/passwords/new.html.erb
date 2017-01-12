@@ -1,0 +1,22 @@
+<div class="loginModule reset">
+
+	<h2>Password Reset</h2>
+
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	  <%= devise_error_messages! %>
+
+	  <div class="field">
+	    <%= f.label :email, "Enter your email address and we’ll send you a new password " %><br />
+	    <%= f.email_field :email, autofocus: true %>
+	  </div>
+
+	  <div class="actions">
+	    <%= f.submit "Reset" %>
+	  </div>
+	<% end %>
+
+	<div class="links">
+		Or <%= link_to "Sign In", new_user_session_path, :class => "marginFix" %> if you no longer need help with your password.
+	</div>
+
+</div>

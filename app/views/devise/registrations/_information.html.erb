@@ -1,0 +1,140 @@
+<div class="row signUpModule">
+
+  <%= form_for @user, html: { "onsubmit" => "event.preventDefault(); return createAccount();", 'user-id' => @user.id }, data: {  disable_with: 'Creating Account...' } do |f| %>
+
+    <%= devise_error_messages! %>
+
+      <div class="plan-details-container col-md-12">
+
+        <div class="col-md-12">
+          <h2>Account Plan for:</h2>
+          <h3><%= @user.institution.name %></h3>
+          <p><%= @user.institution.street_address%></p>
+          <p><%= @user.institution.formatted_mailing_address %></p>
+        </div>
+
+        <div class="plan-level col-md-4 col-sm-4">
+          <%= label_tag :plan_level, "Institution Size" %><br>
+          <span class="info" model-attribute="new-account-plan_level"><%= @user.institution.plan_level %></span>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="plan-years col-md-4 col-sm-4">
+          <%= label_tag :plan_years, "Select number of years" %><br>
+          <%= select_tag :plan_years, options_for_select(@user.institution.plan_years)%>
+          <span class="error-message"></span> 
+        </div>
+        
+        <div class="plan-price-container col-md-4 col-sm-4">
+          <%= label_tag :total_price, "Total" %><br>
+          <span class="info" model-attribute="new-account-plan_price">$<%= number_with_delimiter(@user.institution.one_year_price) %></span> 
+          <span class="error-message"></span> 
+        </div>
+         <%= f.hidden_field :institution, value: @user.institution.name, 'model-attribute' => 'new-account-institution' %>
+      </div>  
+     
+    <div class="names-phone-num-container col-md-12">
+
+      <div class="col-md-12">
+        <h2>Account Manager Name &amp; Phone Number</h2><hr>
+      </div>
+
+      <div class="field first-name col-md-4 col-sm-4">
+        <%= f.label :first_name, "First Name" %><br />
+        <%= f.text_field :first_name, autofocus: true, 'model-attribute' => 'new-account-first_name' %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="field last-name col-md-4 col-sm-4">
+        <%= f.label :last_name, "Last Name" %><br />
+        <%= f.text_field :last_name, autofocus: true, 'model-attribute' => 'new-account-last_name' %>
+        <span class="error-message"></span> 
+      </div>
+      
+      <div class="field phone-num col-md-4 col-sm-4">
+        <%= f.label :phone_num, "Phone Number" %><br />
+        <%= f.text_field :phone_num, autofocus: true, 'model-attribute' => 'new-account-phone_num' %>
+        <span class="error-message"></span> 
+      </div>
+    </div>
+
+    <div class="institution-info-container col-md-12">
+      
+      <div class="col-md-12">
+        <h2>Account Billing Address</h2><hr>
+      </div>
+
+      <div class="field institution-street_address col-md-6 col-sm-6">  
+        <%= f.label :billing_street_address_line_1, "Street Address Line 1" %><br />
+        <%= f.text_field :billing_street_address_line_1, :value => @user.institution.street_address, 'model-attribute' => 'new-account-billing_street_address_line_1' %>
+        <span class="error-message"></span> 
+        <%= f.label :billing_street_address_line_2, "Street Address Line 2" %><br />
+        <%= f.text_field :billing_street_address_line_2, :value => "", placeholder: "ex. 'Suite 4515'", 'model-attribute' => 'new-account-billing_street_address_line2' %>
+      </div>
+
+      <div class="field institution-city-state-zip col-md-6 col-sm-6">  
+        <%= f.label :institution_billing_city, "City" %><br />
+        <%= f.text_field :institution_billing_city, :value => @user.institution.city, 'model-attribute' => 'new-account-institution_billing_city' %>
+        <span class="error-message"></span> 
+      </div>
+      <div class="field institution-state col-md-2 col-sm-2">  
+          <%= label_tag "State" %><br>
+          <%= select_tag :institution_billing_city, 
+            options_from_collection_for_select(
+              @states,
+              "name",
+              "name", params[:state] 
+              ),{ id: 'user_institution_billing_state' } %>
+      </div>
+
+      <div class="field institution-zip_code col-md-4 col-sm-4">  
+        <%= f.label :institution_billing_zip_code, "Zip Code" %><br />
+        <%= f.text_field :institution_billing_zip_code, :value => @user.institution.modified_zip_code, 'model-attribute' => 'new-account-institution_billing_zip_code' %>
+        <span class="error-message"></span> 
+      </div>
+
+    </div>
+
+    <div class="email-password-container col-md-12">
+      <div class="col-md-12">
+        <h2>Account Manager Username &amp; Password</h2><hr>
+      </div>
+
+      <div class="col-md-6 col-sm-6">
+        <div class="field">
+          <%= f.label :email, "Email Address (This is your username)" %><br />
+          <%= f.email_field :email, autofocus: true, 'model-attribute' => 'new-account-email' %>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="field">
+          <%= f.label :email_confirmation, "Confirm your Email Address" %><br />
+          <%= f.email_field :email_confirmation, autocomplete: "off", 'model-attribute' => 'new-account-email_confirmation' %>
+          <span class="error-message"></span> 
+        </div>
+      </div>  
+      <div class="field col-md-6 col-sm-6">
+        <div class="field">
+          <%= f.label :password %>
+          <% if @validatable %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", 'model-attribute' => 'new-account-password' %>
+          <span class="error-message"></span> 
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", 'model-attribute' => 'new-account-password_confirmation' %>
+          <span class="error-message"></span> 
+        </div>
+      </div>  
+
+      <div class="actions">
+        <%= f.submit "Next" %>
+      </div>
+
+    </div>  
+  <% end %>
+</div>
+

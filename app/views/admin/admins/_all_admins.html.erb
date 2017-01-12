@@ -1,0 +1,22 @@
+<table class="table-striped">	
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last</th>
+			<th>Email</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.first_name %></td> 
+				<td><%= user.last_name %></td> 
+				<td><%= user.email %></td> 
+				<td><%= link_to 'Edit', edit_admin_path(user) %></td>
+				<td><%= link_to 'Delete', admin_path(user), method: :delete, data: {confirm: "You sure you want to delete #{user.first_name} #{user.last_name}'s account?"} %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,87 @@
+<div class="home-header">
+  <h1>Admin Panel</h1>
+  <h2>Welcome back <strong><%= @user.first_name %></strong>!</h2>
+</div>
+
+<div id="admin-tabs" class="account-manager container admin">
+  <ul>
+    <li><a id="high-schools-tab" href="#high-schools">High Schools</a></li>
+    <li><a id="accounts-tab" href="#accounts">Accounts</a></li>
+    <li><a id="admins-tab" href="#admins">Administrators</a></li>
+  </ul>
+
+  <div id="high-schools" class="col-md-12">
+    <div class="admin-high-school-container">
+
+      <div class="admin-add-high-school-container col-md-6 col-sm-6">
+        <h3>Add a New High School</h3>  
+        <%= link_to "<button>Add a School</button>".html_safe, new_admin_high_school_path %>
+      </div>  
+      <div class="admin-edit-high-school-container col-md-6 col-sm-6">
+        <%= render(partial: 'admin/high_schools/search',locals: { states: @states }) %>
+      </div>  
+            
+ 
+      <div class="admin-new-high-school-import-container col-md-6 col-sm-6">
+        <h3>Add New High Schools</h3>  
+        <%= link_to "Download CSV Template", '/admin/high_schools/import_template.csv' %>
+        <%= form_tag import_for_new_admin_high_schools_path, multipart: true do %>
+          <%= label_tag :file, "Import New High Schools via CSV" %>
+          <%= file_field_tag :file %>
+          <%= link_to "<button type='submit'>Add Schools</button>".html_safe %>
+        <% end %>
+      </div>  
+
+<!--  <div class="admin-update-high-school-import-container col-md-6 col-sm-6">
+        <h3>Update Existing High Schools</h3>  
+        <%# form_tag import_for_update_admin_high_schools_path, multipart: true do %>
+          <%# label_tag :file, "Update High Schools via CSV" %>
+          <%# file_field_tag :file %>
+          <%# submit_tag "Update Exisiting Schools" %>
+        <%# end %>
+      </div>  --> 
+      
+      <div class="admin-download-high-school-container col-md-6 col-sm-6">
+          <h3>Download High Schools</h3>
+          <%# link_to "<button>Excel</button>".html_safe, '/admin/high_schools/export.xls' %>
+          <%= link_to "<button>CSV</button>".html_safe, '/admin/high_schools/export.csv' %>
+      </div> 
+
+    </div>
+  </div>
+
+  <div id="accounts">
+    <div class="admin-add-account-container col-md-6 col-sm-6">
+      <h3>Accounts</h3>  
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+      <%= link_to "<button>Create an Account</button>".html_safe, new_account_path %>
+    </div>
+
+    <br>
+    <div class="col-md-12">
+      <%= render(partial: "admin/accounts/all_accounts", locals: { users: @users } ) %>
+
+      
+
+    </div>
+  </div>
+
+  <div id="admins">
+    <div class="admin-add-account-container col-md-6 col-sm-6">
+      <h3>Admin</h3>
+    </div>
+    
+    <div class="col-md-6 col-sm-6">
+      <%= link_to "<button>Add a New Administrator</button>".html_safe, new_admin_path %>
+    </div>
+    <br>
+
+    <div class="col-md-12">
+      <%= render(partial: "admin/admins/all_admins", locals: { users: @users } ) %>
+    </div>
+
+  </div>
+
+</div> 

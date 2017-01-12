@@ -1,0 +1,33 @@
+<%= form_for @new_user, url: reps_user_registration_path, html: { "onsubmit" => "event.preventDefault(); return createRep();"}, data: {  disable_with: 'Adding New Rep...' }  do |f| %>
+
+  <%= f.hidden_field :institution, value: @user.institution %>
+   
+  <div class="names col-md-12">
+      <div class="field inline first-name col-md-4 col-md-offset-2 col-sm-12">
+        <%= f.label :first_name, "First Name*" %><br />
+        <%= f.text_field :first_name, autofocus: true, 'model-attribute' => 'first_name' %>
+        <span class="error-message"></span> 
+      </div>
+
+      <div class="field inline last-name col-md-6 col-sm-12">
+          <div class="form-group">
+            <%= f.label :last_name, "Last Name*" %><br />
+            <%= f.text_field :last_name, autofocus: true, 'model-attribute' => 'last_name' %>
+            <span class="error-message"></span>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-md-12" >
+    <div class="new-rep-email col-md-9 col-md-offset-2">      
+      <div class="form-group">
+        <%= f.label :email, "Email*" %><br />
+        <%= f.email_field :email, autofocus: true, 'model-attribute' => 'email' %>
+        <%= button_tag "Add User", 'data-disable-with' =>  "<i class='fa fa-spinner fa-spin'></i>".html_safe %>
+        <span class="error-message"></span> 
+      </div>
+    </div> 
+  </div>   
+
+  
+<% end %>

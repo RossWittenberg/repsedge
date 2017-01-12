@@ -1,0 +1,28 @@
+<% unless nearbys.blank? %>
+	<div id="nearby-list">
+		<% pinsArray = [ 'repsedge_map_pin.png',
+										 'MapPin1.png',
+										 'MapPin2.png', 
+										 'MapPin3.png', 
+										 'MapPin4.png',
+										 'MapPin5.png',
+										 'MapPin6.png', 
+										 'MapPin7.png', 
+										 'MapPin8.png',
+										 'MapPin9.png', 
+										 'MapPin10.png' ] %>
+		<% @nearbys.zip(pinsArray).each do | nearby, pin | %>
+			<div class="nearby" name=<%= nearby.name %> data-lat=<%= nearby.latitude %> data-lng=<%= nearby.longitude %> >
+				<div id="pin-image">
+					<%= image_tag(pin, class: "map-pin") %>
+				</div>
+				<div id="pin-text">		
+					<p id="name"><%= link_to truncate(nearby.name, length: 29), controller: "high_schools", action: "show", id: nearby.id%></p>
+					<p id="distance"><%= nearby.distance_from(@high_school).round(2) %> miles away</p>
+					<p id="type"><%= nearby.hs_type.upcase%></p>
+					<div class="nearby-marker-hidden" style="display: none;"><%= link_to nearby.name, controller: "high_schools", action: "show", id: nearby.id%></div>
+				</div>
+			</div>	
+		<% end %>
+	</div>	
+<% end %>

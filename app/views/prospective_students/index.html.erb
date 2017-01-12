@@ -1,0 +1,53 @@
+<div class="home-header">
+  <h1>View Prospective Students</h1>
+
+  <% if @high_school %>
+  	<h2><%= @high_school.name %></h2>
+  <% end %>
+</div>
+<div class="container prospective view">
+	<div class="col-md-12">
+		<%= form_tag( get_prospective_students_by_year_prospective_students_path, method: :put) do %>
+			<div class="center">
+				<%= label_tag :year, "Expected Year of Transfer/Enrollment" %>
+				<%= select_tag :year, options_for_select([ (Time.now.year), (Time.now.year + 1), (Time.now.year + 2), (Time.now.year + 3), (Time.now.year + 4) ], @year), id: "prospective-students-year-select" %>
+			</div>
+
+			<%= hidden_field_tag :user_id, @user.id, id: "user-id-field" %>
+			<% if @high_school %>
+				<%= hidden_field_tag :high_school_id, @high_school.id, id: "high-school-field" %>
+			<% end %>
+			<%= submit_tag "", id: "prospective-students-year-submit", style: "display: none;" %>
+		<% end %>
+		<div class="prospective-students-container">
+			<% if @high_school && @prospective_students.count == 0 %>
+					<br><br>
+						<p class="text-center">
+							You do not have any prospective students for <%=link_to @high_school.name, high_school_path(@high_school) %> for <%=@year%>
+						</p>
+			<% elsif @prospective_students.count == 0 %>
+				<br><br>
+					<p class="text-center">
+						You do not have any prospective transfer students for <%=@year%>
+					</p>
+			<% elsif @high_school && @prospective_students.count > 0 %>
+				
+
+				<h3><%= "#{@prospective_students.count} Prospective student(s) for"%> <%=link_to @high_school.name, high_school_path(@high_school)%> in <%= @year %></h3>
+
+
+				<%= render partial: 'index_table', locals: {prospective_students: @prospective_students} %>
+			
+			<% elsif @inistituion && @prospective_students.count > 0 %>
+				<h3><%= "#{@prospective_students.count} Prospective transfer student(s) for #{@year}" %></h3>
+				<%= render partial: 'index_table', locals: {prospective_students: @prospective_students} %>			
+
+			<% elsif @prospective_students.count > 0 %>
+				<h3><%= "#{@prospective_students.count} Prospective transfer student(s) for #{@year}" %></h3>
+				<%= render partial: 'index_table', locals: {prospective_students: @prospective_students } %>			
+			<% end %>
+
+		</div>
+	</div>
+</div>
+	

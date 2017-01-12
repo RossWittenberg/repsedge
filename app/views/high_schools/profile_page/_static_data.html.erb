@@ -1,0 +1,330 @@
+<div class="row" id="at-a-glance-container">
+	<div class="profile-header col-md-12">
+		<h2>At a Glance</h2>
+	</div>
+	
+	<div class="school-info-container">
+		
+		<div class="col-md-12">
+			<div class="row">
+
+				<div class="<% if @high_school.all_features_blank? %>col-md-6 col-xs-6<% else %>col-md-3 col-xs-6<% end %>" id="ceeb-and-religion">
+					<p id="info-value"><%=high_school.modify_ceeb%></p>
+					<p id="info-category">CEEB code</p>
+					<div id="orange-divider"></div>
+					<br>
+					<p id="info-value"><%=high_school.religion%></p>
+					<p id="info-category">Religious Affiliation</p>
+					<div id="orange-divider"></div>
+				</div>
+
+				<div class="<% if @high_school.all_features_blank? %>col-md-6 col-xs-6<% else %>col-md-3 col-xs-6<% end %>" id="type-and-classification">
+					<p id="info-value"><%=high_school.hs_type%></p>
+					<p id="info-category">School Type</p>
+					<div id="orange-divider"></div>
+					<br>
+					<p id="info-value"><%=high_school.classification%></p>
+					<p id="info-category">Classification</p>
+					<div id="orange-divider"></div>
+				</div>
+
+
+
+				<% if @high_school.all_features_blank? %>
+
+
+				<% else %>
+
+				<div class="col-md-6 col-xs-12" id="check_boxes">
+
+				<% if @high_school.boarding %>
+					<div class="check_box checked" id="boarding">	
+						<p>Boarding</p>
+					</div>
+				<% end %>
+					
+				<% if @high_school.magnet %>
+					<div class="check_box checked" id="magnet">	
+						<p>Magnet</p>
+					</div>
+				<% end %>
+
+					<br>
+					
+				<% if @high_school.charter %>
+					<div class="check_box checked" id="charter">	
+						<p>Charter</p>
+					</div>
+				<% end %>
+
+				<% if @high_school.capstone %>
+					<div class="check_box checked" id="capstone">	
+						<p>Capstone</p>
+					</div>
+				<% end %>
+
+					<br>
+				
+				<% if @high_school.intl_bacc %>
+					<div class="check_box checked" id="intl_bacc">
+						<p>International Baccalaureate</p>
+					</div>
+				<% end %>
+					
+					<div id="orange-divider"></div>
+				
+				</div>
+
+				<% end %>
+
+
+
+			</div>
+		</div>		
+	</div>	
+
+	<div class="col-md-12">
+		<div class="row text-center">
+			<div class="col-md-3 donut-container donut <% if @high_school.graduation_rate.blank? || @high_school.graduation_rate == 0 %>hide<% end %>" id="grad_donut-container" gradRate=<%= @high_school.graduation_rate %> >
+				<canvas class="donut-canvas" id="grad_donut_donut" ></canvas>
+				<div id="caption-container">
+					<p id="caption">Graduation Rate</p>
+					<p id="sub-caption">vs. State avg of 60%</p>
+				</div>
+				<div class="percentage-container">
+					<div class="percentage_display">
+						<% if @high_school.graduation_rate.blank? || @high_school.graduation_rate == 0 %>
+							<p>N/A</p> 				
+						<% else %>
+							<p><%=@high_school.graduation_rate.round%><sup>%</sup></p>
+						<% end %>
+					</div>	
+				</div>					 
+			</div>
+
+			<div class="col-md-3 donut-container donut <% if @high_school.four_year_school.blank? %>hide<% end %>" id="four_year_school-container" fourYearSchool=<%= @high_school.four_year_school %> >
+				<canvas class="donut-canvas" id="four_year_school_donut" ></canvas>			
+				<div id="caption-container">
+					<p id="caption">Attend 4 Year<br>Schools</p>
+				</div>
+				<div class="percentage-container">
+					<div class="percentage_display">
+						<% if @high_school.four_year_school.blank? %>
+							<p>N/A</p> 				
+						<% else %>
+							<p><%=@high_school.four_year_school.round%><sup>%</sup></p>
+						<% end %>
+					</div>	
+				</div>			 
+			</div>
+
+			<div class="col-md-3 donut-container donut" id="reduced_lunch_donut-container" reducedLunch=<%= @high_school.reduced_lunch %> >
+				<canvas class="donut-canvas" id="reduced_lunch_donut" ></canvas>
+				<div id="caption-container">
+					<p id="caption">Free/Reduced<br>Lunch</p>
+				</div>
+				<div class="percentage-container">
+					<div class="percentage_display">
+					<% if @high_school.reduced_lunch && @high_school.reduced_lunch.round == 0 %>
+						<p><%=@high_school.reduced_lunch.round.to_s + "0" %><sup>%</sup></p>
+					<% elsif @high_school.reduced_lunch
+						 %>
+						<p><%=@high_school.reduced_lunch.round%><sup>%</sup></p>
+					<% else %>
+							<p>N/A</p> 				
+					<% end %>
+					</div>	
+				</div>						 
+			</div>
+
+			<div class="col-md-3 donut-container income" id="median_income-container">
+				<div id="income-dollar-sign-container">
+					<div id="dollar-sign-container">
+						<p id="dollar-sign">$</p>
+					</div>
+					<div id="income-container">
+						<p id="income"><%=incomeRounder(@high_school.median_income.to_s)%></p>
+					</div>
+				</div>				 
+				<div id="income-caption-container">
+					<p id="income-caption">Median Income</p>
+					<p id="income-sub-caption">Based on school zip code</p>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="row" id="students-demo-container">
+	
+	<div class="profile-header">
+		<h2>Student Demographics</h2>
+	</div>
+
+
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-5">
+				<div id="ethnicity_pie_contanier" percentWhite=<%= @high_school.percent_white %>
+																   percentAfricanAm=<%= @high_school.percent_african_am %>
+																   percentAsianAm=<%= @high_school.percent_asian_am %>
+																   percentHispanicAm=<%= @high_school.percent_hispanic_am %>
+																   percentOther=<%= @high_school.percent_other %> >
+					<div id="ethnicity_pie-canvas-container">
+						<canvas id="ethnicity_pie-canvas"></canvas>			
+					</div>		 
+					<div id="ethnicity-legend-container">
+						<!-- legend from pie.js -->
+					</div>
+				</div>																						 
+			</div>
+
+			<div class="col-md-7" id="vert_bar_graphs_contanier">
+				
+				<div class="col-md-5 col-xs-6" id="gender_graph-container" percentFemale=<%=@high_school.percent_female%> percentMale=<%=@high_school.percent_male%> >
+					<canvas id="gender_graph" width="30" height="200"></canvas>
+					<span id="gender_graph-female_tag">Female: <%=@high_school.percent_female%>%</span>
+					<span id="gender_graph-male_tag">Male: <%=@high_school.percent_male%>%</span>
+				</div>
+
+				<div class="col-md-7 col-xs-6" id="seniors_graph-container" seniors=<%=@high_school.seniors_count%> students=<%=@high_school.students_count%> >	
+					<canvas id="students_graph" width="30" height="200" data-studentsCount=<%=@high_school.students_count%> ></canvas>
+					<canvas id="seniors_graph" width="30" height="200"></canvas>
+					<span id="seniors_graph-students_tag">Total Students: <%=@high_school.students_count%></span>
+					<span id="seniors_graph-seniors_tag" class="totalSeniors <% if @high_school.seniors_count.blank? || @high_school.seniors_count == 0 %>hide<%end%>">Total Seniors: <%=@high_school.seniors_count%></span>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="row" id="testing-container">
+
+	<div class="testing-header col-md-12">
+		<h2>Standardized Testing (Average Scores)</h2>
+	</div>
+
+	<div class="col-md-3 col-sm-12 tests-numbers">
+		<div id="SATs-container">
+			<p id="SATs-header">Average SAT</p>
+			<% if @high_school.sat_total.blank? || @high_school.sat_total == 0 %>
+				<p id="SATs-score">N/A</p>
+			<% else %>
+				<p id="SATs-score"><%=@high_school.sat_total%></p>
+			<%end%>	
+			<p id="SATs-state-avg">vs. <%= @high_school.state.sat_total_avg %> State average</p>
+		</div>
+	</div>
+
+	<div class="col-md-9 col-sm-12 tests-bar-graphs">
+		<div id="SATs_graph-container"
+			sat_math=<%= @high_school.sat_math || 800 %>
+			sat_reading=<%= @high_school.sat_reading || 800%>
+			sat_writing=<%= @high_school.sat_writing || 800%>
+			state_sat_math=<%= @high_school.state.sat_math_avg %>
+			state_sat_reading=<%= @high_school.state.sat_reading_avg %>
+			state_sat_writing=<%= @high_school.state.sat_writing_avg %> >
+			<canvas id="HS_SAT_graph" width="500" height="30"></canvas>
+			<canvas id="state_SAT_graph" width="500" height="30"></canvas>
+			<div class="SAT_tag" id="math_tag">Math
+			</div>
+			<div class="SAT_tag" id="reading_tag">Reading
+			</div>
+			<div class="SAT_tag" id="writing_tag">Writing
+			</div>
+			<div class="hs_SAT_score" id="hs_math_score"><%= @high_school.sat_math %>
+			</div>
+			<div class="hs_SAT_score" id="hs_reading_score"><%= @high_school.sat_reading %>
+			</div>
+			<div class="hs_SAT_score" id="hs_writing_score"><%= @high_school.sat_writing %>
+			</div>
+
+			<div class="state_SAT_score" id="state_math_score"><%= @high_school.state.sat_math_avg %>
+			</div>
+			<div class="state_SAT_score" id="state_reading_score"><%= @high_school.state.sat_reading_avg %>
+			</div>
+			<div class="state_SAT_score" id="state_writing_score"><%= @high_school.state.sat_writing_avg %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-3 col-sm-12 tests-numbers">
+		<div id="ACTs-container">
+			<p id="ACTs-header">Average ACT</p>
+			<% if @high_school.act.blank? || @high_school.act == 0 %>
+				<p id="ACTs-score">N/A</p> 				
+			<% else %>
+				
+				<p id="ACTs-score"><%=@high_school.act.round%></p>
+				
+			<% end %>
+			<p id="ACTs-state-avg">vs. <%= @high_school.state.act_avg %> State average</p>
+		</div>
+	</div>
+
+
+	<div class="col-md-9 col-sm-12 tests-bar-graphs">
+		<div id="ACTs_graph-container"
+			ACT=<% if @high_school.act.nil? || @high_school.act == 0 %>
+						<%= 36 %>
+					<% else %>
+						<%= @high_school.act %>
+					<% end %>	
+			state_ACT=<%= @high_school.state.act_avg %> >
+			<canvas id="hs_ACT_graph" width="500" height="30"></canvas>
+			<canvas id="state_ACT_graph" width="500" height="30"></canvas>
+
+			<div class="hs_ACT_score" id="hs_ACT_score">
+				<% if @high_school.act.blank? || @high_school.act == 0%>
+					N/A
+				<% else %>
+					<%= @high_school.act.round %>
+				<% end %>	
+			</div>
+
+			<div class="state_ACT_score" id="state_ACT_score">
+				<%= @high_school.state.act_avg %>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<% unless @high_school.longitude.blank? %>
+	<div class="row" id="nearbys-container">
+	
+	<div class="map-header col-md-12">
+		<div class="col-md-6 col-xs-6">
+			<h2>Nearby High Schools</h2>
+		</div>
+		<div class="right-side-nearbys-header col-md-6 col-xs-6">
+			<div class="checkbox " id="hotels">
+				<%=check_box_tag :hotels, nil, false, class: 'marker-toggle' %>
+				<%= label_tag "Hotels" %> 
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-4 nearby-schools-container">
+		<%= render(partial: 'high_schools/profile_page/nearbys',locals: { user: @user, states: @states, high_school: @high_school, nearbys: @nearbys }) %>	
+	</div>
+	
+	<div class="col-md-8 nearbys-map-container">
+		<div class="acf-map"></div>  
+    	<div class="school-marker" data-lat="<%=@high_school.latitude%>" data-lng="<%= @high_school.longitude%>"> </div>
+	</div>
+	</div>
+<% end %>	
+
+<div class="isError row">
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<a href="#seeError" data-toggle="modal">See an error? Let us know</a>
+		</div>
+	</div>
+</div>
+

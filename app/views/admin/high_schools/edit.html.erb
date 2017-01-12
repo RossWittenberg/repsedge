@@ -1,0 +1,16 @@
+<div class="home-header">
+	<h1>Edit</h1> 
+	<h2><%= @high_school.name %></h2>
+</div>
+
+<% if @high_school && @high_school.errors %>
+	<% @high_school.errors.full_messages.each do |msg| %>
+		<p class="webflash"><%=msg%></p>
+	<% end %>
+<% end %>
+<%= render(partial: 'admin/high_schools/form',locals: { high_school: @high_school}) %>
+
+<%= link_to("Delete this School?", 
+						"/admin/high_schools/#{@high_school.id}", 
+						method: :delete,
+						data: {confirm: "Deleting a high school will also destroy all related content for all users, i.e. notes, visits, preferred contacts, etc. This action cannot be undone. Are you sure you want to delete this school?"})%> 

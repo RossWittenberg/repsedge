@@ -1,0 +1,77 @@
+<div class="row" id="billing">
+
+
+	<div class="col-md-12">
+		<div id="dashboard-block">
+			<div class="pull-left">
+				<h3>Your Current Plan</h3>
+				<h2><%= @user.account.plan_level %></h2>
+			</div>
+
+			<div class="pull-right">
+				<h3>Current Due</h3>
+
+				<% if @customer %>
+					<h2><%= number_to_currency(@customer.account_balance) %></h2>
+				<% else %>
+					<h2>$0.00</h2>
+				<% end %>	
+			</div>
+		</div>
+	</div>
+
+	<div class="billing-info">
+		<div class="col-md-4 col-sm-4">
+
+			<h2>Contact</h2>
+				<p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+				<p><%= @user.institution.name %> </p>
+				<p><%= @user.phone_num %></p>
+				<p><%= @user.email %></p>
+
+		</div>
+
+		<div class="col-md-4 col-sm-4">
+			<% if @customer %>
+				<h2>Next Payment Due</h2>
+				<p><%= Time.at(@customer.subscriptions.data[0].current_period_end).strftime("%B %d, %Y") %></p>
+			<% end %>	
+
+			<h2>Upcoming Payment</h2>
+			<p><%=number_to_currency(@user.account.plan_price, precision: 0)%></p>
+
+      <% unless @user.account.payment_type == "Purchase Order" %>
+				<!-- <h2>Recurring Payments</h2> -->
+	      <div class="field">
+	        <%# radio_button_tag :recurring_payment, true, :checked => true, class: 'checkbox' %> 
+	        <%# label_tag :recurring_payment_true, "<span></span> Yes!".html_safe %>
+	        <%# radio_button_tag :recurring_payment, false, class: 'checkbox' %>
+	        <%# label_tag :recurring_payment_false, "<span></span> Not right now".html_safe %>
+	      </div>
+	    <% end %>  		
+		</div>
+
+		<div class="col-md-4 col-sm-4">
+			<% if @customer %>
+				<h2>Payment Info</h2>
+					<p id="card-brand"><%= @customer.sources.data[0].brand %></p>
+					<p id="card-last4">Ending in <%= @customer.sources.data[0].last4 %></p>
+					<p>Expiration Date: <%= @customer.sources.data[0].exp_month %>/<%= @customer.sources.data[0].exp_year %></p>
+
+				<h2>Billing Address</h2>
+					<p id="card-address"><%= @customer.sources.data[0].address_line1 %> <%= @customer.sources.data[0].address_line2 %></p>
+					<p id="card-city-state-zip"><%= @customer.sources.data[0].address_city %>, <%= @customer.sources.data[0].address_state %> <%= @customer.sources.data[0].address_zip %></p>
+			<%else%>
+				<h2>Payment Info</h2>
+					<p id="purchase-order-number">PO number: <%= @user.account.order_num %></p>
+					<!-- <p id="payment_type">Payment Method: N/A</p> -->
+
+				<h2>Billing Address</h2>
+					<p id="card-address"><%= @user.account.billing_street_address_line_1 %> <%= @user.account.billing_street_address_line_2 %></p>
+					<p id="card-city-state-zip"><%= @user.account.billing_city %>, <%= @user.account.billing_state %> <%= @user.account.billing_zip_code %></p>
+			<%end%>
+		</div>
+	</div>
+
+
+</div>

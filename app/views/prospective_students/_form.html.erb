@@ -1,0 +1,213 @@
+<div class="home-header">
+  <h1>Prospective Student</h1>
+  <% if @high_school %>	
+  	<h2><%= @high_school.name %></h2>
+  <% elsif @institution %>
+  	<h2><%= "Transfer from: #{@institution.name}" %></h2>
+  <% end %>		
+</div>
+
+<div class="container prospective forms">
+
+	<div class="col-md-12">
+		<% if flash && flash[:prospective_student_errors] %>
+			<div class="webflash alert">	
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	    		<p><%= flash[:prospective_student_errors][0]%></p>
+			</div>	
+		<% end %>
+
+		<% if flash && flash[:prospective_student_success] %>
+			<div class="webflash alert">	
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		    	<p><%= flash[:prospective_student_success]%></p>
+			</div>	
+		<% end %>
+
+		<%= form_for @prospective_student do |f| %>
+
+			<div class="col-md-12">
+				<div class="col-md-4 col-sm-4">
+					<%= f.label :first_name, "First Name*" %>
+					<%= f.text_field :first_name, 
+							{ placeholder: nil,
+							  id: "prospective_student_first_name-field" } %>
+				</div>
+
+				<div class="col-md-4 col-sm-4">
+					<%= f.label :middle_name, "Middle Name" %>
+					<%= f.text_field :middle_name, 
+							{ placeholder: nil,
+							  id: "prospective_student_middle_name-field" } %>
+				</div>
+
+				<div class="col-md-4 col-sm-4">
+					<%= f.label :last_name, "Last Name*" %>
+					<%= f.text_field :last_name, 
+							{ placeholder: nil,
+							  id: "prospective_student_last_name-field" } %>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-sm-6">
+
+        <div class="no-pad col-md-6">
+					<%= f.label :year, "Year of Graduation or Transfer*" %>
+					<% if Time.now > (Date.new(Time.now.year, 8, 15)) %>	
+						<%= f.select :year, options_for_select([ @year + 1, @year + 2, @year + 3, @year + 4 ], @prospective_student.year || (@year + 1) ) %>
+					<% else %>	
+						<%= f.select :year, options_for_select([ @year, @year + 1, @year + 2, @year + 3 ], @prospective_student.year || @year) %>
+					<% end %>
+        </div>
+				<div class="no-pad col-md-6">
+
+					<% unless @prospective_student.intended_major && @majors.include?(@prospective_student.intended_major) %>
+						<% major = "Other" if @prospective_student.intended_major %>
+					<% end %>	
+
+					<%= f.label :intended_major, "Intended Major*" %>
+					<%= f.select :intended_major, 
+						options_for_select(
+						@majors, ( major || @prospective_student.intended_major || nil )),
+						{ id: 'county-state-search-input',
+							include_blank: "**Choose Major**" } %>
+					<%= f.text_field :intended_major,
+							# disabled: true,
+		  				autocomplete: "off",
+	            placeholder: 'Type Desired Major',
+	            value: @prospective_student.intended_major || "" %> 	
+      	</div>
+            	
+				<div class="col-md-9 col-sm-9 birth">
+					<%= f.label :birthday, "Date of Birth*" %>
+					<%= f.date_select :birthday, :order => [:month, :day, :year], :default => 17.years.ago, :id => "prospective_student_birthday-field" %>
+				</div>
+
+				<div class="col-md-3 col-sm-3 gender">
+					<%= f.label :gender, "Gender*" %>
+					<%= f.select :gender, 
+								options_for_select([ "Male", "Female"], @prospective_student.gender),
+								{ id: "prospective_student_gender-field" } %>
+				</div>
+
+				<div class="col-md-12">
+					<%= f.label :street_address, "Home Address*" %>
+					<%= f.text_field :street_address, 
+							{ id: "prospective_student_street_address-field" } %>
+				</div>
+
+				<div class="col-md-5 col-sm-5">
+					<%= f.label :city, "City*" %>
+					<%= f.text_field :city, 
+							{ id: "prospective_student_city-field" } %>
+				</div>
+
+				<div class="no-pad  col-md-3 col-sm-3 state">
+					<%= f.label :state, "State*" %>
+					<%= f.select :state, 
+						options_from_collection_for_select(
+							@states,
+							"name",
+							"abbreviation", (@high_school.state.name if @high_school && @high_school.state ) || @prospective_student.state),
+							{ id: 'county-state-search-input' } %>
+				</div>
+
+				<div class="no-pad  col-md-4 col-sm-4">
+					<%= f.label :zip_code, "Zip Code*" %>
+					<%= f.text_field :zip_code, 
+							{ id: "prospective_student_zip_code-field" } %>
+				</div>
+
+				<div class="col-md-12"></div>
+
+				<div class="no-pad col-md-7 col-sm-7">
+					<%= f.label :email, "Email*" %>
+					<%= f.text_field :email, 
+							{ id: "prospective_student_email-field" } %>
+				</div>
+
+
+				<div class="col-md-5 col-sm-5">
+					<%= f.label :phone_num, "Primary Phone #*" %>
+					<%= f.text_field :phone_num, 
+							{ id: "prospective_student_phone_num-field" } %>
+				</div>
+
+			</div>
+
+			<div class="col-md-6 col-sm-6">
+
+				<% if @high_school %>
+					<%= f.hidden_field :high_school_id, value: @high_school.id %>
+					<%= f.hidden_field :enrollment_type, value: "High School" %>
+					<label>High School Name</label>
+					<p><%= @high_school.name %></p>
+					<label>High School Address</label>
+					<p><%= @high_school.address %></p>
+					<label>High School City</label>
+					<p><%= @high_school.city %></p>
+					<label>High School State</label>
+					<p><%= @high_school.state.name %></p>
+
+				<% elsif @institution %>
+					<%= f.hidden_field :institution_id, value: @institution.id %>
+					<%= f.hidden_field :enrollment_type, value: "Transfer" %>
+					<label>Institution Name</label>
+					<p><%= @institution.name %></p>
+					<label>Institution Address</label>
+					<p><%= @institution.street_address %></p>
+					<label>Institution City</label>
+					<p><%= @institution.city %></p>
+					<label>Institution State</label>
+					<p><%= @institution.state %></p>
+					<%= f.label :term, "Expected Term of Transfer*" %>
+					<%= f.select :term, options_for_select([ "Spring", "Summer", "Fall" ], "Fall") %>
+
+				<% else %>
+					<div id="prospective-students-tabs">	
+						<ul>
+					    <li><a id="high-school-tab" href="#high-school">High School</a></li>
+					    <li><a id="transfer-tab" href="#transfer">Transfer</a></li>
+				  	</ul>
+				  	<div id="high-school">
+				  		<%= text_field_tag :high_school_name, nil,
+				  				autocomplete: "off",
+									id: "high-school-name-search",
+								  placeholder: 'Enter HS Name' %>
+				  		<%= f.hidden_field :high_school_id %><br>
+							<%= f.hidden_field :enrollment_type, value: "High School" %>
+
+				  	</div>
+				  	<div id="transfer">
+				      <%= label_tag "First, choose the state in which your current institution is located:" %>
+				      <%= select_tag "state", 
+				        options_from_collection_for_select(
+				          @states,
+				          "name",
+				          "name"),
+				          { id: 'state-institution-select',
+				          	include_blank: "Select a State" } %>
+
+				          <br><br>
+
+				  		<%= text_field_tag :institution_name, nil,
+				  				autocomplete: "off",
+									id: "institution-search",
+			            class: "prospective-student-institution-input",
+			            placeholder: 'Institution Name' %>   
+				  		<%= f.hidden_field :institution_id, id: "institution-id-field" %>
+							<%= f.hidden_field :enrollment_type, value: "Transfer" %>
+
+							<%= f.label :term, "Expected Term of Transfer*" %>
+							<%= f.select :term, options_for_select([ "Spring", "Summer", "Fall" ], "Fall") %>
+				  	</div>
+				  </div>	
+				<% end %>
+					<%= f.hidden_field :user_id, value: @user.id %>
+					<%= f.submit "Submit", { class: "button add" }	%>
+			<% end %>
+		</div>
+	</div>
+</div>

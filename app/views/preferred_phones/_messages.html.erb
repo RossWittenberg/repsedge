@@ -1,0 +1,13 @@
+<% if @preferred_phone.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@preferred_phone.errors.count, "error") %> prohibited
+      this preferred_phone from being saved:
+    </h2>
+    <ul>
+      <% @preferred_phone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

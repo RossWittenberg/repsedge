@@ -1,0 +1,11 @@
+<div id="home-search-container">
+	<div class="name-or-ceeb-container">
+
+		<div id="admin-name-or-ceeb-filter">
+			<%= text_field_tag "high_school[name_or_ceeb_query]", params[:high_school] && params[:high_school]["name_or_ceeb_query"],
+					{ autocomplete: "off",
+						id: "admin-name-search",
+					  placeholder: 'ENTER HS NAME OR CEEB'} %>
+		</div>
+	</div>
+</div>

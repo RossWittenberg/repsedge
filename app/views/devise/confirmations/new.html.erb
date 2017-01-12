@@ -1,0 +1,22 @@
+<div class="loginModule">
+	<h2>Resend</h2>
+	<p>Confirmation Instructions</p>
+
+	<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+	  <%= devise_error_messages! %>
+
+	  <div class="field">
+	    <%= f.label :email, "Email Address" %><br />
+	    <%= f.email_field :email, autofocus: true %>
+	  </div>
+
+	  <div class="actions changePass">
+	    <%= f.submit "Resend confirmation" %>
+	  </div>
+	<% end %>
+
+	<div class="links">
+		<%= render "devise/shared/links" %>
+	</div>
+
+</div>

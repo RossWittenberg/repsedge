@@ -1,0 +1,101 @@
+
+<div class="container">
+	<%= link_to ("&nbsp; <i class='fa fa-chevron-left'></i>&nbsp; Back").html_safe, :back, { :class=>"backBtn" } %>
+</div>
+
+<div id="calendar-header">
+	<h1>Calendar</h1>
+</div>
+
+
+
+<div id="calendar-container" class="container col-md-12">
+
+  <% if flash && flash[:calendar_errors] %>
+    <% flash[:calendar_errors].each do |msg| %>
+      <div class="webflash alert calendar_update_errors">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <p>Unable to create your visit. <%=msg%></p>
+      </div>
+    <% end %>  
+  <% elsif flash[:calendar_success] %>
+    <div class="webflash calendar-success">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <p><%=flash[:calendar_success]%></p>
+    </div>
+	<% end %>
+
+	<% if flash && flash[:calendar_update]%>
+	  <div class="webflash alert calendar-update">
+	    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	    <p><%= flash[:calendar_update] %></p>
+	  </div>
+	<% end %>
+
+	<% if flash && flash[:calendar_update_errors] %>
+	  <% flash[:calendar_update_errors].each do |msg| %>
+	    <div class="webflash alert calendar_update_errors">
+	    	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	      <p>Unable to update your visit. <%=msg%></p>
+	    </div>
+	  <% end %>  
+	<% end %>
+
+	<div class="userTimeZone">
+	  <span class="timezone-display-1">Calendar is displaying: <%= collection_select :user, :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s, selected: @user.time_zone || "Eastern Time (US & Canada)", remote: true %></span>
+	</div>
+	<div class="dropdown">
+	  <button id="dLabel" class="hidden-sm hidden-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Options
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			
+			<li data-toggle="modal" data-target="#newVisitModal"><a type="button">Add a New Event</a></li>
+			
+			<li data-toggle="modal" data-target="#syncCalendarModal"><a type="button">Sync to Calendar</a></li>
+
+
+			<li data-toggle="modal" data-target="#shareAgendaModal"><a type="button">Share Weekly Agenda</a></li>
+
+			<li><%= link_to "Download Visits .CSV", "/users/#{@user.id}/visits_csv.csv" if @user.visits.present? %></li>
+			
+	  </ul>
+	  	<div class="hidden-lg hidden-md mobileCalBtns">
+	  	<a type="button" data-toggle="modal" data-target="#newVisitModal">New Event</a>
+			<a type="button" data-toggle="modal" data-target="#syncCalendarModal">Sync Calendar</a>
+			<a type="button" data-toggle="modal" data-target="#shareAgendaModal">Share Agenda</a>
+		</div>
+	</div>
+
+
+	<div id="calendar" user=<%=user.id%> >
+		<div class="keys col-md-12">
+			<ul>
+				<li id="key">Key</li>
+				<li id="confirmed-high-school-visit">Confirmed HS Visit</li>
+				<li id="tentative-high-school-visit">Tentative HS Visit</li>
+				<li id="college-fair">College Fair</li>
+				<li id="hotel">Hotel</li>
+				<li id="reminder">Reminder</li>
+				<li id="other">Other</li>
+			</ul>
+		</div>
+	</div>	
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+		

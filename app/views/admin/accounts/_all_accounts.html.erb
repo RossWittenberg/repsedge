@@ -1,0 +1,38 @@
+<table class="table-striped">	
+	<thead>
+		<tr>
+			<th>Order Number</th>
+			<th>Ordered On</th>
+			<th>Institution Purchased By</th>
+			<th>Account Manager Email</th>
+			<th>Status</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @accounts.each do |account| %>
+			<% if account.user %>
+				<tr>
+					<td><%= account.order_num  %></td>
+					<td><%= account.created_at.strftime("%m/%d/%y") %></td>
+					<td><%= account.user.institution.name %></td>
+					<td><%= account.user.email %></td> 
+					<td>
+						<% if  account && account.is_paid %>
+							<p class="green">Paid</p>
+						<% else %>
+							<p class="red">Unpaid</p>
+						<% end %>	
+					</td>
+					<td><%= link_to 'Edit', edit_account_path(account) if account %></td>
+					<td><%= link_to("Delete", 
+						account_path(account), 
+						method: :delete,
+						data: {confirm: "Deleting an account will also destroy all related content, i.e. reps, notes, visits, preferred contacts, etc. This action cannot be undone. Are you sure you want to delete this account?"})%>
+				</tr>
+			<% end %>	
+		<% end %>
+	</tbody>
+</table>
+<%= will_paginate @accounts, :params => {:anchor => "accounts"} %>
